@@ -30,6 +30,16 @@ var load = function (options) {
             if (this.languages[i].langCode === langCode) {
                 this.defaultLanguage = this.languages[i].values;
                 this.defaultLanguage.lngCode = langCode;
+
+                // Update Blockly.Msg with localized strings
+                if (typeof Blockly !== 'undefined' && Blockly.Msg) {
+                    for (var key in this.defaultLanguage) {
+                        if (key.indexOf('BLOCKLY_MSG_') === 0) {
+                            var msgKey = key.replace('BLOCKLY_MSG_', '');
+                            Blockly.Msg[msgKey] = this.defaultLanguage[key];
+                        }
+                    }
+                }
             }
         }
     };
@@ -650,7 +660,7 @@ var load = function (options) {
          */
         init: function () {
             this.setColour(RoboBlocks.LANG_COLOUR_MODULAR_ADI_3);
-            this.appendDummyInput().appendField(new Blockly.FieldImage(resources.images.leerModular, resources.dimensions.leerModular.width * options.zoom, resources.dimensions.leerModular.height * options.zoom))    
+            this.appendDummyInput().appendField(new Blockly.FieldImage(resources.images.leerModular, resources.dimensions.leerModular.width * options.zoom, resources.dimensions.leerModular.height * options.zoom))
                 .appendField(RoboBlocks.locales.getKey('LANG_MODULAR_READ'))
                 .appendField(new Blockly.FieldImage(resources.images.leerModularPanel, resources.dimensions.leerModular.width * options.zoom, resources.dimensions.leerModular.height * options.zoom))
                 .appendField(new Blockly.FieldVariable(' '), 'VAR');
@@ -2884,7 +2894,7 @@ var load = function (options) {
         }
         throw 'Unknown flow statement.';
     };
-    
+
 
     Blockly.Blocks.controls_flow_statements = {
         // Flow statements: continue, break.
@@ -5422,13 +5432,13 @@ var load = function (options) {
         var funcName = this.getFieldValue('NAME');
         var branch = Blockly.Arduino.statementToCode(this, 'STACK');
         branch = branch.replace(/&quot;/g, '"');
-    
+
         if (Blockly.Arduino.INFINITE_LOOP_TRAP) {
             branch = Blockly.Arduino.INFINITE_LOOP_TRAP.replace(/%1/g, '\'' + this.id + '\'') + branch;
         }
         var returnValue = Blockly.Arduino.valueToCode(this, 'RETURN', Blockly.Arduino.ORDER_NONE) || '';
         var code = '';
-    
+
         returnValue = returnValue.replace(/&quot;/g, '"');
         var returnType = this.getReturnType();
         if (returnValue) {
@@ -5436,7 +5446,7 @@ var load = function (options) {
             returnValue = a['code'];
             returnValue += (window.programmingLanguage === 'cpp' ? '  ' : '    ') + 'return ' + a['pin'] + ';\n';
         }
-        
+
         var args = this.paramString;
         code += JST['procedures_defreturn']({
             'returnType': returnType,
@@ -5445,18 +5455,18 @@ var load = function (options) {
             'branch': branch,
             'returnValue': returnValue
         }, window.programmingLanguage);
-    
+
         // Adición para js
         if (window.programmingLanguage === 'js') {
             code = code.replace(/return [^;]*;/g, 'return ' + returnValue + ';'); // Asegúrate de devolver el valor correcto
         }
-    
+
         code = Blockly.Arduino.scrub_(this, code);
         Blockly.Arduino.definitions_[funcName] = code;
         console.log(code);
         return null;
     };
-    
+
     Blockly.Blocks.procedures_defreturn = {
         // Define a procedure with a return value.
         category: RoboBlocks.locales.getKey('LANG_CATEGORY_PROCEDURES'), // Procedures are handled specially.
@@ -5555,12 +5565,12 @@ var load = function (options) {
         // Obtener la condición desde el bloque
         var condition = Blockly.Arduino.valueToCode(this, 'CONDITION', Blockly.Arduino.ORDER_NONE) || '';
         var code = '';
-    
+
         // Buscar la configuración del pin en función de la condición
         var pinConfig = RoboBlocks.findPinMode(condition);
         code += pinConfig['code'];
         condition = pinConfig['pin'];
-    
+
         // Generar código en C++
         if (window.programmingLanguage === 'cpp') {
             code += 'if (' + condition + ') {\n';
@@ -5569,7 +5579,7 @@ var load = function (options) {
             code += pinConfig['code'];
             code += '  return (' + value + ');\n';
             code += '}\n';
-        } 
+        }
         // Generar código en Python
         else if (window.programmingLanguage === 'python') {
             code += 'if ' + condition + ':\n';
@@ -5587,10 +5597,10 @@ var load = function (options) {
             code += '  return ' + value + ';\n';
             code += '}\n';
         }
-    
+
         console.log(code);
         return code;
-    };    
+    };
 
     Blockly.Blocks.procedures_ifreturn = {
         // Conditionally return value from a procedure.
@@ -6205,7 +6215,7 @@ var load = function (options) {
             a = RoboBlocks.findPinMode(argument0);
             code += a['code'];
             argument0 = a['pin'];
-    
+
             if (window.programmingLanguage === 'python') {
                 code += 'str(' + argument0 + ')';
             } else if (window.programmingLanguage === 'cpp') {
@@ -6213,38 +6223,38 @@ var load = function (options) {
             } else if (window.programmingLanguage === 'js') {
                 code += 'String(' + argument0 + ')';
             }
-    
+
             return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
         } else {
             var i = (Blockly.Arduino.valueToCode(this, 'ADD0', Blockly.Arduino.ORDER_NONE) || '');
             a = RoboBlocks.findPinMode(i);
             code = a['code'];
             i = a['pin'];
-    
+
             if (window.programmingLanguage === 'python') {
                 final_line = 'str(' + i;
             } else if (window.programmingLanguage === 'cpp' || window.programmingLanguage === 'js') {
                 final_line = 'String(' + i;
             }
-    
+
             for (var n = 1; n < this.itemCount_; n++) {
                 i = (Blockly.Arduino.valueToCode(this, 'ADD' + n, Blockly.Arduino.ORDER_NONE) || '');
                 a = RoboBlocks.findPinMode(i);
                 code += a['code'];
                 i = a['pin'];
-    
+
                 if (window.programmingLanguage === 'python') {
                     final_line += ') + str(' + i;
                 } else if (window.programmingLanguage === 'cpp' || window.programmingLanguage === 'js') {
                     final_line += ') + String(' + i;
                 }
             }
-    
+
             code += final_line + ')';
-    
+
             return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
         }
-    };    
+    };
 
     Blockly.Blocks.text_join = {
         // Create a string made up of any number of elements of any type.
@@ -6583,11 +6593,11 @@ var load = function (options) {
         var varValue = Blockly.Arduino.valueToCode(this, 'VALUE', Blockly.Arduino.ORDER_ASSIGNMENT);
         var varName = this.getFieldValue('VAR') || '';
         var isFunction = false;
-    
+
         var a = RoboBlocks.findPinMode(varValue);
         Blockly.Arduino.setups_['pinMode' + varValue] = a['code'];
         varValue = a['pin'];
-    
+
         for (var i in Blockly.Arduino.definitions_) {
             if (Blockly.Arduino.definitions_[i].search(varValue + ' \\(') >= 0) {
                 isFunction = true;
@@ -6626,7 +6636,7 @@ var load = function (options) {
         } else {
             varType = 'unknown';
         }
-        
+
         // Declara la variable en función del lenguaje de programación
         if (window.programmingLanguage === 'python') {
             Blockly.Arduino.definitions_['declare_var' + varName] = varName + ': ' + { 'String': 'str', 'int': 'int', 'long': 'int', 'byte': 'int', 'float': 'float' }[varType] + '\n';
@@ -6637,15 +6647,15 @@ var load = function (options) {
         } else if (window.programmingLanguage === 'js') {
             Blockly.Arduino.setups_['define_var' + varName] = 'var ' + varName + ' = ' + varValue + ';\n';
         }
-        
+
         // Actualiza el objeto de variables
         RoboBlocks.variables[varName] = [varType, 'global'];
         RoboBlocks.variables['analogRead(' + varName + ')'] = [varType, 'global'];
         RoboBlocks.variables['digitalRead(' + varName + ')'] = [varType, 'global'];
-    
+
         return '';
     };
-    
+
     Blockly.Blocks.variables_global = {
         // Variable setter.
         category: RoboBlocks.locales.getKey('LANG_CATEGORY_VARIABLES'), // Variables are handled specially.
@@ -6745,12 +6755,12 @@ var load = function (options) {
 
         // Definición de variables
         window.programmingLanguage === 'python' ?
-            (Blockly.Arduino.definitions_['declare_var' + varName] = varName + ': ' + { 
-                'String': 'str', 
-                'int': 'int', 
-                'long': 'int', 
-                'byte': 'int', 
-                'float': 'float' 
+            (Blockly.Arduino.definitions_['declare_var' + varName] = varName + ': ' + {
+                'String': 'str',
+                'int': 'int',
+                'long': 'int',
+                'byte': 'int',
+                'float': 'float'
             }[varType] + '\n') :
             (window.programmingLanguage === 'cpp' ?
                 (Blockly.Arduino.definitions_['declare_var' + varName] = varType + ' ' + varName + ';\n') :
@@ -6983,7 +6993,7 @@ var load = function (options) {
             } else if (window.programmingLanguage === 'js') {
                 code += 'let ' + varName + ' = ' + varValue + ';\n';
             }
-        }        
+        }
 
         RoboBlocks.variables[varName] = [varType, 'local'];
         RoboBlocks.variables['analogRead(' + varName + ')'] = [varType, 'local'];
@@ -7040,8 +7050,8 @@ var load = function (options) {
         } else if (window.programmingLanguage === 'js') {
             code += 'let ' + varName + ' = ' + varValue + ';\n';
         }
-        
-        console.log("lang :",window.programmingLanguage,"code ",code );
+
+        console.log("lang :", window.programmingLanguage, "code ", code);
         RoboBlocks.variables[varName] = [varType, 'local'];
         RoboBlocks.variables['analogRead(' + varName + ')'] = [varType, 'local'];
         RoboBlocks.variables['digitalRead(' + varName + ')'] = [varType, 'local'];
@@ -7179,48 +7189,48 @@ var load = function (options) {
     };
 
     // Source: src/blocks/math_number/math_number.js
-        /* global Blockly, RoboBlocks */
-        /* jshint sub:true */
+    /* global Blockly, RoboBlocks */
+    /* jshint sub:true */
 
-        /**
-         * math_number code generation
-         * @return {String} Code generated with block parameters
-         */
+    /**
+     * math_number code generation
+     * @return {String} Code generated with block parameters
+     */
 
-        Blockly.Arduino.math_integer_dc = function() {
-            // Numeric value.
-            var code = window.parseFloat(this.getFieldValue('NUM'));
-            // -4.abs() returns -4 in Dart due to strange order of operation choices.
-            // -4 is actually an operator and a number.  Reflect this in the order.
-            var order = code < 0 ? Blockly.Arduino.ORDER_UNARY_PREFIX : Blockly.Arduino.ORDER_ATOMIC;
-            return [code, order];
-        };
+    Blockly.Arduino.math_integer_dc = function () {
+        // Numeric value.
+        var code = window.parseFloat(this.getFieldValue('NUM'));
+        // -4.abs() returns -4 in Dart due to strange order of operation choices.
+        // -4 is actually an operator and a number.  Reflect this in the order.
+        var order = code < 0 ? Blockly.Arduino.ORDER_UNARY_PREFIX : Blockly.Arduino.ORDER_ATOMIC;
+        return [code, order];
+    };
 
-        Blockly.Blocks.math_integer_dc = {
-            // Numeric value.
-            category: RoboBlocks.locales.getKey('LANG_CATEGORY_MATH'), // Variables are handled specially.
-            helpUrl: RoboBlocks.URL_MATH,
-            init: function() {
-                this.setColour(RoboBlocks.LANG_COLOUR_MATH);
-                this.appendDummyInput()
-                    .appendField(new Blockly.FieldTextInput('0', Blockly.Blocks.math_integer_dc.validator), 'NUM');
-                this.setOutput(true, Number);
-                this.setTooltip(RoboBlocks.locales.getKey('LANG_MATH_NUMBER_TOOLTIP'));
-            }
-        };
+    Blockly.Blocks.math_integer_dc = {
+        // Numeric value.
+        category: RoboBlocks.locales.getKey('LANG_CATEGORY_MATH'), // Variables are handled specially.
+        helpUrl: RoboBlocks.URL_MATH,
+        init: function () {
+            this.setColour(RoboBlocks.LANG_COLOUR_MATH);
+            this.appendDummyInput()
+                .appendField(new Blockly.FieldTextInput('0', Blockly.Blocks.math_integer_dc.validator), 'NUM');
+            this.setOutput(true, Number);
+            this.setTooltip(RoboBlocks.locales.getKey('LANG_MATH_NUMBER_TOOLTIP'));
+        }
+    };
 
-        Blockly.Blocks.math_integer_dc.validator = function(text) {
-            // Ensure that only a valid integer with up to 4 digits may be entered.
-            var n = window.parseInt(text || 0, 10);
-            
-            // Check if it's a valid integer with up to 4 digits.
-            if (Number.isInteger(n) && n >= 0 && n <= 255) {
-                return String(n);
-            } else {
-                return null;
-            }
-        };
-        
+    Blockly.Blocks.math_integer_dc.validator = function (text) {
+        // Ensure that only a valid integer with up to 4 digits may be entered.
+        var n = window.parseInt(text || 0, 10);
+
+        // Check if it's a valid integer with up to 4 digits.
+        if (Number.isInteger(n) && n >= 0 && n <= 255) {
+            return String(n);
+        } else {
+            return null;
+        }
+    };
+
     /**
      * bq_bluetooth_send block definition
      * @type {Object}
