@@ -37,7 +37,7 @@ class App {
         // Global compatibility (if other external scripts rely on them)
         window.translationMap = translationMap || {}; // Should be set by module import or script
 
-        console.log("Initializing App with:", { currentLocale, programmingLanguage, colorProfile });
+        // console.log("Initializing App with:", { currentLocale, programmingLanguage, colorProfile });
 
         // Load RoboBlocks
         RoboBlocksAdapter.load({

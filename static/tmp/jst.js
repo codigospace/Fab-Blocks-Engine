@@ -322,7 +322,6 @@ JST["bq_bluetooth_def_setups"] = function (obj, programmingLanguage) {
             `    baudRate: ${(__t = (obj.baud_rate)) == null ? '' : __t}\n` +
             `});\n`;
     }
-    console.log(__p);
 
     return __p;
 };

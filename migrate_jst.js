@@ -112,7 +112,7 @@ ${entries.join('\n\n')}
 }
 `;
     fs.writeFileSync(path.join(outputDir, fileName), fileContent);
-    console.log(`Generated ${fileName} with ${entries.length} templates.`);
+    // console.log(`Generated ${fileName} with ${entries.length} templates.`);
 }
 
 function capitalize(s) {

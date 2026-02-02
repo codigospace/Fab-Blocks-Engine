@@ -51,7 +51,7 @@ export class LocaleController {
             this.updateLabels(translatedArray);
         }
 
-        console.log("Changed locale to", newLocale);
+        // console.log("Changed locale to", newLocale);
     }
 
     updateLabels(translatedArray) {

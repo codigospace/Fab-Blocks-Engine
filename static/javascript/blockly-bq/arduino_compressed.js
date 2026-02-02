@@ -108,7 +108,7 @@ Blockly.Arduino.finish = function (a) {
     for (f in Blockly.Arduino.setups_) {
         c.push(Blockly.Arduino.setups_[f]);
     }
-    console.log(c, c.length);
+    
     if (window.programmingLanguage === 'cpp') {
         a = (d.join("\n") + "\n\n/***   Global variables   ***/\n" + e.join("") + "\n\n/***   Function declaration   ***/\n" +
             b[0] + "\nvoid setup() \n{\n  " + c.join("\n        ") + "\n}\n\n").replace(/\n\n+/g, "\n\n").replace(/\n*$/, "\n\n\n") +

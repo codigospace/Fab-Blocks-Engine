@@ -155,7 +155,6 @@ var load = function (options) {
      */
     Blockly.createToolbox = function () {
         var blocks = {};
-        console.log(this.Blocks);
         for (var block in this.Blocks) {
 
             // important check that this is objects own property 
@@ -182,14 +181,12 @@ var load = function (options) {
 
         }
         toolbox += '</xml>';
-        // console.log(toolbox);
         return toolbox;
     };
 
     Blockly.createLocalizedToolbox = function (labelArray, oldLocale, newLocale) {
         // Obtener las traducciones del nuevo idioma
         var translations = translationMap[newLocale];
-        console.log(labelArray, translations);
         // Crear un nuevo objeto donde se modificará la se  gunda parte de cada subarray
         var localizedObject = labelArray.reduce((obj, [id, originalText]) => {
             // Buscar la clave en el idioma original (en este caso, el idioma anterior)
@@ -202,7 +199,6 @@ var load = function (options) {
                 var translatedText = translations[translationKey] || originalText; // Busca la traducción por la clave encontrada
                 obj[id] = translatedText; // Actualiza con la traducción
             } else {
-                console.log("Text not found in translationMap:", originalText);
                 obj[id] = originalText; // Si no se encuentra la clave, mantener el texto original
             }
             return obj;
@@ -5463,7 +5459,6 @@ var load = function (options) {
 
         code = Blockly.Arduino.scrub_(this, code);
         Blockly.Arduino.definitions_[funcName] = code;
-        console.log(code);
         return null;
     };
 
@@ -5598,7 +5593,6 @@ var load = function (options) {
             code += '}\n';
         }
 
-        console.log(code);
         return code;
     };
 
@@ -5690,7 +5684,7 @@ var load = function (options) {
         } else if (window.programmingLanguage === 'js') {
             code += 'return ' + value + ';\n';
         }
-        console.log(value);
+
         return code;
     };
 
@@ -6604,7 +6598,7 @@ var load = function (options) {
                 break;
             }
         }
-        console.log(varValue);
+        
         if (varValue.search(/["']/) >= 0 || varValue.search('substring\\(') >= 0) {
             varType = 'String';
         } else if (isFunction) {
@@ -6998,7 +6992,7 @@ var load = function (options) {
         RoboBlocks.variables[varName] = [varType, 'local'];
         RoboBlocks.variables['analogRead(' + varName + ')'] = [varType, 'local'];
         RoboBlocks.variables['digitalRead(' + varName + ')'] = [varType, 'local'];
-        console.log(code);
+
         return code;
     };
     Blockly.Blocks.variables_local = {
@@ -7051,7 +7045,6 @@ var load = function (options) {
             code += 'let ' + varName + ' = ' + varValue + ';\n';
         }
 
-        console.log("lang :", window.programmingLanguage, "code ", code);
         RoboBlocks.variables[varName] = [varType, 'local'];
         RoboBlocks.variables['analogRead(' + varName + ')'] = [varType, 'local'];
         RoboBlocks.variables['digitalRead(' + varName + ')'] = [varType, 'local'];
