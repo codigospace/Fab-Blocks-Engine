@@ -7240,6 +7240,18 @@ var load = function (options) {
         }
     };
 
+    // Ensure a basic Arduino generator exists for the standard math_number block.
+    // Some workspaces include math_number blocks but the Arduino generator was not
+    // present in the bundled generators, causing: "does not know how to generate code for block type 'math_number'".
+    Blockly.Arduino.math_number = function (block) {
+        var value = window.parseFloat(block.getFieldValue('NUM'));
+        if (Number.isNaN(value)) {
+            value = 0;
+        }
+        var order = value < 0 ? Blockly.Arduino.ORDER_UNARY_PREFIX : Blockly.Arduino.ORDER_ATOMIC;
+        return [value, order];
+    };
+
     /**
      * bq_bluetooth_send block definition
      * @type {Object}
