@@ -3999,6 +3999,14 @@ var load = function (options) {
     /* global Blockly, RoboBlocks */
 
     /**
+     * logic_null code generation
+     * @return {String} Code generated with block parameters
+     */
+    Blockly.Arduino.logic_null = function () {
+        return ['NULL', Blockly.Arduino.ORDER_ATOMIC];
+    };
+
+    /**
      * logic_boolean code generation
      * @return {String} Code generated with block parameters
      */
@@ -4217,6 +4225,16 @@ var load = function (options) {
      * @return {String} Code generated with block parameters
      */
 
+
+    /**
+     * math_number code generation
+     * @return {String} Code generated with block parameters
+     */
+    Blockly.Arduino.math_number = function () {
+        // Numeric value.
+        var code = window.parseFloat(this.getFieldValue('NUM'));
+        return [code, Blockly.Arduino.ORDER_ATOMIC];
+    };
 
     Blockly.Arduino.math_arithmetic = function () {
         // Basic arithmetic operators, and power.
@@ -6598,7 +6616,7 @@ var load = function (options) {
                 break;
             }
         }
-        
+
         if (varValue.search(/["']/) >= 0 || varValue.search('substring\\(') >= 0) {
             varType = 'String';
         } else if (isFunction) {
