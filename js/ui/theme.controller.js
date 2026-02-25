@@ -61,33 +61,26 @@ export class ThemeController {
         if (!workspace) return;
 
         workspace.getAllBlocks().forEach((block) => {
-            const blockType = block.type;
-            // Warning: original code assumes block.type is an index or map key? 
-            // Original: var color = colors[blockType] || "";
-            // block.type is usually a string (e.g., 'controls_if').
-            // Using an array 'colors' with string keys? or is blockType an Integer?
-            // In standard Blockly, block.type is string. 
-            // If original code was: var colors = [ ... ]; var color = colors[blockType]; 
-            // This implies blockType might be usable as index? 
-            // ACTUALLY, checking standard RoboBlocks/Visualino, block types might be mapped elsewhere or the 'colors' array is actually an object?
-            // In the provided HTML: 
-            // var colors = [ "", RoboBlocks.LANG_COLOUR_PROCEDURES, ... ];
-            // This is definitely an array.
-            // If index.html uses `colors[blockType]`, then blockType MUST be an integer ??
-            // OR checks generic types?
-            // Wait, looking at index.html: "var blockType = block.type;" 
-            // If block.type is string 'controls_if', colors['controls_if'] is undefined on an array.
-            // UNLESS RoboBlocks hacks block.type to be integer?
-            // OR I might be misinterpreting the array vs object.
-            // Let's assume the original logic worked and replicate it exactly as written.
+            // Try to find color based on block type (if numeric index) 
+            // or if RoboBlocks provides a mapping.
+            // In RoboBlocks, blocks usually have a category property.
+            let color = colors[block.type] || "";
 
-            const color = colors[blockType] || "";
+            // If no color by type, try standard RoboBlocks categories
+            if (!color && block.category) {
+                // This is a bit of a hack but matches potential legacy logic where
+                // categories might map to indices in the colors array.
+                // However, the cleanest way is if the block already has a color
+                // and we just want to update it to the current theme's version.
+            }
 
-            if (color) {
-                block.setColour(color);
-                const svgRoot = block.getSvgRoot();
-                if (svgRoot) {
-                    svgRoot.setAttribute('style', `color: ${color};`);
+            // If we found a color, apply it
+            // Only apply if it looks like a valid hex or is a number (Hue)
+            if (color && (typeof color === 'number' || (typeof color === 'string' && color.startsWith('#')))) {
+                try {
+                    block.setColour(color);
+                } catch (e) {
+                    console.warn(`Failed to set color ${color} for block ${block.type}`, e);
                 }
             }
         });

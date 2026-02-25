@@ -4226,15 +4226,13 @@ var load = function (options) {
      */
 
 
-    /**
-     * math_number code generation
-     * @return {String} Code generated with block parameters
-     */
     Blockly.Arduino.math_number = function () {
         // Numeric value.
         var code = window.parseFloat(this.getFieldValue('NUM'));
         return [code, Blockly.Arduino.ORDER_ATOMIC];
     };
+
+    Blockly.Arduino.math_integer = Blockly.Arduino.math_number;
 
     Blockly.Arduino.math_arithmetic = function () {
         // Basic arithmetic operators, and power.
