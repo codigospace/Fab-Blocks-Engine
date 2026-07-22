@@ -1,6 +1,6 @@
 
 import { stateStore } from '../core/state.store.js';
-import { RoboBlocksAdapter } from '../integrations/roboblocks.adapter.js';
+import { FabBlocksAdapter } from '../integrations/fabblocks.adapter.js';
 import { codeGenerator } from '../core/code.generator.js';
 import { themeController } from './theme.controller.js';
 import { Config } from '../config.js';
@@ -35,8 +35,8 @@ export class LanguageController {
         // Update State
         stateStore.set('language', selectedLanguage);
 
-        // Reload RoboBlocks
-        RoboBlocksAdapter.load({
+        // Reload FabBlocks
+        FabBlocksAdapter.load({
             zoom: 0.5,
             language: currentLocale,
             colorProfile: colorProfile

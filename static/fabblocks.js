@@ -9,23 +9,23 @@ import { JST } from './tmp/jst.js';
 import profiles from './src/profiles.js';
 import resources from './src/resources.js';
 import { colorProfiles } from './src/colorProfiles.js';
-import { RoboBlocksURLs } from './src/helpUrls.js';
+import { FabBlocksURLs } from './src/helpUrls.js';
 import { translationMap } from './src/translationMap.js';
 
 // Crear la función de carga
 var load = function (options) {
 
-    RoboBlocks.locales = {
+    FabBlocks.locales = {
         defaultLanguage: {},
         languages: []
     };
-    RoboBlocks.locales.getLang = function () {
+    FabBlocks.locales.getLang = function () {
         return this.defaultLanguage.lngCode;
     };
-    RoboBlocks.locales.getKey = function (key) {
+    FabBlocks.locales.getKey = function (key) {
         return this.defaultLanguage[key];
     };
-    RoboBlocks.locales.setDefaultLang = function (langCode) {
+    FabBlocks.locales.setDefaultLang = function (langCode) {
         for (var i in this.languages) {
             if (this.languages[i].langCode === langCode) {
                 this.defaultLanguage = this.languages[i].values;
@@ -43,7 +43,7 @@ var load = function (options) {
             }
         }
     };
-    RoboBlocks.locales.add = function (langCode, values) {
+    FabBlocks.locales.add = function (langCode, values) {
         if (!langCode) {
             return this.defaultLanguage;
         }
@@ -61,29 +61,29 @@ var load = function (options) {
         }
         return this;
     };
-    RoboBlocks.locales.initialize = function () {
+    FabBlocks.locales.initialize = function () {
         var lang = options.language || 'es-ES';
         this.setDefaultLang(lang);
         return this;
     };
 
-    RoboBlocks.locales.add('ru', RUlang());
-    RoboBlocks.locales.add('es-ES', enESlang());
-    RoboBlocks.locales.add('en-GB', enGBlang());
-    RoboBlocks.locales.add('fr-FR', frFRlang());
-    RoboBlocks.locales.add('it-IT', itITlang());
+    FabBlocks.locales.add('ru', RUlang());
+    FabBlocks.locales.add('es-ES', enESlang());
+    FabBlocks.locales.add('en-GB', enGBlang());
+    FabBlocks.locales.add('fr-FR', frFRlang());
+    FabBlocks.locales.add('it-IT', itITlang());
 
     // Source: src/constants.js
-    /* global RoboBlocks, Blockly*/
-    RoboBlocks.locales.initialize();
-    RoboBlocks.variables = {};
-    RoboBlocks.isVariable = function (varValue) {
+    /* global FabBlocks, Blockly*/
+    FabBlocks.locales.initialize();
+    FabBlocks.variables = {};
+    FabBlocks.isVariable = function (varValue) {
         for (var i in Blockly.Variables.allVariables()) {
             if (Blockly.Variables.allVariables()[i] === varValue) {
                 return true;
             }
         }
-        if (RoboBlocks.variables[varValue] !== undefined) {
+        if (FabBlocks.variables[varValue] !== undefined) {
             return true;
         }
         if (varValue.search('digitalRead\\(') >= 0 || varValue.search('analogRead\\(') >= 0) {
@@ -92,7 +92,7 @@ var load = function (options) {
         return false;
     };
 
-    RoboBlocks.findPinMode = function (dropdown_pin) {
+    FabBlocks.findPinMode = function (dropdown_pin) {
         var code = '';
         dropdown_pin = dropdown_pin.split(';\n');
         for (var j in dropdown_pin) {
@@ -113,37 +113,37 @@ var load = function (options) {
 
     var profile = colorProfiles[colorProfile];
 
-    RoboBlocks.LANG_COLOUR_BQ = profile.BQ;
-    RoboBlocks.LANG_COLOUR_ZUM = profile.ZUM;
-    RoboBlocks.LANG_COLOUR_SERVO = profile.SERVO;
-    RoboBlocks.LANG_COLOUR_LCD = profile.LCD;
-    RoboBlocks.LANG_COLOUR_CONTROL = profile.CONTROL;
-    RoboBlocks.LANG_COLOUR_LOGIC = profile.LOGIC;
-    RoboBlocks.LANG_COLOUR_MATH = profile.MATH;
-    RoboBlocks.LANG_COLOUR_TEXT = profile.TEXT;
-    RoboBlocks.LANG_COLOUR_COMMUNICATION = profile.COMMUNICATION;
-    RoboBlocks.LANG_COLOUR_MODULAR = profile.MODULAR;
-    RoboBlocks.LANG_COLOUR_MODULAR_ADI = profile.MODULAR_ADI;
-    RoboBlocks.LANG_COLOUR_MODULAR_ADI_2 = profile.MODULAR_ADI_2;
-    RoboBlocks.LANG_COLOUR_MODULAR_ADI_3 = profile.MODULAR_ADI_3;
-    RoboBlocks.LANG_COLOUR_MODULAR_WRITE = profile.MODULAR_WRITE;
-    RoboBlocks.LANG_COLOUR_BETTO = profile.BETTO;
-    RoboBlocks.LANG_COLOUR_CARLITTO = profile.CARLITTO;
-    RoboBlocks.LANG_COLOUR_ADVANCED = profile.ADVANCED;
-    RoboBlocks.LANG_COLOUR_VARIABLES = profile.VARIABLES;
-    RoboBlocks.LANG_COLOUR_PROCEDURES = profile.PROCEDURES;
-    RoboBlocks.LANG_COLOUR_RASPBERRY = profile.RASPBERRY;
-    RoboBlocks.BACKGROUND_COLOUR_TOOLBOX = profile.TOOLBOX;
-    RoboBlocks.BACKGROUND_COLOUR_CANVAS = profile.CANVAS;
-    RoboBlocks.BACKGROUND_COLOUR_CODE = profile.CODE;
-    RoboBlocks.TITLE_COLOR = profile.TITLE_COLOR;
-    RoboBlocks.COMMENT_COLOR = profile.COMMENT_COLOR;
-    RoboBlocks.STRING_COLOR = profile.STRING_COLOR;
-    RoboBlocks.LITERAL_COLOR = profile.LITERAL_COLOR;
-    RoboBlocks.KEYWORD_COLOR = profile.KEYWORD_COLOR;
-    RoboBlocks.NUMBER_COLOR = profile.NUMBER_COLOR;
+    FabBlocks.LANG_COLOUR_BQ = profile.BQ;
+    FabBlocks.LANG_COLOUR_ZUM = profile.ZUM;
+    FabBlocks.LANG_COLOUR_SERVO = profile.SERVO;
+    FabBlocks.LANG_COLOUR_LCD = profile.LCD;
+    FabBlocks.LANG_COLOUR_CONTROL = profile.CONTROL;
+    FabBlocks.LANG_COLOUR_LOGIC = profile.LOGIC;
+    FabBlocks.LANG_COLOUR_MATH = profile.MATH;
+    FabBlocks.LANG_COLOUR_TEXT = profile.TEXT;
+    FabBlocks.LANG_COLOUR_COMMUNICATION = profile.COMMUNICATION;
+    FabBlocks.LANG_COLOUR_MODULAR = profile.MODULAR;
+    FabBlocks.LANG_COLOUR_MODULAR_ADI = profile.MODULAR_ADI;
+    FabBlocks.LANG_COLOUR_MODULAR_ADI_2 = profile.MODULAR_ADI_2;
+    FabBlocks.LANG_COLOUR_MODULAR_ADI_3 = profile.MODULAR_ADI_3;
+    FabBlocks.LANG_COLOUR_MODULAR_WRITE = profile.MODULAR_WRITE;
+    FabBlocks.LANG_COLOUR_BETTO = profile.BETTO;
+    FabBlocks.LANG_COLOUR_CARLITTO = profile.CARLITTO;
+    FabBlocks.LANG_COLOUR_ADVANCED = profile.ADVANCED;
+    FabBlocks.LANG_COLOUR_VARIABLES = profile.VARIABLES;
+    FabBlocks.LANG_COLOUR_PROCEDURES = profile.PROCEDURES;
+    FabBlocks.LANG_COLOUR_RASPBERRY = profile.RASPBERRY;
+    FabBlocks.BACKGROUND_COLOUR_TOOLBOX = profile.TOOLBOX;
+    FabBlocks.BACKGROUND_COLOUR_CANVAS = profile.CANVAS;
+    FabBlocks.BACKGROUND_COLOUR_CODE = profile.CODE;
+    FabBlocks.TITLE_COLOR = profile.TITLE_COLOR;
+    FabBlocks.COMMENT_COLOR = profile.COMMENT_COLOR;
+    FabBlocks.STRING_COLOR = profile.STRING_COLOR;
+    FabBlocks.LITERAL_COLOR = profile.LITERAL_COLOR;
+    FabBlocks.KEYWORD_COLOR = profile.KEYWORD_COLOR;
+    FabBlocks.NUMBER_COLOR = profile.NUMBER_COLOR;
 
-    Object.assign(RoboBlocks, RoboBlocksURLs);
+    Object.assign(FabBlocks, FabBlocksURLs);
 
     // Source: src/blockly.extensions.js
     /* global Blockly */
@@ -208,7 +208,7 @@ var load = function (options) {
     };
 
     // Source: src/blocks/advanced_conversion/advanced_conversion.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -218,7 +218,7 @@ var load = function (options) {
     Blockly.Arduino.advanced_conversion = function () {
         var value_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_NONE);
         var code = '';
-        var a = RoboBlocks.findPinMode(value_num);
+        var a = FabBlocks.findPinMode(value_num);
         code += a['code'];
         value_num = a['pin'];
 
@@ -237,32 +237,32 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.advanced_conversion = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
-        helpUrl: RoboBlocks.URL_SERIE,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
+        helpUrl: FabBlocks.URL_SERIE,
         /**
          * advanced_conversion initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_COMMUNICATION);
+            this.setColour(FabBlocks.LANG_COLOUR_COMMUNICATION);
             this.appendDummyInput('')
-                .appendField(RoboBlocks.locales.getKey('LANG_ADVANCED_CONVERSION_CONVERT'))
+                .appendField(FabBlocks.locales.getKey('LANG_ADVANCED_CONVERSION_CONVERT'))
                 .appendField(new Blockly.FieldDropdown([
-                    [RoboBlocks.locales.getKey('LANG_ADVANCED_CONVERSION_DECIMAL') || 'DEC', 'DEC'],
-                    [RoboBlocks.locales.getKey('LANG_ADVANCED_CONVERSION_HEXADECIMAL') || 'HEX', 'HEX'],
-                    [RoboBlocks.locales.getKey('LANG_ADVANCED_CONVERSION_OCTAL') || 'OCT', 'OCT'],
-                    [RoboBlocks.locales.getKey('LANG_ADVANCED_CONVERSION_BINARY') || 'BIN', 'BIN']
+                    [FabBlocks.locales.getKey('LANG_ADVANCED_CONVERSION_DECIMAL') || 'DEC', 'DEC'],
+                    [FabBlocks.locales.getKey('LANG_ADVANCED_CONVERSION_HEXADECIMAL') || 'HEX', 'HEX'],
+                    [FabBlocks.locales.getKey('LANG_ADVANCED_CONVERSION_OCTAL') || 'OCT', 'OCT'],
+                    [FabBlocks.locales.getKey('LANG_ADVANCED_CONVERSION_BINARY') || 'BIN', 'BIN']
                 ]), 'CONV');
             this.appendValueInput('NUM', Number)
-                .appendField(RoboBlocks.locales.getKey('LANG_ADVANCED_CONVERSION_VALUE'))
+                .appendField(FabBlocks.locales.getKey('LANG_ADVANCED_CONVERSION_VALUE'))
                 .setAlign(Blockly.ALIGN_RIGHT)
                 .setCheck(Number);
             this.setOutput(true, Number);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_CONVERSION_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_CONVERSION_TOOLTIP'));
         }
     };
 
     // Source: src/blocks/advanced_map/advanced_map.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -277,23 +277,23 @@ var load = function (options) {
         var to_max = Blockly.Arduino.valueToCode(this, 'TO_MAX', Blockly.Arduino.ORDER_NONE);
 
         var code = '';
-        var a = RoboBlocks.findPinMode(num);
+        var a = FabBlocks.findPinMode(num);
         code += a['code'];
         num = a['pin'];
 
-        a = RoboBlocks.findPinMode(from_min);
+        a = FabBlocks.findPinMode(from_min);
         code += a['code'];
         from_min = a['pin'];
 
-        a = RoboBlocks.findPinMode(from_max);
+        a = FabBlocks.findPinMode(from_max);
         code += a['code'];
         from_max = a['pin'];
 
-        a = RoboBlocks.findPinMode(to_min);
+        a = FabBlocks.findPinMode(to_min);
         code += a['code'];
         to_min = a['pin'];
 
-        a = RoboBlocks.findPinMode(to_max);
+        a = FabBlocks.findPinMode(to_max);
         code += a['code'];
         to_max = a['pin'];
 
@@ -313,40 +313,40 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.advanced_map = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_MATH'),
-        helpUrl: RoboBlocks.URL_MATH,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_MATH'),
+        helpUrl: FabBlocks.URL_MATH,
         /**
          * advanced_map initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_MATH);
+            this.setColour(FabBlocks.LANG_COLOUR_MATH);
             this.appendValueInput('NUM', Number)
-                .appendField(RoboBlocks.locales.getKey('LANG_MATH_ADVANCED_MAP_MAP'))
+                .appendField(FabBlocks.locales.getKey('LANG_MATH_ADVANCED_MAP_MAP'))
                 .setCheck(Number);
             this.appendValueInput('FROM_MIN', Number)
-                .appendField(RoboBlocks.locales.getKey('LANG_MATH_ADVANCED_MAP_FROM'))
+                .appendField(FabBlocks.locales.getKey('LANG_MATH_ADVANCED_MAP_FROM'))
                 .setCheck(Number);
             this.appendValueInput('FROM_MAX', Number)
-                .appendField(RoboBlocks.locales.getKey('LANG_MATH_ADVANCED_MAP_HYPHEN'))
+                .appendField(FabBlocks.locales.getKey('LANG_MATH_ADVANCED_MAP_HYPHEN'))
                 .setCheck(Number);
             this.appendDummyInput('')
-                .appendField(RoboBlocks.locales.getKey('LANG_MATH_ADVANCED_MAP_BRACKET'));
+                .appendField(FabBlocks.locales.getKey('LANG_MATH_ADVANCED_MAP_BRACKET'));
             this.appendValueInput('TO_MIN', Number)
-                .appendField(RoboBlocks.locales.getKey('LANG_MATH_ADVANCED_MAP_TO'))
+                .appendField(FabBlocks.locales.getKey('LANG_MATH_ADVANCED_MAP_TO'))
                 .setCheck(Number);
             this.appendValueInput('TO_MAX', Number)
-                .appendField(RoboBlocks.locales.getKey('LANG_MATH_ADVANCED_MAP_HYPHEN'))
+                .appendField(FabBlocks.locales.getKey('LANG_MATH_ADVANCED_MAP_HYPHEN'))
                 .setCheck(Number);
             this.appendDummyInput('')
-                .appendField(RoboBlocks.locales.getKey('LANG_MATH_ADVANCED_MAP_BRACKET'));
+                .appendField(FabBlocks.locales.getKey('LANG_MATH_ADVANCED_MAP_BRACKET'));
             this.setInputsInline(true);
             this.setOutput(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_MATH_ADVANCED_MAP_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_MATH_ADVANCED_MAP_TOOLTIP'));
         }
     };
 
     // Source: src/blocks/array_get/array_get.js
-    /* global Blockly, RoboBlocks */
+    /* global Blockly, FabBlocks */
     /* jshint sub:true */
     /**
      * array_get code generation
@@ -365,16 +365,16 @@ var load = function (options) {
 
     Blockly.Blocks.array_get = {
         // Numeric value.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_VARIABLES'),
-        helpUrl: RoboBlocks.URL_VAR,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_VARIABLES'),
+        helpUrl: FabBlocks.URL_VAR,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_VARIABLES);
-            this.appendDummyInput('DUMMY').appendField(RoboBlocks.locales.getKey('LANG_VARIABLES_GET')).appendField(new Blockly.FieldVariable(' '), 'VAR');
+            this.setColour(FabBlocks.LANG_COLOUR_VARIABLES);
+            this.appendDummyInput('DUMMY').appendField(FabBlocks.locales.getKey('LANG_VARIABLES_GET')).appendField(new Blockly.FieldVariable(' '), 'VAR');
             // .appendField(new Blockly.FieldDropdown(this.getVariables()), 'VAR');
-            this.appendDummyInput('DUMMY2').appendField(RoboBlocks.locales.getKey('LANG_ARRAY_GET_BRACKET1')).appendField(new Blockly.FieldTextInput('0', Blockly.Blocks.array_get.validator), 'INDEX').appendField(RoboBlocks.locales.getKey('LANG_ARRAY_GET_BRACKET2'));
+            this.appendDummyInput('DUMMY2').appendField(FabBlocks.locales.getKey('LANG_ARRAY_GET_BRACKET1')).appendField(new Blockly.FieldTextInput('0', Blockly.Blocks.array_get.validator), 'INDEX').appendField(FabBlocks.locales.getKey('LANG_ARRAY_GET_BRACKET2'));
             this.setOutput(true, Number);
             this.setInputsInline(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ARRAY_GET_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ARRAY_GET_TOOLTIP'));
         },
         getVariables: function () {
             var variables = Blockly.Variables.allVariables();
@@ -404,15 +404,15 @@ var load = function (options) {
                         this.removeInput('DUMMY');
                         this.removeInput('DUMMY2');
                     } catch (e) { }
-                    this.appendDummyInput('DUMMY').appendField(RoboBlocks.locales.getKey('LANG_VARIABLES_GET')).appendField(new Blockly.FieldDropdown(this.getVariables()), 'VAR');
-                    this.appendDummyInput('DUMMY2').appendField(RoboBlocks.locales.getKey('LANG_ARRAY_GET_BRACKET1')).appendField(new Blockly.FieldTextInput('0', Blockly.Blocks.array_get.validator), 'INDEX').appendField(RoboBlocks.locales.getKey('LANG_ARRAY_GET_BRACKET2'));
+                    this.appendDummyInput('DUMMY').appendField(FabBlocks.locales.getKey('LANG_VARIABLES_GET')).appendField(new Blockly.FieldDropdown(this.getVariables()), 'VAR');
+                    this.appendDummyInput('DUMMY2').appendField(FabBlocks.locales.getKey('LANG_ARRAY_GET_BRACKET1')).appendField(new Blockly.FieldTextInput('0', Blockly.Blocks.array_get.validator), 'INDEX').appendField(FabBlocks.locales.getKey('LANG_ARRAY_GET_BRACKET2'));
                     this.setFieldValue(this.last_variable, 'VAR');
                     this.last_variables = Blockly.Variables.allVariables();
                 }
             }
             try {
                 if (!this.exists()) {
-                    this.setWarningText(RoboBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
+                    this.setWarningText(FabBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
                 } else {
                     this.setWarningText(null);
                 }
@@ -441,12 +441,12 @@ var load = function (options) {
         return window.isNaN(n) ? null : String(n);
     };
     // Source: src/blocks/base_delay/base_delay.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
 
 
     // COPIA DE LED PRUEBAS
     // Source: src/blocks/bq_led/bq_led.js
-    /* global Blockly, options, JST, RoboBlocks */
+    /* global Blockly, options, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * bq_led code generation
@@ -486,11 +486,11 @@ var load = function (options) {
             'name_mod': name_mod
         }, window.programmingLanguage);
 
-        var a = RoboBlocks.findPinMode(dropdown_pin);
+        var a = FabBlocks.findPinMode(dropdown_pin);
         code += a['code'];
         dropdown_pin = a['pin'];
 
-        if (RoboBlocks.isVariable(dropdown_pin)) {
+        if (FabBlocks.isVariable(dropdown_pin)) {
             code += JST['bq_test_setups']({
                 'name_mod': name_mod
             }, window.programmingLanguage);
@@ -506,37 +506,37 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.bq_led_2 = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_MODULAR'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_MODULAR'),
         tags: ['modular'],
         helpUrl: '',
         /**
          * bq_led initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_MODULAR);
+            this.setColour(FabBlocks.LANG_COLOUR_MODULAR);
             this.appendDummyInput().appendField(new Blockly.FieldImage(resources.images.declararModular, resources.dimensions.declararModular.width * options.zoom, resources.dimensions.declararModular.height * options.zoom))
-                .appendField(RoboBlocks.locales.getKey('LANG_MODULAR_DEFINE'))
+                .appendField(FabBlocks.locales.getKey('LANG_MODULAR_DEFINE'))
                 .appendField(new Blockly.FieldTextInput('name'), 'VAR')
-                .appendField(RoboBlocks.locales.getKey('LANG_MODULAR_TYPE'))
+                .appendField(FabBlocks.locales.getKey('LANG_MODULAR_TYPE'))
                 .setAlign(Blockly.ALIGN_RIGHT)
                 .appendField(new Blockly.FieldDropdown([
-                    [RoboBlocks.locales.getKey('LANG_MODULAR_SENSOR_POTENTIOMETER'), '0'],
-                    [RoboBlocks.locales.getKey('LANG_MODULAR_SENSOR_INFRARED'), '1'],
-                    [RoboBlocks.locales.getKey('LANG_MODULAR_SENSOR_BUTTON'), '2'],
-                    [RoboBlocks.locales.getKey('LANG_MODULAR_SENSOR_DISTANCE'), '3'],
-                    [RoboBlocks.locales.getKey('LANG_MODULAR_ACTUATOR_LED'), '4'],
-                    [RoboBlocks.locales.getKey('LANG_MODULAR_ACTUATOR_BUZZER'), '5'],
-                    [RoboBlocks.locales.getKey('LANG_MODULAR_ACTUATOR_STEPPER_MOTOR'), '6'],
-                    [RoboBlocks.locales.getKey('LANG_MODULAR_ACTUATOR_DISPLAY_7_SEG'), '7'],
-                    [RoboBlocks.locales.getKey('LANG_MODULAR_ACTUATOR_SERVO_MOTOR'), '8'],
-                    [RoboBlocks.locales.getKey('LANG_MODULAR_ACTUATOR_DC_MOTOR'), '9'],
-                    [RoboBlocks.locales.getKey('LANG_MODULAR_SENSOR_IMU'), '10'],
-                    [RoboBlocks.locales.getKey('LANG_MODULAR_ACTUATOR_LCD'), '11'],
-                    [RoboBlocks.locales.getKey('LANG_MODULAR_ACTUATOR_OLED'), '12'],
-                    [RoboBlocks.locales.getKey('LANG_MODULAR_MODULE_BLUETOOTH'), '13'],
-                    [RoboBlocks.locales.getKey('LANG_MODULAR_MODULE_WIFI'), '14'],
+                    [FabBlocks.locales.getKey('LANG_MODULAR_SENSOR_POTENTIOMETER'), '0'],
+                    [FabBlocks.locales.getKey('LANG_MODULAR_SENSOR_INFRARED'), '1'],
+                    [FabBlocks.locales.getKey('LANG_MODULAR_SENSOR_BUTTON'), '2'],
+                    [FabBlocks.locales.getKey('LANG_MODULAR_SENSOR_DISTANCE'), '3'],
+                    [FabBlocks.locales.getKey('LANG_MODULAR_ACTUATOR_LED'), '4'],
+                    [FabBlocks.locales.getKey('LANG_MODULAR_ACTUATOR_BUZZER'), '5'],
+                    [FabBlocks.locales.getKey('LANG_MODULAR_ACTUATOR_STEPPER_MOTOR'), '6'],
+                    [FabBlocks.locales.getKey('LANG_MODULAR_ACTUATOR_DISPLAY_7_SEG'), '7'],
+                    [FabBlocks.locales.getKey('LANG_MODULAR_ACTUATOR_SERVO_MOTOR'), '8'],
+                    [FabBlocks.locales.getKey('LANG_MODULAR_ACTUATOR_DC_MOTOR'), '9'],
+                    [FabBlocks.locales.getKey('LANG_MODULAR_SENSOR_IMU'), '10'],
+                    [FabBlocks.locales.getKey('LANG_MODULAR_ACTUATOR_LCD'), '11'],
+                    [FabBlocks.locales.getKey('LANG_MODULAR_ACTUATOR_OLED'), '12'],
+                    [FabBlocks.locales.getKey('LANG_MODULAR_MODULE_BLUETOOTH'), '13'],
+                    [FabBlocks.locales.getKey('LANG_MODULAR_MODULE_WIFI'), '14'],
                 ]), "MOD")
-                .appendField(RoboBlocks.locales.getKey('LANG_MODULAR_PORT'))
+                .appendField(FabBlocks.locales.getKey('LANG_MODULAR_PORT'))
                 .setAlign(Blockly.ALIGN_RIGHT)
                 .appendField(new Blockly.FieldDropdown([
                     ['0', '0'],
@@ -553,7 +553,7 @@ var load = function (options) {
                 ]), "PORT");
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_TOOLTIP'));
         },
         getVars: function () {
             return [this.getFieldValue('VAR')];
@@ -600,7 +600,7 @@ var load = function (options) {
                 for (var j in Blockly.Arduino.RESERVED_WORDS_) {
                     var reserved_words = Blockly.Arduino.RESERVED_WORDS_.split(',');
                     if (name === reserved_words[j]) {
-                        this.setWarningText(RoboBlocks.locales.getKey('LANG_RESERVED_WORDS'));
+                        this.setWarningText(FabBlocks.locales.getKey('LANG_RESERVED_WORDS'));
                         name = '';
                         break;
                     } else {
@@ -625,7 +625,7 @@ var load = function (options) {
 
     //Copia de DigitalRead
     // Source: src/blocks/inout_digital_read/inout_digital_read.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * inout_digital_read code generation
@@ -634,7 +634,7 @@ var load = function (options) {
     Blockly.Arduino.test_inout_digital_read = function () {
         var dropdown_pin = this.getFieldValue('VAR');
         var code = '';
-        var a = RoboBlocks.findPinMode(dropdown_pin);
+        var a = FabBlocks.findPinMode(dropdown_pin);
         code += a['code'];
         var var_mod = a['pin'];
 
@@ -649,20 +649,20 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.test_inout_digital_read = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_MODULAR'),
-        helpUrl: RoboBlocks.URL_PIN_FUNC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_MODULAR'),
+        helpUrl: FabBlocks.URL_PIN_FUNC,
         /**
          * inout_digital_read initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_MODULAR_ADI_3);
+            this.setColour(FabBlocks.LANG_COLOUR_MODULAR_ADI_3);
             this.appendDummyInput().appendField(new Blockly.FieldImage(resources.images.leerModular, resources.dimensions.leerModular.width * options.zoom, resources.dimensions.leerModular.height * options.zoom))
-                .appendField(RoboBlocks.locales.getKey('LANG_MODULAR_READ'))
+                .appendField(FabBlocks.locales.getKey('LANG_MODULAR_READ'))
                 .appendField(new Blockly.FieldImage(resources.images.leerModularPanel, resources.dimensions.leerModular.width * options.zoom, resources.dimensions.leerModular.height * options.zoom))
                 .appendField(new Blockly.FieldVariable(' '), 'VAR');
             this.setOutput(true);
             this.setOutput(true, Boolean);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_READ_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_READ_TOOLTIP'));
         },
 
         getVariables: function () {
@@ -680,7 +680,7 @@ var load = function (options) {
         onchange: function () {
             try {
                 if (!this.exists()) {
-                    this.setWarningText(RoboBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
+                    this.setWarningText(FabBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
                 } else {
                     this.setWarningText(null);
                 }
@@ -703,7 +703,7 @@ var load = function (options) {
 
     // Copia de digital Write 1 argumento true-false
     // Source: src/blocks/inout_digital_write/inout_digital_write.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * inout_digital_write code generation
@@ -713,7 +713,7 @@ var load = function (options) {
         var dropdown_pin = this.getFieldValue('VAR');
         var dropdown_stat = this.getFieldValue('STAT');
         var code = '';
-        var a = RoboBlocks.findPinMode(dropdown_pin);
+        var a = FabBlocks.findPinMode(dropdown_pin);
         code += a['code'];
         dropdown_pin = a['pin'];
 
@@ -728,24 +728,24 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.test_inout_digital_write_op = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_MODULAR'),
-        helpUrl: RoboBlocks.URL_PIN_FUNC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_MODULAR'),
+        helpUrl: FabBlocks.URL_PIN_FUNC,
         /**
          * inout_digital_write initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_MODULAR_WRITE);
+            this.setColour(FabBlocks.LANG_COLOUR_MODULAR_WRITE);
             this.appendDummyInput().appendField(new Blockly.FieldImage(resources.images.escribirModular, resources.dimensions.escribirModular.width * options.zoom * options.zoom, resources.dimensions.escribirModular.height * options.zoom));
-            this.appendDummyInput('DUMMY').appendField(RoboBlocks.locales.getKey('LANG_MODULAR_WRITE'))
+            this.appendDummyInput('DUMMY').appendField(FabBlocks.locales.getKey('LANG_MODULAR_WRITE'))
                 .appendField(new Blockly.FieldVariable(' '), 'VAR');
-            this.appendDummyInput().appendField(RoboBlocks.locales.getKey('LANG_MODULAR_STATE')).appendField(new Blockly.FieldDropdown([
-                [RoboBlocks.locales.getKey('LANG_MODULAR_ON'), 'HIGH'],
-                [RoboBlocks.locales.getKey('LANG_MODULAR_OFF'), 'LOW']
+            this.appendDummyInput().appendField(FabBlocks.locales.getKey('LANG_MODULAR_STATE')).appendField(new Blockly.FieldDropdown([
+                [FabBlocks.locales.getKey('LANG_MODULAR_ON'), 'HIGH'],
+                [FabBlocks.locales.getKey('LANG_MODULAR_OFF'), 'LOW']
             ]), 'STAT');
             this.setPreviousStatement(true, null);
             this.setInputsInline(true);
             this.setNextStatement(true, null);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_TOOLTIP'));
         },
         getVariables: function () {
             var variables = Blockly.Variables.allVariables();
@@ -762,7 +762,7 @@ var load = function (options) {
         onchange: function () {
             try {
                 if (!this.exists()) {
-                    this.setWarningText(RoboBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
+                    this.setWarningText(FabBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
                 } else {
                     this.setWarningText(null);
                 }
@@ -785,7 +785,7 @@ var load = function (options) {
 
     // Copia de digital Write 1 argumento true-false 2
     // Source: src/blocks/inout_digital_write/inout_digital_write.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * inout_digital_write code generation
@@ -795,7 +795,7 @@ var load = function (options) {
         var dropdown_pin = this.getFieldValue('VAR');
         var dropdown_stat = Blockly.Arduino.valueToCode(this, 'BOOL', Blockly.Arduino.ORDER_ATOMIC);
         var code = '';
-        var a = RoboBlocks.findPinMode(dropdown_pin);
+        var a = FabBlocks.findPinMode(dropdown_pin);
         code += a['code'];
         dropdown_pin = a['pin'];
 
@@ -810,24 +810,24 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.test_inout_digital_write_bool = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_MODULAR'),
-        helpUrl: RoboBlocks.URL_PIN_FUNC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_MODULAR'),
+        helpUrl: FabBlocks.URL_PIN_FUNC,
         /**
          * inout_digital_write initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_MODULAR_WRITE);
+            this.setColour(FabBlocks.LANG_COLOUR_MODULAR_WRITE);
             this.appendDummyInput().appendField(new Blockly.FieldImage(resources.images.escribirModular, resources.dimensions.escribirModular.width * options.zoom * options.zoom, resources.dimensions.escribirModular.height * options.zoom));
-            this.appendDummyInput('DUMMY').appendField(RoboBlocks.locales.getKey('LANG_MODULAR_WRITE'))
+            this.appendDummyInput('DUMMY').appendField(FabBlocks.locales.getKey('LANG_MODULAR_WRITE'))
                 //.appendField(new Blockly.FieldDropdown(this.getVariables()), 'VAR');
                 .appendField(new Blockly.FieldVariable(' '), 'VAR');
-            this.appendDummyInput().appendField(RoboBlocks.locales.getKey('LANG_MODULAR_STATE'));
+            this.appendDummyInput().appendField(FabBlocks.locales.getKey('LANG_MODULAR_STATE'));
             this.appendValueInput('BOOL', Boolean)
                 .setCheck(Boolean);
             this.setPreviousStatement(true, null);
             this.setInputsInline(true);
             this.setNextStatement(true, null);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_TOOLTIP'));
         },
         getVariables: function () {
             var variables = Blockly.Variables.allVariables();
@@ -844,7 +844,7 @@ var load = function (options) {
         onchange: function () {
             try {
                 if (!this.exists()) {
-                    this.setWarningText(RoboBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
+                    this.setWarningText(FabBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
                 } else {
                     this.setWarningText(null);
                 }
@@ -867,7 +867,7 @@ var load = function (options) {
 
     // Copia de digital Write 1 argumento number
     // Source: src/blocks/inout_digital_write/inout_digital_write.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * inout_digital_write code generation
@@ -878,7 +878,7 @@ var load = function (options) {
         var dropdown_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_ATOMIC);
 
         var code = '';
-        var a = RoboBlocks.findPinMode(dropdown_pin);
+        var a = FabBlocks.findPinMode(dropdown_pin);
         code += a['code'];
         dropdown_pin = a['pin'];
 
@@ -893,24 +893,24 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.test_inout_digital_write_number = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_MODULAR'),
-        helpUrl: RoboBlocks.URL_PIN_FUNC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_MODULAR'),
+        helpUrl: FabBlocks.URL_PIN_FUNC,
         /**
          * inout_digital_write initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_MODULAR_ADI_2);
+            this.setColour(FabBlocks.LANG_COLOUR_MODULAR_ADI_2);
             this.appendDummyInput().appendField(new Blockly.FieldImage(resources.images.escribirModular, resources.dimensions.escribirModular.width * options.zoom * options.zoom, resources.dimensions.escribirModular.height * options.zoom));
-            this.appendDummyInput('DUMMY').appendField(RoboBlocks.locales.getKey('LANG_MODULAR_STEPPER_MOTOR'))
+            this.appendDummyInput('DUMMY').appendField(FabBlocks.locales.getKey('LANG_MODULAR_STEPPER_MOTOR'))
                 //.appendField(new Blockly.FieldDropdown(this.getVariables()), 'VAR');
                 .appendField(new Blockly.FieldVariable(' '), 'VAR');
             this.appendValueInput('NUM')
                 .setCheck(Number)
-                .appendField(RoboBlocks.locales.getKey('LANG_MODULAR_VALUE'));
+                .appendField(FabBlocks.locales.getKey('LANG_MODULAR_VALUE'));
             this.setPreviousStatement(true, null);
             this.setInputsInline(true);
             this.setNextStatement(true, null);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_TOOLTIP'));
         },
         getVariables: function () {
             var variables = Blockly.Variables.allVariables();
@@ -927,7 +927,7 @@ var load = function (options) {
         onchange: function () {
             try {
                 if (!this.exists()) {
-                    this.setWarningText(RoboBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
+                    this.setWarningText(FabBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
                 } else {
                     this.setWarningText(null);
                 }
@@ -950,7 +950,7 @@ var load = function (options) {
 
     // Copia de digital Write 1 argumento number 4 digitos
     // Source: src/blocks/inout_digital_write/inout_digital_write.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * inout_digital_write code generation
@@ -960,7 +960,7 @@ var load = function (options) {
         var dropdown_pin = this.getFieldValue('VAR');
         var dropdown_stat = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_ATOMIC);
         var code = '';
-        var a = RoboBlocks.findPinMode(dropdown_pin);
+        var a = FabBlocks.findPinMode(dropdown_pin);
         code += a['code'];
         dropdown_pin = a['pin'];
 
@@ -975,23 +975,23 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.test_inout_digital_write_number_4 = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_MODULAR'),
-        helpUrl: RoboBlocks.URL_PIN_FUNC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_MODULAR'),
+        helpUrl: FabBlocks.URL_PIN_FUNC,
         /**
          * inout_digital_write initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_MODULAR_ADI_2);
+            this.setColour(FabBlocks.LANG_COLOUR_MODULAR_ADI_2);
             this.appendDummyInput().appendField(new Blockly.FieldImage(resources.images.escribirModular, resources.dimensions.escribirModular.width * options.zoom * options.zoom, resources.dimensions.escribirModular.height * options.zoom));
-            this.appendDummyInput('DUMMY').appendField(RoboBlocks.locales.getKey('LANG_MODULAR_WRITE_SEVEN_DISPLAY'))
+            this.appendDummyInput('DUMMY').appendField(FabBlocks.locales.getKey('LANG_MODULAR_WRITE_SEVEN_DISPLAY'))
                 .appendField(new Blockly.FieldVariable(' '), 'VAR');
             this.appendValueInput('NUM')
                 .setCheck(Number)
-                .appendField(RoboBlocks.locales.getKey('LANG_MODULAR_FOUR_VALUE'));
+                .appendField(FabBlocks.locales.getKey('LANG_MODULAR_FOUR_VALUE'));
             this.setPreviousStatement(true, null);
             this.setInputsInline(true);
             this.setNextStatement(true, null);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_TOOLTIP'));
         },
         getVariables: function () {
             var variables = Blockly.Variables.allVariables();
@@ -1008,7 +1008,7 @@ var load = function (options) {
         onchange: function () {
             try {
                 if (!this.exists()) {
-                    this.setWarningText(RoboBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
+                    this.setWarningText(FabBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
                 } else {
                     this.setWarningText(null);
                 }
@@ -1031,7 +1031,7 @@ var load = function (options) {
 
     // Copia de digital Write 1 argumento number servo
     // Source: src/blocks/inout_digital_write/inout_digital_write.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * inout_digital_write code generation
@@ -1042,7 +1042,7 @@ var load = function (options) {
         var dropdown_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_ATOMIC);
 
         var code = '';
-        var a = RoboBlocks.findPinMode(dropdown_pin);
+        var a = FabBlocks.findPinMode(dropdown_pin);
         code += a['code'];
         dropdown_pin = a['pin'];
 
@@ -1057,23 +1057,23 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.test_inout_digital_write_number_servo = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_MODULAR'),
-        helpUrl: RoboBlocks.URL_PIN_FUNC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_MODULAR'),
+        helpUrl: FabBlocks.URL_PIN_FUNC,
         /**
          * inout_digital_write initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_BETTO);
+            this.setColour(FabBlocks.LANG_COLOUR_BETTO);
             this.appendDummyInput().appendField(new Blockly.FieldImage(resources.images.escribirModular, resources.dimensions.escribirModular.width * options.zoom * options.zoom, resources.dimensions.escribirModular.height * options.zoom));
-            this.appendDummyInput('DUMMY').appendField(RoboBlocks.locales.getKey('LANG_MODULAR_SERVO_MOTOR'))
+            this.appendDummyInput('DUMMY').appendField(FabBlocks.locales.getKey('LANG_MODULAR_SERVO_MOTOR'))
                 .appendField(new Blockly.FieldVariable(' '), 'VAR');
             this.appendValueInput('NUM')
                 .setCheck(Number)
-                .appendField(RoboBlocks.locales.getKey('LANG_MODULAR_VALUE_TO_180'));
+                .appendField(FabBlocks.locales.getKey('LANG_MODULAR_VALUE_TO_180'));
             this.setPreviousStatement(true, null);
             this.setInputsInline(true);
             this.setNextStatement(true, null);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_TOOLTIP'));
         },
         getVariables: function () {
             var variables = Blockly.Variables.allVariables();
@@ -1090,7 +1090,7 @@ var load = function (options) {
         onchange: function () {
             try {
                 if (!this.exists()) {
-                    this.setWarningText(RoboBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
+                    this.setWarningText(FabBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
                 } else {
                     this.setWarningText(null);
                 }
@@ -1113,7 +1113,7 @@ var load = function (options) {
 
     // Copia de digital Write 1 argumento number servo
     // Source: src/blocks/inout_digital_write/inout_digital_write.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * inout_digital_write code generation
@@ -1125,7 +1125,7 @@ var load = function (options) {
         var dropdown_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_ATOMIC);
 
         var code = '';
-        var a = RoboBlocks.findPinMode(dropdown_pin);
+        var a = FabBlocks.findPinMode(dropdown_pin);
         code += a['code'];
         dropdown_pin = a['pin'];
 
@@ -1141,26 +1141,26 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.test_inout_digital_write_number_dc = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_MODULAR'),
-        helpUrl: RoboBlocks.URL_PIN_FUNC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_MODULAR'),
+        helpUrl: FabBlocks.URL_PIN_FUNC,
         /**
          * inout_digital_write initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_MODULAR_ADI);
+            this.setColour(FabBlocks.LANG_COLOUR_MODULAR_ADI);
             this.appendDummyInput().appendField(new Blockly.FieldImage(resources.images.escribirModular, resources.dimensions.escribirModular.width * options.zoom * options.zoom, resources.dimensions.escribirModular.height * options.zoom));
-            this.appendDummyInput('DUMMY').appendField(RoboBlocks.locales.getKey('LANG_MODULAR_DC_MOTOR'))
+            this.appendDummyInput('DUMMY').appendField(FabBlocks.locales.getKey('LANG_MODULAR_DC_MOTOR'))
                 .appendField(new Blockly.FieldVariable(' '), 'VAR');
             this.appendValueInput('NUM')
                 .setCheck(Number)
-                .appendField(RoboBlocks.locales.getKey('LANG_MODULAR_DC_MOTOR_POWER'));
+                .appendField(FabBlocks.locales.getKey('LANG_MODULAR_DC_MOTOR_POWER'));
             this.appendValueInput('STAT')
                 .setCheck(Boolean)
-                .appendField(RoboBlocks.locales.getKey('LANG_MODULAR_DC_MOTOR_DIRECTION'));
+                .appendField(FabBlocks.locales.getKey('LANG_MODULAR_DC_MOTOR_DIRECTION'));
             this.setPreviousStatement(true, null);
             this.setInputsInline(true);
             this.setNextStatement(true, null);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_TOOLTIP'));
         },
         getVariables: function () {
             var variables = Blockly.Variables.allVariables();
@@ -1177,7 +1177,7 @@ var load = function (options) {
         onchange: function () {
             try {
                 if (!this.exists()) {
-                    this.setWarningText(RoboBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
+                    this.setWarningText(FabBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
                 } else {
                     this.setWarningText(null);
                 }
@@ -1200,7 +1200,7 @@ var load = function (options) {
 
     // Copia de digital Write 1 argumento i2c
     // Source: src/blocks/inout_digital_write/inout_digital_write.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * inout_digital_write code generation
@@ -1210,7 +1210,7 @@ var load = function (options) {
         var dropdown_pin = this.getFieldValue('VAR');
         var dropdown_stat = this.getFieldValue('STAT');
         var code = '';
-        var a = RoboBlocks.findPinMode(dropdown_pin);
+        var a = FabBlocks.findPinMode(dropdown_pin);
         code += a['code'];
         dropdown_pin = a['pin'];
 
@@ -1226,22 +1226,22 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.test_inout_digital_write_i2c = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_MODULAR'),
-        helpUrl: RoboBlocks.URL_PIN_FUNC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_MODULAR'),
+        helpUrl: FabBlocks.URL_PIN_FUNC,
         /**
          * inout_digital_write initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_MODULAR_ADI_3);
+            this.setColour(FabBlocks.LANG_COLOUR_MODULAR_ADI_3);
             this.appendDummyInput().appendField(new Blockly.FieldImage(resources.images.escribirModular, resources.dimensions.escribirModular.width * options.zoom, resources.dimensions.escribirModular.height * options.zoom));
-            this.appendDummyInput('DUMMY').appendField(RoboBlocks.locales.getKey('LANG_MODULAR_LCD'))
+            this.appendDummyInput('DUMMY').appendField(FabBlocks.locales.getKey('LANG_MODULAR_LCD'))
                 .appendField(new Blockly.FieldVariable(' '), 'VAR');
-            this.appendDummyInput().appendField(RoboBlocks.locales.getKey('LANG_MODULAR_LCD_TEXT'))
+            this.appendDummyInput().appendField(FabBlocks.locales.getKey('LANG_MODULAR_LCD_TEXT'))
                 .appendField(new Blockly.FieldTextInput('', String), 'VAR');
             this.setPreviousStatement(true, null);
             this.setInputsInline(true);
             this.setNextStatement(true, null);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_TOOLTIP'));
         },
         getVariables: function () {
             var variables = Blockly.Variables.allVariables();
@@ -1258,7 +1258,7 @@ var load = function (options) {
         onchange: function () {
             try {
                 if (!this.exists()) {
-                    this.setWarningText(RoboBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
+                    this.setWarningText(FabBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
                 } else {
                     this.setWarningText(null);
                 }
@@ -1281,7 +1281,7 @@ var load = function (options) {
 
     // copia de inout
     // Source: src/blocks/inout_highlow/inout_highlow.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -1303,26 +1303,26 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.test_inout_highlow = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_MODULAR'),
-        helpUrl: RoboBlocks.URL_PIN_FUNC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_MODULAR'),
+        helpUrl: FabBlocks.URL_PIN_FUNC,
         /**
          * inout_highlow initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_MODULAR_ADI_3);
+            this.setColour(FabBlocks.LANG_COLOUR_MODULAR_ADI_3);
             this.appendDummyInput().appendField(new Blockly.FieldImage(resources.images.escribirModular, resources.dimensions.escribirModular.width * options.zoom, resources.dimensions.escribirModular.height * options.zoom))
                 .appendField(new Blockly.FieldDropdown([
-                    [RoboBlocks.locales.getKey('LANG_MODULAR_FORWARD'), 'HIGH'],
-                    [RoboBlocks.locales.getKey('LANG_MODULAR_BACKWARD'), 'LOW']
+                    [FabBlocks.locales.getKey('LANG_MODULAR_FORWARD'), 'HIGH'],
+                    [FabBlocks.locales.getKey('LANG_MODULAR_BACKWARD'), 'LOW']
                 ]), 'BOOL');
             this.setOutput(true, Boolean);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_HIGHLOW_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_HIGHLOW_TOOLTIP'));
         }
     };
 
     // BETTO BLOQUES
     // Source: src/blocks/bq_led/bq_led.js
-    /* global Blockly, options, JST, RoboBlocks */
+    /* global Blockly, options, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * bq_led code generation
@@ -1343,25 +1343,25 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.betto_def_variables = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
         tags: ['Betto'],
         helpUrl: '',
         /**
          * bq_led initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_BETTO);
+            this.setColour(FabBlocks.LANG_COLOUR_BETTO);
             this.appendDummyInput().appendField(new Blockly.FieldImage(resources.images.ottoMain, resources.dimensions.ottoMain.width * options.zoom, resources.dimensions.ottoMain.height * options.zoom))
-                .appendField(RoboBlocks.locales.getKey('LANG_BETTO_DEFINE'))
+                .appendField(FabBlocks.locales.getKey('LANG_BETTO_DEFINE'))
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_TOOLTIP'));
         },
     };
 
     // COPIA DE LED PRUEBAS para BETTO Movimientos
     // Source: src/blocks/bq_led/bq_led.js
-    /* global Blockly, options, JST, RoboBlocks */
+    /* global Blockly, options, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * bq_led code generation
@@ -1429,45 +1429,45 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.betto_movs_select = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
         tags: ['Betto'],
         helpUrl: '',
         /**
          * bq_led initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_BETTO);
+            this.setColour(FabBlocks.LANG_COLOUR_BETTO);
             this.appendDummyInput('VALUE')
-                .appendField(RoboBlocks.locales.getKey('LANG_BETTO_MOVEMENT'))
+                .appendField(FabBlocks.locales.getKey('LANG_BETTO_MOVEMENT'))
                 .appendField(new Blockly.FieldDropdown([
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_FORWARD'), '0'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_BACKWARD'), '1'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_TURN_LEFT'), '2'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_TURN_RIGHT'), '3'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_TILT_LEFT'), '4'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_TILT_RIGHT'), '5'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_SHAKE_LEFT'), '6'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_SHAKE_RIGHT'), '7'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_UP'), '8'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_FORWARD'), '0'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_BACKWARD'), '1'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_TURN_LEFT'), '2'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_TURN_RIGHT'), '3'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_TILT_LEFT'), '4'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_TILT_RIGHT'), '5'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_SHAKE_LEFT'), '6'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_SHAKE_RIGHT'), '7'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_UP'), '8'],
                 ]), "ACTION")
-                .appendField(RoboBlocks.locales.getKey('LANG_BETTO_VELOCITY'))
+                .appendField(FabBlocks.locales.getKey('LANG_BETTO_VELOCITY'))
                 .appendField(new Blockly.FieldDropdown([
-                    [RoboBlocks.locales.getKey('LANG_BETTO_VELOCITY_NORMAL'), '0'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_VELOCITY_SLOW'), '1'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_VELOCITY_VERY_SLOW'), '2'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_VELOCITY_FAST'), '3'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_VELOCITY_VERY_FAST'), '4'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_VELOCITY_TOO_FAST'), '5'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_VELOCITY_NORMAL'), '0'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_VELOCITY_SLOW'), '1'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_VELOCITY_VERY_SLOW'), '2'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_VELOCITY_FAST'), '3'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_VELOCITY_VERY_FAST'), '4'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_VELOCITY_TOO_FAST'), '5'],
                 ]), "VEL");
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_TOOLTIP'));
         },
     };
 
     // COPIA DE LED PRUEBAS para BETTO Movimientos
     // Source: src/blocks/bq_led/bq_led.js
-    /* global Blockly, options, JST, RoboBlocks */
+    /* global Blockly, options, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * bq_led code generation
@@ -1551,48 +1551,48 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.betto_movs_select_dance = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
         tags: ['Betto'],
         helpUrl: '',
         /**
          * bq_led initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_BETTO);
+            this.setColour(FabBlocks.LANG_COLOUR_BETTO);
             this.appendDummyInput('VALUE')
-                .appendField(RoboBlocks.locales.getKey('LANG_BETTO_DANCE'))
+                .appendField(FabBlocks.locales.getKey('LANG_BETTO_DANCE'))
                 .appendField(new Blockly.FieldDropdown([
-                    [RoboBlocks.locales.getKey('LANG_BETTO_DANCE_MOONWALK_LEFT'), '0'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_DANCE_MOONWALK_RIGHT'), '1'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_DANCE_CRUSAITO_LEFT'), '2'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_DANCE_CRUSAITO_RIGHT'), '3'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_DANCE_FLAP_UP'), '4'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_DANCE_FLAP_DOWN'), '5'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_DANCE_MOONWALK_LEFT'), '0'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_DANCE_MOONWALK_RIGHT'), '1'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_DANCE_CRUSAITO_LEFT'), '2'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_DANCE_CRUSAITO_RIGHT'), '3'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_DANCE_FLAP_UP'), '4'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_DANCE_FLAP_DOWN'), '5'],
                 ]), "ACTION")
-                .appendField(RoboBlocks.locales.getKey('LANG_BETTO_VELOCITY'))
+                .appendField(FabBlocks.locales.getKey('LANG_BETTO_VELOCITY'))
                 .appendField(new Blockly.FieldDropdown([
-                    [RoboBlocks.locales.getKey('LANG_BETTO_VELOCITY_NORMAL'), '0'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_VELOCITY_SLOW'), '1'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_VELOCITY_VERY_SLOW'), '2'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_VELOCITY_FAST'), '3'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_VELOCITY_VERY_FAST'), '4'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_VELOCITY_TOO_FAST'), '5'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_VELOCITY_NORMAL'), '0'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_VELOCITY_SLOW'), '1'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_VELOCITY_VERY_SLOW'), '2'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_VELOCITY_FAST'), '3'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_VELOCITY_VERY_FAST'), '4'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_VELOCITY_TOO_FAST'), '5'],
                 ]), "VEL")
-                .appendField(RoboBlocks.locales.getKey('LANG_BETTO_SIZE'))
+                .appendField(FabBlocks.locales.getKey('LANG_BETTO_SIZE'))
                 .appendField(new Blockly.FieldDropdown([
-                    [RoboBlocks.locales.getKey('LANG_BETTO_SIZE_NORMAL'), '0'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_SIZE_SMALL'), '1'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_SIZE_LARGE'), '2'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_SIZE_NORMAL'), '0'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_SIZE_SMALL'), '1'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_SIZE_LARGE'), '2'],
                 ]), "SIZE");
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_TOOLTIP'));
         },
     };
 
     // COPIA DE LED PRUEBAS para BETTO Movimientos MOVE
     // Source: src/blocks/bq_led/bq_led.js
-    /* global Blockly, options, JST, RoboBlocks */
+    /* global Blockly, options, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * bq_led code generation
@@ -1666,48 +1666,48 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.betto_movs_select_move = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
         tags: ['Betto'],
         helpUrl: '',
         /**
          * bq_led initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_BETTO);
+            this.setColour(FabBlocks.LANG_COLOUR_BETTO);
             this.appendDummyInput('VALUE')
-                .appendField(RoboBlocks.locales.getKey('LANG_BETTO_MOVE'))
+                .appendField(FabBlocks.locales.getKey('LANG_BETTO_MOVE'))
                 .appendField(new Blockly.FieldDropdown([
-                    [RoboBlocks.locales.getKey('LANG_BETTO_DANCE_MENEITO'), '0'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_DANCE_UP_DOWN'), '1'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_DANCE_TIPTOE_SWAY'), '2'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_DANCE_RESTLESS'), '3'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_DANCE_SPIN_ASCENDING'), '4'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_DANCE_MENEITO'), '0'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_DANCE_UP_DOWN'), '1'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_DANCE_TIPTOE_SWAY'), '2'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_DANCE_RESTLESS'), '3'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_DANCE_SPIN_ASCENDING'), '4'],
                 ]), "ACTION")
-                .appendField(RoboBlocks.locales.getKey('LANG_BETTO_VELOCITY'))
+                .appendField(FabBlocks.locales.getKey('LANG_BETTO_VELOCITY'))
                 .appendField(new Blockly.FieldDropdown([
-                    [RoboBlocks.locales.getKey('LANG_BETTO_VELOCITY_NORMAL'), '0'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_VELOCITY_SLOW'), '1'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_VELOCITY_VERY_SLOW'), '2'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_VELOCITY_FAST'), '3'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_VELOCITY_VERY_FAST'), '4'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_VELOCITY_TOO_FAST'), '5'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_VELOCITY_NORMAL'), '0'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_VELOCITY_SLOW'), '1'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_VELOCITY_VERY_SLOW'), '2'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_VELOCITY_FAST'), '3'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_VELOCITY_VERY_FAST'), '4'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_VELOCITY_TOO_FAST'), '5'],
                 ]), "VEL")
-                .appendField(RoboBlocks.locales.getKey('LANG_BETTO_SIZE'))
+                .appendField(FabBlocks.locales.getKey('LANG_BETTO_SIZE'))
                 .appendField(new Blockly.FieldDropdown([
-                    [RoboBlocks.locales.getKey('LANG_BETTO_SIZE_NORMAL'), '0'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_SIZE_SMALL'), '1'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_SIZE_LARGE'), '2'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_SIZE_NORMAL'), '0'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_SIZE_SMALL'), '1'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_SIZE_LARGE'), '2'],
                 ]), "SIZE");
 
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_TOOLTIP'));
         },
     };
 
     // COPIA DE LED PRUEBAS para BETTO Movimientos SOUND
     // Source: src/blocks/bq_led/bq_led.js
-    /* global Blockly, options, JST, RoboBlocks */
+    /* global Blockly, options, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * bq_led code generation
@@ -1751,46 +1751,46 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.betto_select_sound = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
         tags: ['Betto'],
         helpUrl: '',
         /**
          * bq_led initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_BETTO);
+            this.setColour(FabBlocks.LANG_COLOUR_BETTO);
             this.appendDummyInput('VALUE')
-                .appendField(RoboBlocks.locales.getKey('LANG_BETTO_MOVE'))
+                .appendField(FabBlocks.locales.getKey('LANG_BETTO_MOVE'))
                 .appendField(new Blockly.FieldDropdown([
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_HAPPY'), '0'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_JOYFUL'), '1'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_CONTENT'), '2'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_SAD'), '3'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_CONFUSED'), '4'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_AFFectionate'), '5'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_OH'), '6'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_OOH'), '7'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_SURPRISE'), '8'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_CONNECTION'), '9'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_DISCONNECTION'), '10'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_BUTTON'), '11'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_MODE_1'), '12'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_MODE_2'), '13'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_MODE_3'), '14'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_SLEEP'), '15'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_FART_1'), '16'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_FART_2'), '17'],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_ACTION_FART_3'), '18'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_HAPPY'), '0'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_JOYFUL'), '1'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_CONTENT'), '2'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_SAD'), '3'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_CONFUSED'), '4'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_AFFectionate'), '5'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_OH'), '6'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_OOH'), '7'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_SURPRISE'), '8'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_CONNECTION'), '9'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_DISCONNECTION'), '10'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_BUTTON'), '11'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_MODE_1'), '12'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_MODE_2'), '13'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_MODE_3'), '14'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_SLEEP'), '15'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_FART_1'), '16'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_FART_2'), '17'],
+                    [FabBlocks.locales.getKey('LANG_BETTO_ACTION_FART_3'), '18'],
                 ]), "ACTION")
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_TOOLTIP'));
         },
     };
 
     // COPIA DE LED PRUEBAS para BETTO Movimientos SOUND
     // Source: src/blocks/bq_led/bq_led.js
-    /* global Blockly, options, JST, RoboBlocks */
+    /* global Blockly, options, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * bq_led code generation
@@ -1809,7 +1809,7 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.betto_select_sound = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
         tags: ['Betto'],
         helpUrl: '',
         /**
@@ -1823,13 +1823,13 @@ var load = function (options) {
             this.setInputsInline(true);
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setColour(RoboBlocks.LANG_COLOUR_BETTO);
+            this.setColour(FabBlocks.LANG_COLOUR_BETTO);
         },
     };
 
     // COPIA DE LED PRUEBAS para BETTO Movimientos SOUND 3 campos
     // Source: src/blocks/bq_led/bq_led.js
-    /* global Blockly, options, JST, RoboBlocks */
+    /* global Blockly, options, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * bq_led code generation
@@ -1850,7 +1850,7 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.betto_select_sound_vars = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
         tags: ['Betto'],
         helpUrl: '',
         /**
@@ -1864,13 +1864,13 @@ var load = function (options) {
             this.setInputsInline(true);
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setColour(RoboBlocks.LANG_COLOUR_BETTO);
+            this.setColour(FabBlocks.LANG_COLOUR_BETTO);
         },
     };
 
     // COPIA DE LED PRUEBAS para BETTO Movimientos SOUND 5 campos
     // Source: src/blocks/bq_led/bq_led.js
-    /* global Blockly, options, JST, RoboBlocks */
+    /* global Blockly, options, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * bq_led code generation
@@ -1893,7 +1893,7 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.betto_select_sound_5_vars = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
         tags: ['Betto'],
         helpUrl: '',
         /**
@@ -1909,13 +1909,13 @@ var load = function (options) {
             this.setInputsInline(true);
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setColour(RoboBlocks.LANG_COLOUR_BETTO);
+            this.setColour(FabBlocks.LANG_COLOUR_BETTO);
         },
     };
 
     // COPIA DE LED PRUEBAS para BETTO Movimientos Gesto
     // Source: src/blocks/bq_led/bq_led.js
-    /* global Blockly, options, JST, RoboBlocks */
+    /* global Blockly, options, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * bq_led code generation
@@ -1934,7 +1934,7 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.betto_select_gest = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
         tags: ['Betto'],
         helpUrl: '',
         /**
@@ -1942,26 +1942,26 @@ var load = function (options) {
          */
         init: function () {
             this.appendDummyInput().appendField(new Blockly.FieldImage(resources.images.ottoEmoji, resources.dimensions.ottoEmoji.width * options.zoom, resources.dimensions.ottoEmoji.height * options.zoom))
-                .appendField(RoboBlocks.locales.getKey('LANG_BETTO_GESTURE'))
+                .appendField(FabBlocks.locales.getKey('LANG_BETTO_GESTURE'))
                 .appendField(new Blockly.FieldDropdown([
-                    [RoboBlocks.locales.getKey('LANG_BETTO_GESTURE_HAPPY'), "BettoSuperHappy"],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_GESTURE_JOYFUL'), "BettoHappy"],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_GESTURE_SAD'), "BettoSad"],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_GESTURE_SLEEPING'), "BettoSleeping"],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_GESTURE_CONFUSED'), "BettoConfused"],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_GESTURE_FRETUL'), "BettoFretful"],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_GESTURE_LOVE'), "BettoLove"],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_GESTURE_ANGRY'), "BettoAngry"],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_GESTURE_MAGIC'), "BettoMagic"],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_GESTURE_WAVE'), "BettoWave"],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_GESTURE_VICTORY'), "BettoVictory"],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_GESTURE_FAIL'), "BettoFail"],
-                    [RoboBlocks.locales.getKey('LANG_BETTO_GESTURE_FART'), "BettoFart"],
+                    [FabBlocks.locales.getKey('LANG_BETTO_GESTURE_HAPPY'), "BettoSuperHappy"],
+                    [FabBlocks.locales.getKey('LANG_BETTO_GESTURE_JOYFUL'), "BettoHappy"],
+                    [FabBlocks.locales.getKey('LANG_BETTO_GESTURE_SAD'), "BettoSad"],
+                    [FabBlocks.locales.getKey('LANG_BETTO_GESTURE_SLEEPING'), "BettoSleeping"],
+                    [FabBlocks.locales.getKey('LANG_BETTO_GESTURE_CONFUSED'), "BettoConfused"],
+                    [FabBlocks.locales.getKey('LANG_BETTO_GESTURE_FRETUL'), "BettoFretful"],
+                    [FabBlocks.locales.getKey('LANG_BETTO_GESTURE_LOVE'), "BettoLove"],
+                    [FabBlocks.locales.getKey('LANG_BETTO_GESTURE_ANGRY'), "BettoAngry"],
+                    [FabBlocks.locales.getKey('LANG_BETTO_GESTURE_MAGIC'), "BettoMagic"],
+                    [FabBlocks.locales.getKey('LANG_BETTO_GESTURE_WAVE'), "BettoWave"],
+                    [FabBlocks.locales.getKey('LANG_BETTO_GESTURE_VICTORY'), "BettoVictory"],
+                    [FabBlocks.locales.getKey('LANG_BETTO_GESTURE_FAIL'), "BettoFail"],
+                    [FabBlocks.locales.getKey('LANG_BETTO_GESTURE_FART'), "BettoFart"],
                 ]), "otto_gesture")
             this.setInputsInline(true);
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setColour(RoboBlocks.LANG_COLOUR_BETTO);
+            this.setColour(FabBlocks.LANG_COLOUR_BETTO);
         },
     };
 
@@ -1986,7 +1986,7 @@ var load = function (options) {
     };
 
     Blockly.Blocks.mouth_matrix8x8 = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
         init: function () {
             this.appendDummyInput().appendField('  ').appendField(' 0').appendField(' 1').appendField(' 2').appendField('  3').appendField('  4').appendField(' 5').appendField(' 6').appendField(' 7');
             Blockly.FieldCheckbox.CHECK_CHAR = '🔴';
@@ -2065,13 +2065,13 @@ var load = function (options) {
             this.setInputsInline(false);
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setColour(RoboBlocks.LANG_COLOUR_BETTO);
+            this.setColour(FabBlocks.LANG_COLOUR_BETTO);
         },
     };
 
     // Copia de digital Write 1 argumento true-false para BETTO
     // Source: src/blocks/inout_digital_write/inout_digital_write.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * inout_digital_write code generation
@@ -2087,24 +2087,24 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.test_inout_digital_write = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
-        helpUrl: RoboBlocks.URL_PIN_FUNC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
+        helpUrl: FabBlocks.URL_PIN_FUNC,
         /**
          * inout_digital_write initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_BETTO);
-            this.appendDummyInput('DUMMY').appendField(RoboBlocks.locales.getKey('LANG_BETTO_STAND'));
+            this.setColour(FabBlocks.LANG_COLOUR_BETTO);
+            this.appendDummyInput('DUMMY').appendField(FabBlocks.locales.getKey('LANG_BETTO_STAND'));
             this.setPreviousStatement(true, null);
             this.setInputsInline(true);
             this.setNextStatement(true, null);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_TOOLTIP'));
         }
     };
 
     // Copia de digital Write 1 argumento true-false para BETTO 2
     // Source: src/blocks/inout_digital_write/inout_digital_write.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * inout_digital_write code generation
@@ -2120,31 +2120,31 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.betto_clear_mouth = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
-        helpUrl: RoboBlocks.URL_PIN_FUNC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
+        helpUrl: FabBlocks.URL_PIN_FUNC,
         /**
          * inout_digital_write initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_BETTO);
-            this.appendDummyInput('DUMMY').appendField(RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_CLEAN'));
+            this.setColour(FabBlocks.LANG_COLOUR_BETTO);
+            this.appendDummyInput('DUMMY').appendField(FabBlocks.locales.getKey('LANG_BETTO_MOUTH_CLEAN'));
             this.setPreviousStatement(true, null);
             this.setInputsInline(true);
             this.setNextStatement(true, null);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_TOOLTIP'));
         }
     };
 
     // Mouth
     Blockly.Blocks.betto_mouth_text = {
 
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
         init: function () {
-            this.appendDummyInput().appendField(RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_TEXT')).appendField(new Blockly.FieldTextInput('I AM OTTO'), 'input');
+            this.appendDummyInput().appendField(FabBlocks.locales.getKey('LANG_BETTO_MOUTH_TEXT')).appendField(new Blockly.FieldTextInput('I AM OTTO'), 'input');
             this.setInputsInline(true);
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setColour(RoboBlocks.LANG_COLOUR_BETTO);
+            this.setColour(FabBlocks.LANG_COLOUR_BETTO);
         }
     };
     Blockly.Arduino.betto_mouth_text = function (block) {
@@ -2155,15 +2155,15 @@ var load = function (options) {
 
     // Brightness
     Blockly.Blocks.betto_mouth_brightness = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
         init: function () {
             this.appendValueInput("brightness")
                 .setCheck(Number)
-                .appendField(RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_GLOW'));
+                .appendField(FabBlocks.locales.getKey('LANG_BETTO_MOUTH_GLOW'));
             this.setInputsInline(true);
             this.setPreviousStatement(true, null);
             this.setNextStatement(true, null);
-            this.setColour(RoboBlocks.LANG_COLOUR_BETTO);
+            this.setColour(FabBlocks.LANG_COLOUR_BETTO);
         }
     };
 
@@ -2175,33 +2175,33 @@ var load = function (options) {
 
     // Boca
     Blockly.Blocks.betto_mouth_face = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
         init: function () {
-            this.appendDummyInput().appendField(RoboBlocks.locales.getKey('LANG_BETTO_MOUTH')).appendField(new Blockly.FieldDropdown([
-                [RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_HAPPY'), "happyOpen"],
-                [RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_JOYFUL'), "happyClosed"],
-                [RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_SMILE'), "smile"],
-                [RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_SAD'), "23"],
-                [RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_DEJECTED'), "24"],
-                [RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_SMALL_SURPRISE'), "smallSurprise"],
-                [RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_BIG_SURPRISE'), "bigSurprise"],
-                [RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_CONFUSED'), "confused"],
-                [RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_TONGUE_OUT'), "tongueOut"],
-                [RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_CULITO'), "culito"],
-                [RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_SERIOUS'), "lineMouth"],
-                [RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_DISAPPOINTED'), "21"],
-                [RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_LOVE'), "heart"],
-                [RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_VAMPIRE'), "vamp1"],
-                [RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_TEETH'), "vamp2"],
-                [RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_NO'), "xMouth"],
-                [RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_OK'), "okMouth"],
-                [RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_QUESTION'), "27"],
-                [RoboBlocks.locales.getKey('LANG_BETTO_MOUTH_THUNDER'), "thunder"],
+            this.appendDummyInput().appendField(FabBlocks.locales.getKey('LANG_BETTO_MOUTH')).appendField(new Blockly.FieldDropdown([
+                [FabBlocks.locales.getKey('LANG_BETTO_MOUTH_HAPPY'), "happyOpen"],
+                [FabBlocks.locales.getKey('LANG_BETTO_MOUTH_JOYFUL'), "happyClosed"],
+                [FabBlocks.locales.getKey('LANG_BETTO_MOUTH_SMILE'), "smile"],
+                [FabBlocks.locales.getKey('LANG_BETTO_MOUTH_SAD'), "23"],
+                [FabBlocks.locales.getKey('LANG_BETTO_MOUTH_DEJECTED'), "24"],
+                [FabBlocks.locales.getKey('LANG_BETTO_MOUTH_SMALL_SURPRISE'), "smallSurprise"],
+                [FabBlocks.locales.getKey('LANG_BETTO_MOUTH_BIG_SURPRISE'), "bigSurprise"],
+                [FabBlocks.locales.getKey('LANG_BETTO_MOUTH_CONFUSED'), "confused"],
+                [FabBlocks.locales.getKey('LANG_BETTO_MOUTH_TONGUE_OUT'), "tongueOut"],
+                [FabBlocks.locales.getKey('LANG_BETTO_MOUTH_CULITO'), "culito"],
+                [FabBlocks.locales.getKey('LANG_BETTO_MOUTH_SERIOUS'), "lineMouth"],
+                [FabBlocks.locales.getKey('LANG_BETTO_MOUTH_DISAPPOINTED'), "21"],
+                [FabBlocks.locales.getKey('LANG_BETTO_MOUTH_LOVE'), "heart"],
+                [FabBlocks.locales.getKey('LANG_BETTO_MOUTH_VAMPIRE'), "vamp1"],
+                [FabBlocks.locales.getKey('LANG_BETTO_MOUTH_TEETH'), "vamp2"],
+                [FabBlocks.locales.getKey('LANG_BETTO_MOUTH_NO'), "xMouth"],
+                [FabBlocks.locales.getKey('LANG_BETTO_MOUTH_OK'), "okMouth"],
+                [FabBlocks.locales.getKey('LANG_BETTO_MOUTH_QUESTION'), "27"],
+                [FabBlocks.locales.getKey('LANG_BETTO_MOUTH_THUNDER'), "thunder"],
             ]), "otto9_mouth_choice");
             this.setInputsInline(true);
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setColour(RoboBlocks.LANG_COLOUR_BETTO);
+            this.setColour(FabBlocks.LANG_COLOUR_BETTO);
         }
     };
     Blockly.Arduino.betto_mouth_face = function (block) {
@@ -2246,10 +2246,10 @@ var load = function (options) {
 
     Blockly.Blocks.Sound_sensor_3 = {
         helpUrl: '',
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
         init: function () {
             var card = window.localStorage.card;
-            this.setColour(RoboBlocks.LANG_COLOUR_BETTO);
+            this.setColour(FabBlocks.LANG_COLOUR_BETTO);
             this.appendDummyInput()
                 .appendField(new Blockly.FieldImage(resources.images.sensorNoise, resources.dimensions.sensorNoise.width * options.zoom, resources.dimensions.sensorNoise.height * options.zoom))
                 .appendField(Blockly.Msg.SOUND_NAME)
@@ -2274,13 +2274,13 @@ var load = function (options) {
 
     // Ultrasonido
     Blockly.Blocks.ultrasonic_distance = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_BETTO'),
         init: function () {
             this.appendDummyInput()
                 .appendField(new Blockly.FieldImage(resources.images.sensorUltrasound, resources.dimensions.sensorUltrasound.width * options.zoom, resources.dimensions.sensorUltrasound.height * options.zoom))
                 .appendField("#").appendField(new Blockly.FieldDropdown([['1', '1'], ['2', '2'], ['3', '3'], ['4', '4']]), "US_NUMBER")
-                .appendField(RoboBlocks.locales.getKey('LANG_ULTRASOUND_DISTANCE'));
-            this.setColour(RoboBlocks.LANG_COLOUR_BETTO);
+                .appendField(FabBlocks.locales.getKey('LANG_ULTRASOUND_DISTANCE'));
+            this.setColour(FabBlocks.LANG_COLOUR_BETTO);
             this.setInputsInline(false);
             this.setOutput(true, "Number");
         }
@@ -2295,7 +2295,7 @@ var load = function (options) {
 
     // CARLITTO BLOQUES
     // Source: src/blocks/bq_led/bq_led.js
-    /* global Blockly, options, JST, RoboBlocks */
+    /* global Blockly, options, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * bq_led code generation
@@ -2327,31 +2327,31 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.carlitto_def_variables = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_CARLITTO'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_CARLITTO'),
         tags: ['Carlitto'],
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_CARLITTO);
+            this.setColour(FabBlocks.LANG_COLOUR_CARLITTO);
 
             this.appendDummyInput()
                 .appendField(new Blockly.FieldImage(resources.images.declararCarlitto, resources.dimensions.declararCarlitto.width * options.zoom, resources.dimensions.declararCarlitto.height * options.zoom))
-                .appendField(RoboBlocks.locales.getKey('LANG_CARLITTO_DEFINE'));
+                .appendField(FabBlocks.locales.getKey('LANG_CARLITTO_DEFINE'));
 
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_CARLITTO_MOTOR_LEFT'))
+                .appendField(FabBlocks.locales.getKey('LANG_CARLITTO_MOTOR_LEFT'))
                 .setAlign(Blockly.ALIGN_LEFT)
                 .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"]]), "MOT_LEFT")
-                .appendField(RoboBlocks.locales.getKey('LANG_CARLITTO_POWER_LEFT'))
+                .appendField(FabBlocks.locales.getKey('LANG_CARLITTO_POWER_LEFT'))
                 .appendField(new Blockly.FieldTextInput('0', Blockly.Blocks.math_integer_dc.validator), 'POT_LEFT');
 
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_CARLITTO_MOTOR_RIGHT'))
+                .appendField(FabBlocks.locales.getKey('LANG_CARLITTO_MOTOR_RIGHT'))
                 .setAlign(Blockly.ALIGN_LEFT)
                 .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"]]), "MOT_RIGHT")
-                .appendField(RoboBlocks.locales.getKey('LANG_CARLITTO_POWER_RIGHT'))
+                .appendField(FabBlocks.locales.getKey('LANG_CARLITTO_POWER_RIGHT'))
                 .appendField(new Blockly.FieldTextInput('0', Blockly.Blocks.math_integer_dc.validator), 'POT_RIGHT');
 
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_CARLITTO_POTENTIOMETER'))
+                .appendField(FabBlocks.locales.getKey('LANG_CARLITTO_POTENTIOMETER'))
                 .setAlign(Blockly.ALIGN_LEFT)
                 .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"]]), "POT");
 
@@ -2359,13 +2359,13 @@ var load = function (options) {
             this.setNextStatement(true);
 
             // Tooltip
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_TOOLTIP'));
         },
     };
 
     // COPIA DE LED PRUEBAS para BETTO Movimientos Gesto
     // Source: src/blocks/bq_led/bq_led.js
-    /* global Blockly, options, JST, RoboBlocks */
+    /* global Blockly, options, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * bq_led code generation
@@ -2388,16 +2388,16 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.betto_select_gest = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_CARLITTO'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_CARLITTO'),
         tags: ['Carlitto'],
         helpUrl: '',
         /**
          * bq_led initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_CARLITTO);
+            this.setColour(FabBlocks.LANG_COLOUR_CARLITTO);
             this.appendDummyInput().appendField(new Blockly.FieldImage(resources.images.movimientoCarlitto, resources.dimensions.movimientoCarlitto.width * options.zoom, resources.dimensions.movimientoCarlitto.height * options.zoom))
-                .appendField(RoboBlocks.locales.getKey('LANG_CARLITTO_MOVE_IN'))
+                .appendField(FabBlocks.locales.getKey('LANG_CARLITTO_MOVE_IN'))
                 .appendField(new Blockly.FieldDropdown([
                     ["ADELANTE", "ADELANTE"],
                     ["ATRAS", "ATRAS"],
@@ -2412,7 +2412,7 @@ var load = function (options) {
 
     // Copia de digital Write 1 argumento true-false para BETTO
     // Source: src/blocks/inout_digital_write/inout_digital_write.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * inout_digital_write code generation
@@ -2428,14 +2428,14 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.carlitto_stop = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_CARLITTO'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_CARLITTO'),
         /**
          * inout_digital_write initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_CARLITTO);
+            this.setColour(FabBlocks.LANG_COLOUR_CARLITTO);
             this.appendDummyInput().appendField(new Blockly.FieldImage(resources.images.pararCarlitto, resources.dimensions.pararCarlitto.width * options.zoom, resources.dimensions.pararCarlitto.height * options.zoom))
-                .appendField(RoboBlocks.locales.getKey('LANG_CARLITTO_STOP'));
+                .appendField(FabBlocks.locales.getKey('LANG_CARLITTO_STOP'));
             this.setPreviousStatement(true, null);
             this.setInputsInline(true);
             this.setNextStatement(true, null);
@@ -2443,7 +2443,7 @@ var load = function (options) {
     };
 
     // Source: src/blocks/base_map/base_map.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -2456,11 +2456,11 @@ var load = function (options) {
         var value_dmax = Blockly.Arduino.valueToCode(this, 'DMAX', Blockly.Arduino.ORDER_ATOMIC);
 
         var code = '';
-        var a = RoboBlocks.findPinMode(value_num);
+        var a = FabBlocks.findPinMode(value_num);
         code += a['code'];
         value_num = a['pin'];
 
-        a = RoboBlocks.findPinMode(value_dmax);
+        a = FabBlocks.findPinMode(value_dmax);
         code += a['code'];
         value_dmax = a['pin'];
 
@@ -2473,26 +2473,26 @@ var load = function (options) {
     };
 
     Blockly.Blocks.base_map = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_MATH'),
-        helpUrl: RoboBlocks.URL_MATH,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_MATH'),
+        helpUrl: FabBlocks.URL_MATH,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_MATH);
+            this.setColour(FabBlocks.LANG_COLOUR_MATH);
             this.appendValueInput('NUM', Number)
-                .appendField(RoboBlocks.locales.getKey('LANG_MATH_BASE_MAP'))
+                .appendField(FabBlocks.locales.getKey('LANG_MATH_BASE_MAP'))
                 .setCheck(Number);
             this.appendValueInput('DMAX', Number)
-                .appendField(RoboBlocks.locales.getKey('LANG_MATH_BASE_MAP_VALUE_TO'))
+                .appendField(FabBlocks.locales.getKey('LANG_MATH_BASE_MAP_VALUE_TO'))
                 .setCheck(Number);
             this.appendDummyInput('')
-                .appendField(RoboBlocks.locales.getKey('LANG_MATH_BASE_MAP_BRACKET'));
+                .appendField(FabBlocks.locales.getKey('LANG_MATH_BASE_MAP_BRACKET'));
             this.setInputsInline(true);
             this.setOutput(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_MATH_BASE_MAP_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_MATH_BASE_MAP_TOOLTIP'));
         }
     };
 
     // Source: src/blocks/base_millis/base_millis.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
 
     //register with blockly arduino
     Blockly.Arduino.base_millis = function () {
@@ -2501,13 +2501,13 @@ var load = function (options) {
     };
 
     Blockly.Blocks.base_millis = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_CONTROLS'),
-        helpUrl: RoboBlocks.URL_LED,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_CONTROLS'),
+        helpUrl: FabBlocks.URL_LED,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_CONTROL);
-            this.appendDummyInput('').appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_BASE_MILLIS'));
+            this.setColour(FabBlocks.LANG_COLOUR_CONTROL);
+            this.appendDummyInput('').appendField(FabBlocks.locales.getKey('LANG_CONTROLS_BASE_MILLIS'));
             this.setOutput(true, 'Number');
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_CONTROLS_BASE_MILLIS_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_CONTROLS_BASE_MILLIS_TOOLTIP'));
         }
     };
 
@@ -2515,7 +2515,7 @@ var load = function (options) {
     Blockly.Arduino.base_delay = function () {
         var delay_time = Blockly.Arduino.valueToCode(this, 'DELAY_TIME', Blockly.Arduino.ORDER_ATOMIC);
         var code = '';
-        var a = RoboBlocks.findPinMode(delay_time);
+        var a = FabBlocks.findPinMode(delay_time);
         code += a['code'];
         delay_time = a['pin'];
 
@@ -2528,21 +2528,21 @@ var load = function (options) {
     };
 
     Blockly.Blocks.base_delay = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_CONTROLS'),
-        helpUrl: RoboBlocks.URL_LED,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_CONTROLS'),
+        helpUrl: FabBlocks.URL_LED,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_CONTROL);
+            this.setColour(FabBlocks.LANG_COLOUR_CONTROL);
             this.appendValueInput('DELAY_TIME', Number)
-                .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_BASE_DELAY_WAIT'))
+                .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_BASE_DELAY_WAIT'))
                 .setCheck(Number);
             this.setInputsInline(true);
             this.setPreviousStatement(true, null);
             this.setNextStatement(true, null);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_CONTROLS_BASE_DELAY_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_CONTROLS_BASE_DELAY_TOOLTIP'));
         }
     };
     // Source: src/blocks/bq_bluetooth_def/bq_bluetooth_def.js
-    /* global Blockly, options, JST, RoboBlocks */
+    /* global Blockly, options, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * bq_bluetooth_def code generation
@@ -2553,10 +2553,10 @@ var load = function (options) {
         if (this.getFieldValue('TOGGLE') === 'FALSE') {
             dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
             NextPIN = Blockly.Arduino.valueToCode(this, 'PIN2', Blockly.Arduino.ORDER_ATOMIC);
-            var a = RoboBlocks.findPinMode(dropdown_pin);
+            var a = FabBlocks.findPinMode(dropdown_pin);
             Blockly.Arduino.setups_['setup_bluetooth_pinmode'] = a['code'];
             dropdown_pin = a['pin'];
-            a = RoboBlocks.findPinMode(NextPIN);
+            a = FabBlocks.findPinMode(NextPIN);
             Blockly.Arduino.setups_['setup_bluetooth_pinmode2'] = a['code'];
             NextPIN = a['pin'];
         } else {
@@ -2564,7 +2564,7 @@ var load = function (options) {
             NextPIN = 1;
         }
         var baud_rate = Blockly.Arduino.valueToCode(this, 'BAUD_RATE', Blockly.Arduino.ORDER_ATOMIC);
-        var b = RoboBlocks.findPinMode(baud_rate);
+        var b = FabBlocks.findPinMode(baud_rate);
         Blockly.Arduino.setups_['setup_bluetooth_pinmode3'] = b['code'];
         baud_rate = b['pin'];
 
@@ -2585,23 +2585,23 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.bq_bluetooth_def = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
         tags: ['bluetooth'],
-        helpUrl: RoboBlocks.URL_BT,
+        helpUrl: FabBlocks.URL_BT,
         /**
          * bq_bluetooth_slave initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_COMMUNICATION);
-            this.appendDummyInput().appendField(RoboBlocks.locales.getKey('LANG_BQ_BLUETOOTH_DEF')).appendField(new Blockly.FieldImage(resources.images.bqmod03, resources.dimensions.bqmod03.width * options.zoom, resources.dimensions.bqmod03.height * options.zoom));
-            this.appendValueInput('BAUD_RATE').setCheck(Number).appendField(RoboBlocks.locales.getKey('LANG_BQ_BLUETOOTH_DEF_BAUD_RATE')).setAlign(Blockly.ALIGN_RIGHT);
+            this.setColour(FabBlocks.LANG_COLOUR_COMMUNICATION);
+            this.appendDummyInput().appendField(FabBlocks.locales.getKey('LANG_BQ_BLUETOOTH_DEF')).appendField(new Blockly.FieldImage(resources.images.bqmod03, resources.dimensions.bqmod03.width * options.zoom, resources.dimensions.bqmod03.height * options.zoom));
+            this.appendValueInput('BAUD_RATE').setCheck(Number).appendField(FabBlocks.locales.getKey('LANG_BQ_BLUETOOTH_DEF_BAUD_RATE')).setAlign(Blockly.ALIGN_RIGHT);
             this.appendDummyInput().appendField('zum?').appendField(new Blockly.FieldCheckbox('FALSE'), 'TOGGLE').setAlign(Blockly.ALIGN_RIGHT);
             this.checkBT();
             this.last_toogle = this.getFieldValue('TOGGLE');
             this.setInputsInline(false);
             this.setPreviousStatement(true, null);
             this.setNextStatement(true, null);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_BQ_BLUETOOTH_DEF_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_BQ_BLUETOOTH_DEF_TOOLTIP'));
         },
         checkBT: function () {
             if (this.getFieldValue('TOGGLE') === 'FALSE') {
@@ -2609,8 +2609,8 @@ var load = function (options) {
                     this.removeInput('PIN');
                     this.removeInput('PIN2');
                 } catch (e) { }
-                this.appendValueInput('PIN').setCheck(Number).appendField(RoboBlocks.locales.getKey('LANG_BQ_BLUETOOTH_DEF_PIN1')).setAlign(Blockly.ALIGN_RIGHT);
-                this.appendValueInput('PIN2').setCheck(Number).appendField(RoboBlocks.locales.getKey('LANG_BQ_BLUETOOTH_DEF_PIN2')).setAlign(Blockly.ALIGN_RIGHT);
+                this.appendValueInput('PIN').setCheck(Number).appendField(FabBlocks.locales.getKey('LANG_BQ_BLUETOOTH_DEF_PIN1')).setAlign(Blockly.ALIGN_RIGHT);
+                this.appendValueInput('PIN2').setCheck(Number).appendField(FabBlocks.locales.getKey('LANG_BQ_BLUETOOTH_DEF_PIN2')).setAlign(Blockly.ALIGN_RIGHT);
             } else {
                 try {
                     this.removeInput('PIN');
@@ -2626,7 +2626,7 @@ var load = function (options) {
         }
     };
     // Source: src/blocks/bq_bluetooth_receive/bq_bluetooth_receive.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -2644,28 +2644,28 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.bq_bluetooth_receive = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
         tags: ['bluetooth'],
-        helpUrl: RoboBlocks.URL_BT,
+        helpUrl: FabBlocks.URL_BT,
         /**
          * bq_bluetooth_slave initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_COMMUNICATION);
+            this.setColour(FabBlocks.LANG_COLOUR_COMMUNICATION);
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_BQ_BLUETOOTH_RECEIVE'));
+                .appendField(FabBlocks.locales.getKey('LANG_BQ_BLUETOOTH_RECEIVE'));
             // .appendField(new Blockly.FieldImage('img/blocks/bqmod03.png', 208 * options.zoom, 100 * options.zoom));
 
             this.setInputsInline(false);
 
 
             this.setOutput(true, null);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_BQ_BLUETOOTH_RECEIVE_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_BQ_BLUETOOTH_RECEIVE_TOOLTIP'));
         }
     };
 
     // Source: src/blocks/bq_bluetooth_send/bq_bluetooth_send.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -2677,7 +2677,7 @@ var load = function (options) {
         var statement_send = Blockly.Arduino.valueToCode(this, 'SNT', Blockly.Arduino.ORDER_ATOMIC) || '';
 
         var code = '';
-        var a = RoboBlocks.findPinMode(statement_send);
+        var a = FabBlocks.findPinMode(statement_send);
         code += a['code'];
         statement_send = a['pin'];
 
@@ -2693,34 +2693,34 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.bq_bluetooth_send = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
         tags: ['bluetooth'],
-        helpUrl: RoboBlocks.URL_BT,
+        helpUrl: FabBlocks.URL_BT,
         /**
          * bq_bluetooth_send initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_COMMUNICATION);
+            this.setColour(FabBlocks.LANG_COLOUR_COMMUNICATION);
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_BQ_BLUETOOTH_SEND'));
+                .appendField(FabBlocks.locales.getKey('LANG_BQ_BLUETOOTH_SEND'));
             // .appendField(new Blockly.FieldImage('img/blocks/bqmod03.png', 208 * options.zoom, 100 * options.zoom));
 
             this.appendValueInput('SNT')
                 .setAlign(Blockly.ALIGN_RIGHT)
-                .appendField(RoboBlocks.locales.getKey('LANG_BQ_BLUETOOTH_SEND_SEND'));
+                .appendField(FabBlocks.locales.getKey('LANG_BQ_BLUETOOTH_SEND_SEND'));
 
             this.setInputsInline(false);
 
 
             this.setPreviousStatement(true, null);
             this.setNextStatement(true, null);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_BQ_BLUETOOTH_SEND_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_BQ_BLUETOOTH_SEND_TOOLTIP'));
         }
     };
 
 
     // Source: src/blocks/bt_serial_available/bt_serial_available.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -2742,26 +2742,26 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.bt_serial_available = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
-        helpUrl: RoboBlocks.URL_BT,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
+        helpUrl: FabBlocks.URL_BT,
         tags: ['bluetooth'],
         /**
          * bt_serial_available initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_COMMUNICATION);
+            this.setColour(FabBlocks.LANG_COLOUR_COMMUNICATION);
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_ADVANCED_BT_SERIAL_AVAILABLE'));
+                .appendField(FabBlocks.locales.getKey('LANG_ADVANCED_BT_SERIAL_AVAILABLE'));
             this.appendStatementInput('DO')
-                .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_REPEAT_INPUT_DO'));
+                .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_REPEAT_INPUT_DO'));
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_BT_SERIAL_AVAILABLE_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_BT_SERIAL_AVAILABLE_TOOLTIP'));
         }
     };
 
     // Source: src/blocks/controls_doWhile/controls_doWhile.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * controls_doWhile code generation
@@ -2794,24 +2794,24 @@ var load = function (options) {
     };
     Blockly.Blocks.controls_doWhile = {
         // Do/while loop.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_CONTROLS'),
-        // helpUrl: RoboBlocks.URL_DOWHILE,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_CONTROLS'),
+        // helpUrl: FabBlocks.URL_DOWHILE,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_CONTROL);
-            this.appendStatementInput('DO').appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_DOWHILE_OPERATOR_DO'));
-            this.appendValueInput('WHILE').setCheck(Boolean).appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT')).appendField(new Blockly.FieldDropdown([
-                [RoboBlocks.locales.getKey('LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE'), 'WHILE'],
-                [RoboBlocks.locales.getKey('LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL'), 'UNTIL']
+            this.setColour(FabBlocks.LANG_COLOUR_CONTROL);
+            this.appendStatementInput('DO').appendField(FabBlocks.locales.getKey('LANG_CONTROLS_DOWHILE_OPERATOR_DO'));
+            this.appendValueInput('WHILE').setCheck(Boolean).appendField(FabBlocks.locales.getKey('LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT')).appendField(new Blockly.FieldDropdown([
+                [FabBlocks.locales.getKey('LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE'), 'WHILE'],
+                [FabBlocks.locales.getKey('LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL'), 'UNTIL']
             ]), 'MODE');
-            // this.appendValueInput('WHILE').setCheck(Boolean).appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_DOWHILE_OPERATOR_WHILE'));
+            // this.appendValueInput('WHILE').setCheck(Boolean).appendField(FabBlocks.locales.getKey('LANG_CONTROLS_DOWHILE_OPERATOR_WHILE'));
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_CONTROLS_DOWHILE_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_CONTROLS_DOWHILE_TOOLTIP'));
         }
     };
 
     // Source: src/blocks/controls_execute/controls_execute.js
-    /* global Blockly, profiles, JST, RoboBlocks */
+    /* global Blockly, profiles, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * controls_execute code generation
@@ -2844,22 +2844,22 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.controls_execute = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_CONTROLS'),
-        // helpUrl: RoboBlocks.URL_SERIE,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_CONTROLS'),
+        // helpUrl: FabBlocks.URL_SERIE,
         /**
          * controls_execute initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_CONTROL);
-            this.appendValueInput('CONTENT', String).appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_EXECUTE'));
+            this.setColour(FabBlocks.LANG_COLOUR_CONTROL);
+            this.appendValueInput('CONTENT', String).appendField(FabBlocks.locales.getKey('LANG_CONTROLS_EXECUTE'));
             this.setPreviousStatement(true, null);
             this.setNextStatement(true, null);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_CONTROLS_EXECUTE_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_CONTROLS_EXECUTE_TOOLTIP'));
         }
     };
 
     // Source: src/blocks/controls_flow_statements/controls_flow_statements.js
-    /* global Blockly, RoboBlocks */
+    /* global Blockly, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -2894,18 +2894,18 @@ var load = function (options) {
 
     Blockly.Blocks.controls_flow_statements = {
         // Flow statements: continue, break.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_CONTROLS'),
-        helpUrl: RoboBlocks.URL_FLOW_STATEMENTS,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_CONTROLS'),
+        helpUrl: FabBlocks.URL_FLOW_STATEMENTS,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_CONTROL);
+            this.setColour(FabBlocks.LANG_COLOUR_CONTROL);
             var dropdown = new Blockly.FieldDropdown(
                 [
-                    [RoboBlocks.locales.getKey('LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK') || 'BREAK', 'BREAK'],
-                    [RoboBlocks.locales.getKey('LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE') || 'CONTINUE', 'CONTINUE']
+                    [FabBlocks.locales.getKey('LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK') || 'BREAK', 'BREAK'],
+                    [FabBlocks.locales.getKey('LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE') || 'CONTINUE', 'CONTINUE']
                 ]);
             this.appendDummyInput()
                 .appendField(dropdown, 'FLOW')
-                .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP'));
+                .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP'));
             this.setPreviousStatement(true);
             // Assign 'this' to a variable for use in the tooltip closure below.
             var thisBlock = this;
@@ -2936,7 +2936,7 @@ var load = function (options) {
                 this.setWarningText(null);
             } else {
                 try {
-                    this.setWarningText(RoboBlocks.locales.getKey('LANG_CONTROLS_FLOW_STATEMENTS_WARNING'));
+                    this.setWarningText(FabBlocks.locales.getKey('LANG_CONTROLS_FLOW_STATEMENTS_WARNING'));
                 } catch (err) {
                     console.log('Captured error: ', err);
                 }
@@ -2945,12 +2945,12 @@ var load = function (options) {
     };
 
     Blockly.Blocks.controls_flow_statements.TOOLTIPS = {
-        BREAK: RoboBlocks.locales.getKey('LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK'),
-        CONTINUE: RoboBlocks.locales.getKey('LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE')
+        BREAK: FabBlocks.locales.getKey('LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK'),
+        CONTINUE: FabBlocks.locales.getKey('LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE')
     };
 
     // Source: src/blocks/controls_for/controls_for.js
-    /* global Blockly, RoboBlocks */
+    /* global Blockly, FabBlocks */
     /* jshint sub:true */
     /**
      * controls_for code generation
@@ -2966,15 +2966,15 @@ var load = function (options) {
         }
 
         var code = '';
-        var a = RoboBlocks.findPinMode(variable0);
+        var a = FabBlocks.findPinMode(variable0);
         code += a['code'];
         variable0 = a['pin'];
 
-        a = RoboBlocks.findPinMode(argument0);
+        a = FabBlocks.findPinMode(argument0);
         code += a['code'];
         argument0 = a['pin'];
 
-        a = RoboBlocks.findPinMode(argument1);
+        a = FabBlocks.findPinMode(argument1);
         code += a['code'];
         argument1 = a['pin'];
 
@@ -2992,22 +2992,22 @@ var load = function (options) {
     };
     Blockly.Blocks.controls_for = {
         // For loop.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_CONTROLS'),
-        helpUrl: RoboBlocks.URL_FOR,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_CONTROLS'),
+        helpUrl: FabBlocks.URL_FOR,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_CONTROL);
-            this.appendValueInput('VAR').appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_FOR_INPUT_WITH'));
+            this.setColour(FabBlocks.LANG_COLOUR_CONTROL);
+            this.appendValueInput('VAR').appendField(FabBlocks.locales.getKey('LANG_CONTROLS_FOR_INPUT_WITH'));
             // .appendField(new Blockly.FieldVariable(' '), 'VAR');
-            this.appendValueInput('FROM').setCheck(Number).setAlign(Blockly.ALIGN_RIGHT).appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_FOR_INPUT_FROM'));
-            this.appendValueInput('TO').setCheck(Number).setAlign(Blockly.ALIGN_RIGHT).appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_FOR_INPUT_TO'));
-            this.appendStatementInput('DO').appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_FOR_INPUT_DO'));
+            this.appendValueInput('FROM').setCheck(Number).setAlign(Blockly.ALIGN_RIGHT).appendField(FabBlocks.locales.getKey('LANG_CONTROLS_FOR_INPUT_FROM'));
+            this.appendValueInput('TO').setCheck(Number).setAlign(Blockly.ALIGN_RIGHT).appendField(FabBlocks.locales.getKey('LANG_CONTROLS_FOR_INPUT_TO'));
+            this.appendStatementInput('DO').appendField(FabBlocks.locales.getKey('LANG_CONTROLS_FOR_INPUT_DO'));
             this.setPreviousStatement(true);
             this.setNextStatement(true);
             this.setInputsInline(true);
             // Assign 'this' to a variable for use in the tooltip closure below.
             var thisBlock = this;
             this.setTooltip(function () {
-                return RoboBlocks.LANG_CONTROLS_FOR_TOOLTIP.replace('%1', thisBlock.getFieldValue('VAR'));
+                return FabBlocks.LANG_CONTROLS_FOR_TOOLTIP.replace('%1', thisBlock.getFieldValue('VAR'));
             });
         },
         getVars: function () {
@@ -3036,9 +3036,9 @@ var load = function (options) {
         onchange: function () {
             try {
                 if (this.isVariable(Blockly.Arduino.valueToCode(this, 'FROM', Blockly.Arduino.ORDER_ATOMIC))) {
-                    this.setWarningText(RoboBlocks.locales.getKey('LANG_CONTROLS_FOR_FROM_WARNING'));
+                    this.setWarningText(FabBlocks.locales.getKey('LANG_CONTROLS_FOR_FROM_WARNING'));
                 } else if (this.isVariable(Blockly.Arduino.valueToCode(this, 'TO', Blockly.Arduino.ORDER_ATOMIC))) {
-                    this.setWarningText(RoboBlocks.locales.getKey('LANG_CONTROLS_FOR_TO_WARNING'));
+                    this.setWarningText(FabBlocks.locales.getKey('LANG_CONTROLS_FOR_TO_WARNING'));
                 } else {
                     this.setWarningText(null);
                 }
@@ -3061,25 +3061,25 @@ var load = function (options) {
             //             this.removeInput('TO');
             //             this.removeInput('DO');
             //             this.appendDummyInput('DUMMY')
-            //                 .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_FOR_INPUT_WITH'))
+            //                 .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_FOR_INPUT_WITH'))
             //                 .appendField(new Blockly.FieldDropdown(this.getVariables()), 'VAR');
             //             this.appendValueInput('FROM')
             //                 .setCheck(Number)
             //                 .setAlign(Blockly.ALIGN_RIGHT)
-            //                 .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_FOR_INPUT_FROM'));
+            //                 .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_FOR_INPUT_FROM'));
             //             this.appendValueInput('TO')
             //                 .setCheck(Number)
             //                 .setAlign(Blockly.ALIGN_RIGHT)
-            //                 .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_FOR_INPUT_TO'));
+            //                 .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_FOR_INPUT_TO'));
             //             this.appendStatementInput('DO')
-            //                 .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_FOR_INPUT_DO'));
+            //                 .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_FOR_INPUT_DO'));
             //         }catch(e){}
             //         this.last_variables=Blockly.Variables.allVariables();
             //     }
             // }
             // try {
             //     if (!this.exists()) {
-            //         this.setWarningText(RoboBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
+            //         this.setWarningText(FabBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
             //     } else {
             //         this.setWarningText(null);
             //     }
@@ -3092,7 +3092,7 @@ var load = function (options) {
         },
     };
     // Source: src/blocks/controls_if/controls_if.js
-    /* global Blockly, JST,  RoboBlocks */
+    /* global Blockly, JST,  FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -3108,7 +3108,7 @@ var load = function (options) {
         var branch = Blockly.Arduino.statementToCode(this, 'DO' + n);
 
         var code = '';
-        var a = RoboBlocks.findPinMode(argument);
+        var a = FabBlocks.findPinMode(argument);
         code += a['code'];
         argument = a['pin'];
 
@@ -3148,15 +3148,15 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.controls_if = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_CONTROLS'),
-        helpUrl: RoboBlocks.URL_IF,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_CONTROLS'),
+        helpUrl: FabBlocks.URL_IF,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_CONTROL);
+            this.setColour(FabBlocks.LANG_COLOUR_CONTROL);
             this.appendValueInput('IF0')
                 .setCheck(Boolean)
-                .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_IF_MSG_IF'));
+                .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_IF_MSG_IF'));
             this.appendStatementInput('DO0')
-                .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_IF_MSG_THEN'))
+                .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_IF_MSG_THEN'))
                 .setAlign(Blockly.ALIGN_RIGHT);
             this.setPreviousStatement(true);
             this.setNextStatement(true);
@@ -3167,13 +3167,13 @@ var load = function (options) {
             var thisBlock = this;
             this.setTooltip(function () {
                 if (!thisBlock.elseifCount_ && !thisBlock.elseCount_) {
-                    return RoboBlocks.locales.getKey('LANG_CONTROLS_IF_TOOLTIP_1');
+                    return FabBlocks.locales.getKey('LANG_CONTROLS_IF_TOOLTIP_1');
                 } else if (!thisBlock.elseifCount_ && thisBlock.elseCount_) {
-                    return RoboBlocks.locales.getKey('LANG_CONTROLS_IF_TOOLTIP_2');
+                    return FabBlocks.locales.getKey('LANG_CONTROLS_IF_TOOLTIP_2');
                 } else if (thisBlock.elseifCount_ && !thisBlock.elseCount_) {
-                    return RoboBlocks.locales.getKey('LANG_CONTROLS_IF_TOOLTIP_3');
+                    return FabBlocks.locales.getKey('LANG_CONTROLS_IF_TOOLTIP_3');
                 } else if (thisBlock.elseifCount_ && thisBlock.elseCount_) {
-                    return RoboBlocks.locales.getKey('LANG_CONTROLS_IF_TOOLTIP_4');
+                    return FabBlocks.locales.getKey('LANG_CONTROLS_IF_TOOLTIP_4');
                 }
                 return '';
             });
@@ -3199,14 +3199,14 @@ var load = function (options) {
             for (var x = 1; x <= this.elseifCount_; x++) {
                 this.appendValueInput('IF' + x)
                     .setCheck(Boolean)
-                    .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_IF_MSG_ELSEIF'));
+                    .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_IF_MSG_ELSEIF'));
                 this.appendStatementInput('DO' + x)
-                    .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_IF_MSG_THEN'))
+                    .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_IF_MSG_THEN'))
                     .setAlign(Blockly.ALIGN_RIGHT);
             }
             if (this.elseCount_) {
                 this.appendStatementInput('ELSE')
-                    .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_IF_MSG_ELSE'))
+                    .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_IF_MSG_ELSE'))
                     .setAlign(Blockly.ALIGN_RIGHT);
             }
         },
@@ -3247,9 +3247,9 @@ var load = function (options) {
                         this.elseifCount_++;
                         var ifInput = this.appendValueInput('IF' + this.elseifCount_)
                             .setCheck(Boolean)
-                            .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_IF_MSG_ELSEIF'));
+                            .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_IF_MSG_ELSEIF'));
                         var doInput = this.appendStatementInput('DO' + this.elseifCount_);
-                        doInput.appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_IF_MSG_THEN'))
+                        doInput.appendField(FabBlocks.locales.getKey('LANG_CONTROLS_IF_MSG_THEN'))
                             .setAlign(Blockly.ALIGN_RIGHT);
                         // Reconnect any child blocks.
                         if (clauseBlock.valueConnection_) {
@@ -3262,7 +3262,7 @@ var load = function (options) {
                     case 'controls_if_else':
                         this.elseCount_++;
                         var elseInput = this.appendStatementInput('ELSE');
-                        elseInput.appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_IF_MSG_ELSE'))
+                        elseInput.appendField(FabBlocks.locales.getKey('LANG_CONTROLS_IF_MSG_ELSE'))
                             .setAlign(Blockly.ALIGN_RIGHT);
                         // Reconnect any child blocks.
                         if (clauseBlock.statementConnection_) {
@@ -3308,12 +3308,12 @@ var load = function (options) {
     Blockly.Blocks.controls_if_if = {
         // If condition.
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_CONTROL);
+            this.setColour(FabBlocks.LANG_COLOUR_CONTROL);
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_IF_IF_Field_IF'))
+                .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_IF_IF_Field_IF'))
                 .setAlign(Blockly.ALIGN_RIGHT);
             this.appendStatementInput('STACK');
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_CONTROLS_IF_IF_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_CONTROLS_IF_IF_TOOLTIP'));
             this.contextMenu = false;
         }
     };
@@ -3321,13 +3321,13 @@ var load = function (options) {
     Blockly.Blocks.controls_if_elseif = {
         // Else-If condition.
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_CONTROL);
+            this.setColour(FabBlocks.LANG_COLOUR_CONTROL);
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_IF_ELSEIF_Field_ELSEIF'))
+                .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_IF_ELSEIF_Field_ELSEIF'))
                 .setAlign(Blockly.ALIGN_RIGHT);
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_CONTROLS_IF_ELSEIF_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_CONTROLS_IF_ELSEIF_TOOLTIP'));
             this.contextMenu = false;
         }
     };
@@ -3335,12 +3335,12 @@ var load = function (options) {
     Blockly.Blocks.controls_if_else = {
         // Else condition.
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_CONTROL);
+            this.setColour(FabBlocks.LANG_COLOUR_CONTROL);
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_IF_ELSE_Field_ELSE'))
+                .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_IF_ELSE_Field_ELSE'))
                 .setAlign(Blockly.ALIGN_RIGHT);
             this.setPreviousStatement(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_CONTROLS_IF_ELSE_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_CONTROLS_IF_ELSE_TOOLTIP'));
             this.contextMenu = false;
         }
     };
@@ -3348,7 +3348,7 @@ var load = function (options) {
 
 
     // Source: src/blocks/controls_setupLoop/controls_setupLoop.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * controls_setup code generation
@@ -3374,20 +3374,20 @@ var load = function (options) {
     };
     Blockly.Blocks.controls_setupLoop = {
         // Setup statements.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_CONTROLS'),
-        // helpUrl: RoboBlocks.URL_SETUP,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_CONTROLS'),
+        // helpUrl: FabBlocks.URL_SETUP,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_CONTROL);
-            this.appendStatementInput('SETUP').appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_SETUP_LOOP_SETUP_TITLE'));
-            this.appendStatementInput('LOOP').appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_SETUP_LOOP_LOOP_TITLE'));
+            this.setColour(FabBlocks.LANG_COLOUR_CONTROL);
+            this.appendStatementInput('SETUP').appendField(FabBlocks.locales.getKey('LANG_CONTROLS_SETUP_LOOP_SETUP_TITLE'));
+            this.appendStatementInput('LOOP').appendField(FabBlocks.locales.getKey('LANG_CONTROLS_SETUP_LOOP_LOOP_TITLE'));
             this.setPreviousStatement(false);
             this.setNextStatement(false);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_CONTROLS_SETUP_LOOP_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_CONTROLS_SETUP_LOOP_TOOLTIP'));
         }
     };
 
     // Source: src/blocks/controls_switch/controls_switch.js
-    /* global Blockly, RoboBlocks */
+    /* global Blockly, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -3413,7 +3413,7 @@ var load = function (options) {
         // branch=branch.replace(/&amp;/g, '');
 
         var code = '';
-        var a = RoboBlocks.findPinMode(argument);
+        var a = FabBlocks.findPinMode(argument);
         code += a['code'];
         argument = a['pin'];
 
@@ -3441,13 +3441,13 @@ var load = function (options) {
 
     Blockly.Blocks.controls_switch = {
         // switch condition.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_CONTROLS'),
-        helpUrl: RoboBlocks.URL_SWITCH,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_CONTROLS'),
+        helpUrl: FabBlocks.URL_SWITCH,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_CONTROL);
+            this.setColour(FabBlocks.LANG_COLOUR_CONTROL);
             this.appendValueInput('IF0')
                 .setCheck(Boolean)
-                .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_SWITCH'))
+                .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_SWITCH'))
                 .setAlign(Blockly.ALIGN_RIGHT);
             this.setPreviousStatement(true);
             this.setNextStatement(true);
@@ -3456,13 +3456,13 @@ var load = function (options) {
             var thisBlock = this;
             this.setTooltip(function () {
                 if (!thisBlock.switchCount_ && !thisBlock.defaultCount_) {
-                    return RoboBlocks.locales.getKey('LANG_CONTROLS_SWITCH_TOOLTIP_1');
+                    return FabBlocks.locales.getKey('LANG_CONTROLS_SWITCH_TOOLTIP_1');
                 } else if (!thisBlock.switchCount_ && thisBlock.defaultCount_) {
-                    return RoboBlocks.locales.getKey('LANG_CONTROLS_SWITCH_TOOLTIP_2');
+                    return FabBlocks.locales.getKey('LANG_CONTROLS_SWITCH_TOOLTIP_2');
                 } else if (thisBlock.switchCount_ && !thisBlock.defaultCount_) {
-                    return RoboBlocks.locales.getKey('LANG_CONTROLS_SWITCH_TOOLTIP_3');
+                    return FabBlocks.locales.getKey('LANG_CONTROLS_SWITCH_TOOLTIP_3');
                 } else if (thisBlock.switchCount_ && thisBlock.defaultCount_) {
-                    return RoboBlocks.locales.getKey('LANG_CONTROLS_SWITCH_TOOLTIP_4');
+                    return FabBlocks.locales.getKey('LANG_CONTROLS_SWITCH_TOOLTIP_4');
                 }
                 return '';
             });
@@ -3487,16 +3487,16 @@ var load = function (options) {
             for (var x = 1; x <= this.switchCount_; x++) {
                 this.appendValueInput('SWITCH' + x)
                     .setCheck(Number)
-                    .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_SWITCH_CASE'))
+                    .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_SWITCH_CASE'))
                     .setAlign(Blockly.ALIGN_RIGHT);
                 this.setInputsInline(true);
                 this.appendStatementInput('DO' + x)
-                    .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_IF_MSG_THEN'))
+                    .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_IF_MSG_THEN'))
                     .setAlign(Blockly.ALIGN_RIGHT);
             }
             if (this.defaultCount_) {
                 this.appendStatementInput('DEFAULT')
-                    .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_SWITCH_DEFAULT'))
+                    .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_SWITCH_DEFAULT'))
                     .setAlign(Blockly.ALIGN_RIGHT);
             }
         },
@@ -3537,9 +3537,9 @@ var load = function (options) {
                         this.switchCount_++;
                         var case_lang;
                         if (this.switchCount_ === 1) {
-                            case_lang = RoboBlocks.locales.getKey('LANG_CONTROLS_SWITCH_IS');
+                            case_lang = FabBlocks.locales.getKey('LANG_CONTROLS_SWITCH_IS');
                         } else {
-                            case_lang = RoboBlocks.locales.getKey('LANG_CONTROLS_SWITCH_CASE');
+                            case_lang = FabBlocks.locales.getKey('LANG_CONTROLS_SWITCH_CASE');
                         }
                         var switchInput = this.appendValueInput('SWITCH' + this.switchCount_)
                             .setCheck(Number)
@@ -3548,7 +3548,7 @@ var load = function (options) {
                         this.setInputsInline(true);
 
                         var doInput = this.appendStatementInput('DO' + this.switchCount_);
-                        doInput.appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_SWITCH_DO'))
+                        doInput.appendField(FabBlocks.locales.getKey('LANG_CONTROLS_SWITCH_DO'))
                             .setAlign(Blockly.ALIGN_RIGHT);
                         // Reconnect any child blocks.
                         if (clauseBlock.valueConnection_) {
@@ -3561,7 +3561,7 @@ var load = function (options) {
                     case 'controls_switch_default':
                         this.defaultCount_++;
                         var defaultInput = this.appendStatementInput('DEFAULT');
-                        defaultInput.appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_SWITCH_DEFAULT'))
+                        defaultInput.appendField(FabBlocks.locales.getKey('LANG_CONTROLS_SWITCH_DEFAULT'))
                             .setAlign(Blockly.ALIGN_RIGHT);
                         // Reconnect any child blocks.
                         if (clauseBlock.statementConnection_) {
@@ -3606,9 +3606,9 @@ var load = function (options) {
     Blockly.Blocks.controls_switch_switch = {
         // If condition.
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_CONTROL);
+            this.setColour(FabBlocks.LANG_COLOUR_CONTROL);
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_SWITCH'))
+                .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_SWITCH'))
                 .setAlign(Blockly.ALIGN_RIGHT);
             this.appendStatementInput('STACK');
             this.setTooltip('Switch');
@@ -3619,9 +3619,9 @@ var load = function (options) {
     Blockly.Blocks.controls_switch_case = {
         // case condition.
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_CONTROL);
+            this.setColour(FabBlocks.LANG_COLOUR_CONTROL);
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_SWITCH_CASE'))
+                .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_SWITCH_CASE'))
                 .setAlign(Blockly.ALIGN_RIGHT);
             this.setPreviousStatement(true);
             this.setNextStatement(true);
@@ -3633,9 +3633,9 @@ var load = function (options) {
     Blockly.Blocks.controls_switch_default = {
         // default condition.
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_CONTROL);
+            this.setColour(FabBlocks.LANG_COLOUR_CONTROL);
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_SWITCH_DEFAULT'))
+                .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_SWITCH_DEFAULT'))
                 .setAlign(Blockly.ALIGN_RIGHT);
             this.setPreviousStatement(true);
             this.setTooltip('Switch default');
@@ -3643,7 +3643,7 @@ var load = function (options) {
         }
     };
     // Source: src/blocks/controls_whileUntil/controls_whileUntil.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * controls_whileUntil code generation
@@ -3658,7 +3658,7 @@ var load = function (options) {
         branch = branch.replace(/&quot;/g, '"');
 
         var code = '';
-        var a = RoboBlocks.findPinMode(argument0);
+        var a = FabBlocks.findPinMode(argument0);
         code += a['code'];
         argument0 = a['pin'];
 
@@ -3682,15 +3682,15 @@ var load = function (options) {
     };
     Blockly.Blocks.controls_whileUntil = {
         // Do while/until loop.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_CONTROLS'),
-        helpUrl: RoboBlocks.URL_WHILE,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_CONTROLS'),
+        helpUrl: FabBlocks.URL_WHILE,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_CONTROL);
-            this.appendValueInput('BOOL').setCheck(Boolean).appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT')).appendField(new Blockly.FieldDropdown([
-                [RoboBlocks.locales.getKey('LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE'), 'WHILE'],
-                [RoboBlocks.locales.getKey('LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL'), 'UNTIL']
+            this.setColour(FabBlocks.LANG_COLOUR_CONTROL);
+            this.appendValueInput('BOOL').setCheck(Boolean).appendField(FabBlocks.locales.getKey('LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT')).appendField(new Blockly.FieldDropdown([
+                [FabBlocks.locales.getKey('LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE'), 'WHILE'],
+                [FabBlocks.locales.getKey('LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL'), 'UNTIL']
             ]), 'MODE');
-            this.appendStatementInput('DO').appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_WHILEUNTIL_INPUT_DO'));
+            this.appendStatementInput('DO').appendField(FabBlocks.locales.getKey('LANG_CONTROLS_WHILEUNTIL_INPUT_DO'));
             this.setPreviousStatement(true);
             this.setNextStatement(true);
             // Assign 'this' to a variable for use in the tooltip closure below.
@@ -3702,11 +3702,11 @@ var load = function (options) {
         }
     };
     Blockly.Blocks.controls_whileUntil.TOOLTIPS = {
-        WHILE: RoboBlocks.locales.getKey('LANG_CONTROLS_WHILEUNTIL_TOOLTIP_WHILE'),
-        UNTIL: RoboBlocks.locales.getKey('LANG_CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL')
+        WHILE: FabBlocks.locales.getKey('LANG_CONTROLS_WHILEUNTIL_TOOLTIP_WHILE'),
+        UNTIL: FabBlocks.locales.getKey('LANG_CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL')
     };
     // Source: src/blocks/inout_analog_read/inout_analog_read.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * inout_analog_read code generation
@@ -3716,11 +3716,11 @@ var load = function (options) {
         var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
         var code = '';
 
-        var a = RoboBlocks.findPinMode(dropdown_pin);
+        var a = FabBlocks.findPinMode(dropdown_pin);
         code += a['code'];
         dropdown_pin = a['pin'];
 
-        if (RoboBlocks.isVariable(dropdown_pin)) {
+        if (FabBlocks.isVariable(dropdown_pin)) {
             code += JST['inout_analog_read_setups']({
                 'dropdown_pin': dropdown_pin,
             }, window.programmingLanguage);
@@ -3739,21 +3739,21 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.inout_analog_read = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_ADVANCED'),
-        helpUrl: RoboBlocks.URL_PIN_FUNC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_ADVANCED'),
+        helpUrl: FabBlocks.URL_PIN_FUNC,
         /**
          * inout_analog_read initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_ADVANCED);
-            this.appendValueInput('PIN').appendField(RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_ANALOG_READ'));
+            this.setColour(FabBlocks.LANG_COLOUR_ADVANCED);
+            this.appendValueInput('PIN').appendField(FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_ANALOG_READ'));
             this.setOutput(true, Number);
             this.setInputsInline(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_ANALOG_READ_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_ANALOG_READ_TOOLTIP'));
         }
     };
     // Source: src/blocks/inout_analog_write/inout_analog_write.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * inout_analog_write code generation
@@ -3763,16 +3763,16 @@ var load = function (options) {
         var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
         var value_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_ATOMIC);
         var code = '';
-        var a = RoboBlocks.findPinMode(dropdown_pin);
+        var a = FabBlocks.findPinMode(dropdown_pin);
         code += a['code'];
         dropdown_pin = a['pin'];
 
-        var b = RoboBlocks.findPinMode(value_num);
+        var b = FabBlocks.findPinMode(value_num);
         code += b['code'];
         value_num = b['pin'];
 
 
-        if (RoboBlocks.isVariable(dropdown_pin)) {
+        if (FabBlocks.isVariable(dropdown_pin)) {
             code += JST['inout_analog_write_setups']({
                 'dropdown_pin': dropdown_pin,
                 'value_num': value_num
@@ -3795,23 +3795,23 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.inout_analog_write = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_ADVANCED'),
-        helpUrl: RoboBlocks.URL_PIN_FUNC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_ADVANCED'),
+        helpUrl: FabBlocks.URL_PIN_FUNC,
         /**
          * inout_analog_write initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_ADVANCED);
-            this.appendValueInput('PIN').appendField(RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_ANALOG_WRITE'));
-            this.appendValueInput('NUM', Number).appendField(RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_ANALOG_WRITE_VALUE')).setCheck(Number);
+            this.setColour(FabBlocks.LANG_COLOUR_ADVANCED);
+            this.appendValueInput('PIN').appendField(FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_ANALOG_WRITE'));
+            this.appendValueInput('NUM', Number).appendField(FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_ANALOG_WRITE_VALUE')).setCheck(Number);
             this.setInputsInline(true);
             this.setPreviousStatement(true, null);
             this.setNextStatement(true, null);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_ANALOG_WRITE_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_ANALOG_WRITE_TOOLTIP'));
         }
     };
     // Source: src/blocks/inout_builtin_led/inout_builtin_led.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -3836,28 +3836,28 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.inout_builtin_led = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_ADVANCED'),
-        helpUrl: RoboBlocks.URL_LED,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_ADVANCED'),
+        helpUrl: FabBlocks.URL_LED,
         /**
          * inout_builtin_led initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_ADVANCED);
+            this.setColour(FabBlocks.LANG_COLOUR_ADVANCED);
             this.appendDummyInput('')
-                .appendField(RoboBlocks.locales.getKey('LANG_ADVANCED_BUILTIN_LED'))
-                .appendField(RoboBlocks.locales.getKey('LANG_ADVANCED_BUILTIN_LED_STATE'))
+                .appendField(FabBlocks.locales.getKey('LANG_ADVANCED_BUILTIN_LED'))
+                .appendField(FabBlocks.locales.getKey('LANG_ADVANCED_BUILTIN_LED_STATE'))
                 .appendField(new Blockly.FieldDropdown([
-                    [RoboBlocks.locales.getKey('LANG_ADVANCED_BUILTIN_LED_ON') || 'ON', 'HIGH'],
-                    [RoboBlocks.locales.getKey('LANG_ADVANCED_BUILTIN_LED_OFF') || 'OFF', 'LOW']
+                    [FabBlocks.locales.getKey('LANG_ADVANCED_BUILTIN_LED_ON') || 'ON', 'HIGH'],
+                    [FabBlocks.locales.getKey('LANG_ADVANCED_BUILTIN_LED_OFF') || 'OFF', 'LOW']
                 ]), 'STAT');
             this.setPreviousStatement(true, null);
             this.setNextStatement(true, null);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_BUILTIN_LED_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_BUILTIN_LED_TOOLTIP'));
         }
     };
 
     // Source: src/blocks/inout_digital_read/inout_digital_read.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * inout_digital_read code generation
@@ -3866,10 +3866,10 @@ var load = function (options) {
     Blockly.Arduino.inout_digital_read = function () {
         var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
         var code = '';
-        var a = RoboBlocks.findPinMode(dropdown_pin);
+        var a = FabBlocks.findPinMode(dropdown_pin);
         code += a['code'];
         dropdown_pin = a['pin'];
-        if (RoboBlocks.isVariable(dropdown_pin)) {
+        if (FabBlocks.isVariable(dropdown_pin)) {
             code += JST['inout_digital_read_setups']({
                 'dropdown_pin': dropdown_pin,
             }, window.programmingLanguage);
@@ -3888,21 +3888,21 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.inout_digital_read = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_ADVANCED'),
-        helpUrl: RoboBlocks.URL_PIN_FUNC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_ADVANCED'),
+        helpUrl: FabBlocks.URL_PIN_FUNC,
         /**
          * inout_digital_read initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_ADVANCED);
-            this.appendValueInput('PIN').appendField(RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_READ'));
+            this.setColour(FabBlocks.LANG_COLOUR_ADVANCED);
+            this.appendValueInput('PIN').appendField(FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_READ'));
             this.setOutput(true, Boolean);
             this.setInputsInline(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_READ_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_READ_TOOLTIP'));
         }
     };
     // Source: src/blocks/inout_digital_write/inout_digital_write.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * inout_digital_write code generation
@@ -3912,10 +3912,10 @@ var load = function (options) {
         var dropdown_pin = Blockly.Arduino.valueToCode(this, 'PIN', Blockly.Arduino.ORDER_ATOMIC);
         var dropdown_stat = this.getFieldValue('STAT');
         var code = '';
-        var a = RoboBlocks.findPinMode(dropdown_pin);
+        var a = FabBlocks.findPinMode(dropdown_pin);
         code += a['code'];
         dropdown_pin = a['pin'];
-        if (RoboBlocks.isVariable(dropdown_pin)) {
+        if (FabBlocks.isVariable(dropdown_pin)) {
             code += JST['inout_digital_write_setups']({
                 'dropdown_pin': dropdown_pin,
                 'dropdown_stat': dropdown_stat
@@ -3937,26 +3937,26 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.inout_digital_write = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_ADVANCED'),
-        helpUrl: RoboBlocks.URL_PIN_FUNC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_ADVANCED'),
+        helpUrl: FabBlocks.URL_PIN_FUNC,
         /**
          * inout_digital_write initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_ADVANCED);
-            this.appendValueInput('PIN').appendField(RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE')).appendField(RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_PIN'));
-            this.appendDummyInput().appendField(RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_STATE')).appendField(new Blockly.FieldDropdown([
-                [RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_HIGH') || 'HIGH', 'HIGH'],
-                [RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_LOW') || 'LOW', 'LOW']
+            this.setColour(FabBlocks.LANG_COLOUR_ADVANCED);
+            this.appendValueInput('PIN').appendField(FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE')).appendField(FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_PIN'));
+            this.appendDummyInput().appendField(FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_STATE')).appendField(new Blockly.FieldDropdown([
+                [FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_HIGH') || 'HIGH', 'HIGH'],
+                [FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_LOW') || 'LOW', 'LOW']
             ]), 'STAT');
             this.setPreviousStatement(true, null);
             this.setInputsInline(true);
             this.setNextStatement(true, null);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_INOUT_DIGITAL_WRITE_TOOLTIP'));
         }
     };
     // Source: src/blocks/inout_highlow/inout_highlow.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -3978,25 +3978,25 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.inout_highlow = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_ADVANCED'),
-        helpUrl: RoboBlocks.URL_PIN_FUNC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_ADVANCED'),
+        helpUrl: FabBlocks.URL_PIN_FUNC,
         /**
          * inout_highlow initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_ADVANCED);
+            this.setColour(FabBlocks.LANG_COLOUR_ADVANCED);
             this.appendDummyInput('')
                 .appendField(new Blockly.FieldDropdown([
-                    [RoboBlocks.locales.getKey('LANG_ADVANCED_HIGHLOW_HIGH') || 'HIGH', 'HIGH'],
-                    [RoboBlocks.locales.getKey('LANG_ADVANCED_HIGHLOW_LOW') || 'LOW', 'LOW']
+                    [FabBlocks.locales.getKey('LANG_ADVANCED_HIGHLOW_HIGH') || 'HIGH', 'HIGH'],
+                    [FabBlocks.locales.getKey('LANG_ADVANCED_HIGHLOW_LOW') || 'LOW', 'LOW']
                 ]), 'BOOL');
             this.setOutput(true, Boolean);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_HIGHLOW_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_HIGHLOW_TOOLTIP'));
         }
     };
 
     // Source: src/blocks/logic_boolean/logic_boolean.js
-    /* global Blockly, RoboBlocks */
+    /* global Blockly, FabBlocks */
 
     /**
      * logic_boolean code generation
@@ -4016,21 +4016,21 @@ var load = function (options) {
 
     Blockly.Blocks.logic_boolean = {
         // Boolean data type: true and false.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_LOGIC'),
-        helpUrl: RoboBlocks.URL_LOGIC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_LOGIC'),
+        helpUrl: FabBlocks.URL_LOGIC,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_LOGIC);
+            this.setColour(FabBlocks.LANG_COLOUR_LOGIC);
             this.setOutput(true, Boolean);
             this.appendDummyInput()
                 .appendField(new Blockly.FieldDropdown([
-                    [RoboBlocks.locales.getKey('LANG_LOGIC_BOOLEAN_TRUE'), 'TRUE'],
-                    [RoboBlocks.locales.getKey('LANG_LOGIC_BOOLEAN_FALSE'), 'FALSE']
+                    [FabBlocks.locales.getKey('LANG_LOGIC_BOOLEAN_TRUE'), 'TRUE'],
+                    [FabBlocks.locales.getKey('LANG_LOGIC_BOOLEAN_FALSE'), 'FALSE']
                 ]), 'BOOL');
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_LOGIC_BOOLEAN_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_LOGIC_BOOLEAN_TOOLTIP'));
         }
     };
     // Source: src/blocks/logic_compare/logic_compare.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -4049,11 +4049,11 @@ var load = function (options) {
 
         var code = '';
 
-        var a = RoboBlocks.findPinMode(argument0);
+        var a = FabBlocks.findPinMode(argument0);
         code += a['code'];
         argument0 = a['pin'];
 
-        a = RoboBlocks.findPinMode(argument1);
+        a = FabBlocks.findPinMode(argument1);
         code += a['code'];
         argument1 = a['pin'];
 
@@ -4077,10 +4077,10 @@ var load = function (options) {
 
     Blockly.Blocks.logic_compare = {
         // Comparison operator.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_LOGIC'),
-        helpUrl: RoboBlocks.URL_LOGIC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_LOGIC'),
+        helpUrl: FabBlocks.URL_LOGIC,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_LOGIC);
+            this.setColour(FabBlocks.LANG_COLOUR_LOGIC);
             this.setOutput(true, Boolean);
             this.appendValueInput('A');
             this.appendValueInput('B')
@@ -4105,16 +4105,16 @@ var load = function (options) {
     ];
 
     Blockly.Blocks.logic_compare.TOOLTIPS = {
-        EQ: RoboBlocks.locales.getKey('LANG_LOGIC_COMPARE_TOOLTIP_EQ'),
-        NEQ: RoboBlocks.locales.getKey('LANG_LOGIC_COMPARE_TOOLTIP_NEQ'),
-        LT: RoboBlocks.locales.getKey('LANG_LOGIC_COMPARE_TOOLTIP_LT'),
-        LTE: RoboBlocks.locales.getKey('LANG_LOGIC_COMPARE_TOOLTIP_LTE'),
-        GT: RoboBlocks.locales.getKey('LANG_LOGIC_COMPARE_TOOLTIP_GT'),
-        GTE: RoboBlocks.locales.getKey('LANG_LOGIC_COMPARE_TOOLTIP_GTE')
+        EQ: FabBlocks.locales.getKey('LANG_LOGIC_COMPARE_TOOLTIP_EQ'),
+        NEQ: FabBlocks.locales.getKey('LANG_LOGIC_COMPARE_TOOLTIP_NEQ'),
+        LT: FabBlocks.locales.getKey('LANG_LOGIC_COMPARE_TOOLTIP_LT'),
+        LTE: FabBlocks.locales.getKey('LANG_LOGIC_COMPARE_TOOLTIP_LTE'),
+        GT: FabBlocks.locales.getKey('LANG_LOGIC_COMPARE_TOOLTIP_GT'),
+        GTE: FabBlocks.locales.getKey('LANG_LOGIC_COMPARE_TOOLTIP_GTE')
     };
 
     // Source: src/blocks/logic_negate/logic_negate.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
 
     /**
      * logic_negate code generation
@@ -4125,7 +4125,7 @@ var load = function (options) {
         var order = Blockly.Arduino.ORDER_UNARY_PREFIX;
         var argument0 = Blockly.Arduino.valueToCode(this, 'BOOL', order) || 'false';
         var code = '';
-        var a = RoboBlocks.findPinMode(argument0);
+        var a = FabBlocks.findPinMode(argument0);
         code += a['code'];
         argument0 = a['pin'];
 
@@ -4140,20 +4140,20 @@ var load = function (options) {
 
     Blockly.Blocks.logic_negate = {
         // Negation.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_LOGIC'),
-        helpUrl: RoboBlocks.URL_LOGIC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_LOGIC'),
+        helpUrl: FabBlocks.URL_LOGIC,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_LOGIC);
+            this.setColour(FabBlocks.LANG_COLOUR_LOGIC);
             this.setOutput(true, Boolean);
             this.appendValueInput('BOOL')
                 .setCheck(Boolean)
-                .appendField(RoboBlocks.locales.getKey('LANG_LOGIC_NEGATE_INPUT_NOT'));
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_LOGIC_NEGATE_TOOLTIP'));
+                .appendField(FabBlocks.locales.getKey('LANG_LOGIC_NEGATE_INPUT_NOT'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_LOGIC_NEGATE_TOOLTIP'));
         }
     };
 
     // Source: src/blocks/logic_operation/logic_operation.js
-    /* global Blockly, RoboBlocks */
+    /* global Blockly, FabBlocks */
     /**
      * logic_operation code generation
      * @return {String} Code generated with block parameters
@@ -4173,10 +4173,10 @@ var load = function (options) {
         var argument1 = Blockly.Arduino.valueToCode(this, 'B', order) || '';
 
         var code = '';
-        var a = RoboBlocks.findPinMode(argument0);
+        var a = FabBlocks.findPinMode(argument0);
         code += a['code'];
         argument0 = a['pin'];
-        a = RoboBlocks.findPinMode(argument1);
+        a = FabBlocks.findPinMode(argument1);
         code += a['code'];
         argument1 = a['pin'];
 
@@ -4185,15 +4185,15 @@ var load = function (options) {
     };
     Blockly.Blocks.logic_operation = {
         // Logical operations: 'and', 'or'.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_LOGIC'),
-        helpUrl: RoboBlocks.URL_LOGIC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_LOGIC'),
+        helpUrl: FabBlocks.URL_LOGIC,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_LOGIC);
+            this.setColour(FabBlocks.LANG_COLOUR_LOGIC);
             this.setOutput(true, Boolean);
             this.appendValueInput('A').setCheck(Boolean);
             this.appendValueInput('B').setCheck(Boolean).appendField(new Blockly.FieldDropdown([
-                [RoboBlocks.locales.getKey('LANG_LOGIC_OPERATION_AND') || 'AND', 'AND'],
-                [RoboBlocks.locales.getKey('LANG_LOGIC_OPERATION_OR') || 'OR', 'OR']
+                [FabBlocks.locales.getKey('LANG_LOGIC_OPERATION_AND') || 'AND', 'AND'],
+                [FabBlocks.locales.getKey('LANG_LOGIC_OPERATION_OR') || 'OR', 'OR']
             ]), 'OP');
             this.setInputsInline(true);
             // Assign 'this' to a variable for use in the tooltip closure below.
@@ -4205,11 +4205,11 @@ var load = function (options) {
         }
     };
     Blockly.Blocks.logic_operation.TOOLTIPS = {
-        AND: RoboBlocks.locales.getKey('LANG_LOGIC_OPERATION_TOOLTIP_AND'),
-        OR: RoboBlocks.locales.getKey('LANG_LOGIC_OPERATION_TOOLTIP_OR')
+        AND: FabBlocks.locales.getKey('LANG_LOGIC_OPERATION_TOOLTIP_AND'),
+        OR: FabBlocks.locales.getKey('LANG_LOGIC_OPERATION_TOOLTIP_OR')
     };
     // Source: src/blocks/math_arithmetic/math_arithmetic.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -4227,11 +4227,11 @@ var load = function (options) {
         var argument0 = Blockly.Arduino.valueToCode(this, 'A', order) || '';
         var argument1 = Blockly.Arduino.valueToCode(this, 'B', order) || '';
         var code = '';
-        var a = RoboBlocks.findPinMode(argument0);
+        var a = FabBlocks.findPinMode(argument0);
         code += a['code'];
         argument0 = a['pin'];
 
-        a = RoboBlocks.findPinMode(argument1);
+        a = FabBlocks.findPinMode(argument1);
         code += a['code'];
         argument1 = a['pin'];
         if (!operator) {
@@ -4262,10 +4262,10 @@ var load = function (options) {
 
     Blockly.Blocks.math_arithmetic = {
         // Basic arithmetic operator.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_MATH'),
-        helpUrl: RoboBlocks.URL_MATH,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_MATH'),
+        helpUrl: FabBlocks.URL_MATH,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_MATH);
+            this.setColour(FabBlocks.LANG_COLOUR_MATH);
             this.setOutput(true, Number);
             this.appendValueInput('A')
                 .setCheck(Number);
@@ -4291,15 +4291,15 @@ var load = function (options) {
     ];
 
     Blockly.Blocks.math_arithmetic.TOOLTIPS = {
-        ADD: RoboBlocks.locales.getKey('LANG_MATH_ARITHMETIC_TOOLTIP_ADD'),
-        MINUS: RoboBlocks.locales.getKey('LANG_MATH_ARITHMETIC_TOOLTIP_MINUS'),
-        MULTIPLY: RoboBlocks.locales.getKey('LANG_MATH_ARITHMETIC_TOOLTIP_MULTIPLY'),
-        DIVIDE: RoboBlocks.locales.getKey('LANG_MATH_ARITHMETIC_TOOLTIP_DIVIDE'),
-        POWER: RoboBlocks.locales.getKey('LANG_MATH_ARITHMETIC_TOOLTIP_POWER')
+        ADD: FabBlocks.locales.getKey('LANG_MATH_ARITHMETIC_TOOLTIP_ADD'),
+        MINUS: FabBlocks.locales.getKey('LANG_MATH_ARITHMETIC_TOOLTIP_MINUS'),
+        MULTIPLY: FabBlocks.locales.getKey('LANG_MATH_ARITHMETIC_TOOLTIP_MULTIPLY'),
+        DIVIDE: FabBlocks.locales.getKey('LANG_MATH_ARITHMETIC_TOOLTIP_DIVIDE'),
+        POWER: FabBlocks.locales.getKey('LANG_MATH_ARITHMETIC_TOOLTIP_POWER')
     };
 
     // Source: src/blocks/math_array/math_array.js
-    /* global Blockly, RoboBlocks */
+    /* global Blockly, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -4326,28 +4326,28 @@ var load = function (options) {
 
     Blockly.Blocks.math_array = {
         // Numeric value.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_MATH'), // Variables are handled specially.
-        helpUrl: RoboBlocks.URL_MATH,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_MATH'), // Variables are handled specially.
+        helpUrl: FabBlocks.URL_MATH,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_MATH);
+            this.setColour(FabBlocks.LANG_COLOUR_MATH);
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_MATH_ARRAY_ARRAY3'))
-                .appendField(RoboBlocks.locales.getKey('LANG_MATH_ARRAY_BRACKET3'))
+                .appendField(FabBlocks.locales.getKey('LANG_MATH_ARRAY_ARRAY3'))
+                .appendField(FabBlocks.locales.getKey('LANG_MATH_ARRAY_BRACKET3'))
                 .appendField(new Blockly.FieldTextInput('0', Blockly.Blocks.math_array.validator), 'NUM0')
-                .appendField(RoboBlocks.locales.getKey('LANG_MATH_ARRAY_COMMA'));
+                .appendField(FabBlocks.locales.getKey('LANG_MATH_ARRAY_COMMA'));
 
 
             this.appendDummyInput()
                 .appendField(new Blockly.FieldTextInput('0', Blockly.Blocks.math_array.validator), 'NUM1')
-                .appendField(RoboBlocks.locales.getKey('LANG_MATH_ARRAY_COMMA'));
+                .appendField(FabBlocks.locales.getKey('LANG_MATH_ARRAY_COMMA'));
 
             this.appendDummyInput()
                 .appendField(new Blockly.FieldTextInput('0', Blockly.Blocks.math_array.validator), 'NUM2')
-                .appendField(RoboBlocks.locales.getKey('LANG_MATH_ARRAY_BRACKET4'));
+                .appendField(FabBlocks.locales.getKey('LANG_MATH_ARRAY_BRACKET4'));
 
             this.setOutput(true, Number);
             this.setInputsInline(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_MATH_ARRAY_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_MATH_ARRAY_TOOLTIP'));
         }
     };
 
@@ -4359,7 +4359,7 @@ var load = function (options) {
         return window.isNaN(n) ? null : String(n);
     };
     // Source: src/blocks/math_modulo/math_modulo.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -4374,10 +4374,10 @@ var load = function (options) {
         var argument1 = Blockly.Arduino.valueToCode(this, 'DIVISOR',
             Blockly.Arduino.ORDER_MULTIPLICATIVE) || '';
         var code = '';
-        var a = RoboBlocks.findPinMode(argument0);
+        var a = FabBlocks.findPinMode(argument0);
         code += a['code'];
         argument0 = a['pin'];
-        a = RoboBlocks.findPinMode(argument1);
+        a = FabBlocks.findPinMode(argument1);
         code += a['code'];
         argument1 = a['pin'];
         code += JST['math_modulo']({
@@ -4391,25 +4391,25 @@ var load = function (options) {
 
     Blockly.Blocks.math_modulo = {
         // Remainder of a division.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_MATH'),
-        helpUrl: RoboBlocks.URL_MATH,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_MATH'),
+        helpUrl: FabBlocks.URL_MATH,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_MATH);
+            this.setColour(FabBlocks.LANG_COLOUR_MATH);
             this.setOutput(true, Number);
             this.appendValueInput('DIVIDEND')
                 .setCheck(Number)
-                .appendField(RoboBlocks.locales.getKey('LANG_MATH_MODULO_INPUT_DIVIDEND'));
+                .appendField(FabBlocks.locales.getKey('LANG_MATH_MODULO_INPUT_DIVIDEND'));
             this.appendValueInput('DIVISOR')
                 .setCheck(Number)
                 .setAlign(Blockly.ALIGN_RIGHT)
                 .appendField('%');
             this.setInputsInline(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_MATH_MODULO_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_MATH_MODULO_TOOLTIP'));
         }
     };
 
     // Source: src/blocks/math_random/math_random.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
 
     /**
      * math_random code generation
@@ -4419,13 +4419,13 @@ var load = function (options) {
         var value_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_NONE);
         var value_dmax = Blockly.Arduino.valueToCode(this, 'DMAX', Blockly.Arduino.ORDER_ATOMIC);
         var code = '';
-        var a = RoboBlocks.findPinMode(value_num);
+        var a = FabBlocks.findPinMode(value_num);
         code += a['code'];
         value_num = a['pin'];
 
         window.programmingLanguage === 'python' && (Blockly.Arduino.definitions_['define_mod_math'] = JST['random_library']({}, window.programmingLanguage));
 
-        a = RoboBlocks.findPinMode(value_dmax);
+        a = FabBlocks.findPinMode(value_dmax);
         code += a['code'];
         value_dmax = a['pin'];
 
@@ -4437,24 +4437,24 @@ var load = function (options) {
     };
 
     Blockly.Blocks.math_random = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_MATH'),
-        helpUrl: RoboBlocks.URL_MATH,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_MATH'),
+        helpUrl: FabBlocks.URL_MATH,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_MATH);
+            this.setColour(FabBlocks.LANG_COLOUR_MATH);
             this.appendValueInput('NUM', Number)
-                .appendField(RoboBlocks.locales.getKey('LANG_ADVANCED_MATH_RANDOM'))
+                .appendField(FabBlocks.locales.getKey('LANG_ADVANCED_MATH_RANDOM'))
                 .setCheck(Number);
             this.appendValueInput('DMAX', Number)
-                .appendField(RoboBlocks.locales.getKey('LANG_ADVANCED_MATH_RANDOM_AND'))
+                .appendField(FabBlocks.locales.getKey('LANG_ADVANCED_MATH_RANDOM_AND'))
                 .setCheck(Number);
             this.setInputsInline(true);
             this.setOutput(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_MATH_RANDOM_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_MATH_RANDOM_TOOLTIP'));
         }
     };
 
     // Source: src/blocks/math_single/math_single.js
-    /* global Blockly, RoboBlocks */
+    /* global Blockly, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -4476,7 +4476,7 @@ var load = function (options) {
         if (operator === 'NEG') {
             // Negation is a special case given its different operator precedents.
             arg = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_UNARY_PREFIX) || '';
-            a = RoboBlocks.findPinMode(arg);
+            a = FabBlocks.findPinMode(arg);
             code += a['code'];
             arg = a['pin'];
             if (arg[0] === '-') {
@@ -4487,14 +4487,14 @@ var load = function (options) {
             return [code, Blockly.Arduino.ORDER_UNARY_PREFIX];
         } else if (operator === 'SIN' || operator === 'COS' || operator === 'TAN') {
             arg = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_MULTIPLICATIVE) || '';
-            a = RoboBlocks.findPinMode(arg);
+            a = FabBlocks.findPinMode(arg);
             code += a['code'];
             arg = a['pin'];
         } else if (operator === 'LOG10') {
             code = '';
         } else {
             arg = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_NONE) || '';
-            a = RoboBlocks.findPinMode(arg);
+            a = FabBlocks.findPinMode(arg);
             code += a['code'];
             arg = a['pin'];
         }
@@ -4534,7 +4534,7 @@ var load = function (options) {
         switch (operator) {
             case 'LOG10':
                 arg = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_NONE) || '';
-                a = RoboBlocks.findPinMode(arg);
+                a = FabBlocks.findPinMode(arg);
                 code += a['code'];
                 arg = a['pin'];
                 code += (window.programmingLanguage === 'python' ? 'math.log(' + arg + ') / math.log(10)' : 'log(' + arg + ') / log(10)');
@@ -4557,16 +4557,16 @@ var load = function (options) {
 
     Blockly.Blocks.math_single = {
         // Advanced math operators with single operand.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_MATH'),
-        helpUrl: RoboBlocks.URL_MATH,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_MATH'),
+        helpUrl: FabBlocks.URL_MATH,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_MATH);
+            this.setColour(FabBlocks.LANG_COLOUR_MATH);
             this.setOutput(true, Number);
             this.appendValueInput('NUM')
                 .setCheck(Number)
                 .appendField(new Blockly.FieldDropdown([
-                    [RoboBlocks.locales.getKey('LANG_MATH_SINGLE_OP_ROOT') || 'SQR ROOT', 'ROOT'],
-                    [RoboBlocks.locales.getKey('LANG_MATH_SINGLE_OP_ABSOLUTE') || 'ABS', 'ABS'],
+                    [FabBlocks.locales.getKey('LANG_MATH_SINGLE_OP_ROOT') || 'SQR ROOT', 'ROOT'],
+                    [FabBlocks.locales.getKey('LANG_MATH_SINGLE_OP_ABSOLUTE') || 'ABS', 'ABS'],
                     ['-', 'NEG'],
                     ['ln', 'LN'],
                     ['log10', 'LOG10'],
@@ -4583,17 +4583,17 @@ var load = function (options) {
     };
 
     Blockly.Blocks.math_single.TOOLTIPS = {
-        ROOT: RoboBlocks.locales.getKey('LANG_MATH_SINGLE_TOOLTIP_ROOT'),
-        ABS: RoboBlocks.locales.getKey('LANG_MATH_SINGLE_TOOLTIP_ABS'),
-        NEG: RoboBlocks.locales.getKey('LANG_MATH_SINGLE_TOOLTIP_NEG'),
-        LN: RoboBlocks.locales.getKey('LANG_MATH_SINGLE_TOOLTIP_LN'),
-        LOG10: RoboBlocks.locales.getKey('LANG_MATH_SINGLE_TOOLTIP_LOG10'),
-        EXP: RoboBlocks.locales.getKey('LANG_MATH_SINGLE_TOOLTIP_EXP'),
-        POW10: RoboBlocks.locales.getKey('LANG_MATH_SINGLE_TOOLTIP_POW10')
+        ROOT: FabBlocks.locales.getKey('LANG_MATH_SINGLE_TOOLTIP_ROOT'),
+        ABS: FabBlocks.locales.getKey('LANG_MATH_SINGLE_TOOLTIP_ABS'),
+        NEG: FabBlocks.locales.getKey('LANG_MATH_SINGLE_TOOLTIP_NEG'),
+        LN: FabBlocks.locales.getKey('LANG_MATH_SINGLE_TOOLTIP_LN'),
+        LOG10: FabBlocks.locales.getKey('LANG_MATH_SINGLE_TOOLTIP_LOG10'),
+        EXP: FabBlocks.locales.getKey('LANG_MATH_SINGLE_TOOLTIP_EXP'),
+        POW10: FabBlocks.locales.getKey('LANG_MATH_SINGLE_TOOLTIP_POW10')
     };
 
     // Source: src/blocks/pin_analog/pin_analog.js
-    /* global Blockly, profiles, RoboBlocks */
+    /* global Blockly, profiles, FabBlocks */
 
     /**
      * pin code generation
@@ -4605,22 +4605,22 @@ var load = function (options) {
     };
 
     Blockly.Blocks.pin_analog = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_ADVANCED'),
-        helpUrl: RoboBlocks.URL_PIN_FUNC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_ADVANCED'),
+        helpUrl: FabBlocks.URL_PIN_FUNC,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_ADVANCED);
+            this.setColour(FabBlocks.LANG_COLOUR_ADVANCED);
             this.appendDummyInput('')
-                .appendField(RoboBlocks.locales.getKey('LANG_VARIABLES_PIN_ANALOG'))
+                .appendField(FabBlocks.locales.getKey('LANG_VARIABLES_PIN_ANALOG'))
                 .appendField(new Blockly.FieldDropdown(profiles.default.analog), 'PIN');
 
             this.setInputsInline(true);
             this.setOutput(true, Number);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_VARIABLES_PIN_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_VARIABLES_PIN_TOOLTIP'));
         }
     };
 
     // Source: src/blocks/pin_digital/pin_digital.js
-    /* global Blockly, profiles, RoboBlocks */
+    /* global Blockly, profiles, FabBlocks */
 
     /**
      * pin code generation
@@ -4632,17 +4632,17 @@ var load = function (options) {
     };
 
     Blockly.Blocks.pin_digital = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_ADVANCED'),
-        helpUrl: RoboBlocks.URL_PIN_FUNC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_ADVANCED'),
+        helpUrl: FabBlocks.URL_PIN_FUNC,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_ADVANCED);
+            this.setColour(FabBlocks.LANG_COLOUR_ADVANCED);
             this.appendDummyInput('')
-                .appendField(RoboBlocks.locales.getKey('LANG_VARIABLES_PIN_DIGITAL'))
+                .appendField(FabBlocks.locales.getKey('LANG_VARIABLES_PIN_DIGITAL'))
                 .appendField(new Blockly.FieldDropdown(profiles.default.digital), 'PIN');
 
             this.setInputsInline(true);
             this.setOutput(true, Number);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_VARIABLES_PIN_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_VARIABLES_PIN_TOOLTIP'));
         },
         onchange: function () {
             if (!this.workspace) {
@@ -4651,7 +4651,7 @@ var load = function (options) {
             }
             if (this.getFieldValue('PIN') === '0') {
                 try {
-                    this.setWarningText(RoboBlocks.locales.getKey('LANG_VARIABLES_PIN_DIGITAL0'));
+                    this.setWarningText(FabBlocks.locales.getKey('LANG_VARIABLES_PIN_DIGITAL0'));
                 } catch (e) { }
             } else {
                 try {
@@ -4662,7 +4662,7 @@ var load = function (options) {
     };
 
     // Source: src/blocks/procedures_callnoreturn/procedures_callnoreturn.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /**
      * procedures_callnoreturn code generation
      * @return {String} Code generated with block parameters
@@ -4676,7 +4676,7 @@ var load = function (options) {
         try {
             for (var x = 0; x < this.getVariables(funcName).length; x++) {
                 args[x] = Blockly.Arduino.valueToCode(this, 'ARG' + x, Blockly.Arduino.ORDER_NONE) || '';
-                a = RoboBlocks.findPinMode(args[x]);
+                a = FabBlocks.findPinMode(args[x]);
                 code += a['code'];
                 args[x] = a['pin'];
             }
@@ -4690,14 +4690,14 @@ var load = function (options) {
     };
     Blockly.Blocks.procedures_callnoreturn = {
         // Variable getter.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_PROCEDURES'), // Variables are handled specially.
-        helpUrl: RoboBlocks.URL_PROC_NO_RET,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_PROCEDURES'), // Variables are handled specially.
+        helpUrl: FabBlocks.URL_PROC_NO_RET,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_PROCEDURES);
+            this.setColour(FabBlocks.LANG_COLOUR_PROCEDURES);
             this.appendDummyInput('DUMMY').appendField(new Blockly.FieldDropdown(this.getProcedures()), 'PROCEDURES');
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_PROCEDURES_CALLNORETURN_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_PROCEDURES_CALLNORETURN_TOOLTIP'));
             this.arguments_ = this.getVariables(this.getFieldValue('PROCEDURES'));
             this.quarkConnections_ = null;
             this.quarkArguments_ = null;
@@ -4742,7 +4742,7 @@ var load = function (options) {
                     procedures_dropdown.push([proc_name, proc_name]);
                 }
             } else {
-                procedures_dropdown.push([RoboBlocks.locales.getKey('LANG_PROCEDURES_DEFNORETURN_PROCEDURE'), RoboBlocks.locales.getKey('LANG_PROCEDURES_DEFNORETURN_PROCEDURE')]);
+                procedures_dropdown.push([FabBlocks.locales.getKey('LANG_PROCEDURES_DEFNORETURN_PROCEDURE'), FabBlocks.locales.getKey('LANG_PROCEDURES_DEFNORETURN_PROCEDURE')]);
             }
             return procedures_dropdown;
         },
@@ -4804,7 +4804,7 @@ var load = function (options) {
             }
             if (!this.exists()) {
                 try {
-                    this.setWarningText(RoboBlocks.locales.getKey('LANG_PROCEDURES_CALL_WITHOUT_DEFINITION'));
+                    this.setWarningText(FabBlocks.locales.getKey('LANG_PROCEDURES_CALL_WITHOUT_DEFINITION'));
                 } catch (e) { }
             } else {
                 try {
@@ -4899,7 +4899,7 @@ var load = function (options) {
         }
     };
     // Source: src/blocks/procedures_callreturn/procedures_callreturn.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /**
      * procedures_callreturn code generation
      * @return {String} Code generated with block parameters
@@ -4913,7 +4913,7 @@ var load = function (options) {
         for (var x = 0; x < this.getVariables(funcName).length; x++) {
             args[x] = Blockly.Arduino.valueToCode(this, 'ARG' + x, Blockly.Arduino.ORDER_NONE) || 'null';
 
-            a = RoboBlocks.findPinMode(args[x]);
+            a = FabBlocks.findPinMode(args[x]);
             code += a['code'];
             args[x] = a['pin'];
         }
@@ -4927,13 +4927,13 @@ var load = function (options) {
     };
     Blockly.Blocks.procedures_callreturn = {
         // Variable getter.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_PROCEDURES'), // Variables are handled specially.
-        helpUrl: RoboBlocks.URL_PROC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_PROCEDURES'), // Variables are handled specially.
+        helpUrl: FabBlocks.URL_PROC,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_PROCEDURES);
+            this.setColour(FabBlocks.LANG_COLOUR_PROCEDURES);
             this.appendDummyInput('DUMMY').appendField(new Blockly.FieldDropdown(this.getProcedures()), 'PROCEDURES');
             this.setOutput(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_PROCEDURES_CALLRETURN_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_PROCEDURES_CALLRETURN_TOOLTIP'));
             this.arguments_ = this.getVariables(this.getFieldValue('PROCEDURES'));
             this.quarkConnections_ = null;
             this.quarkArguments_ = null;
@@ -4968,7 +4968,7 @@ var load = function (options) {
                 for (var j in Blockly.Arduino.RESERVED_WORDS_) {
                     var reserved_words = Blockly.Arduino.RESERVED_WORDS_.split(',');
                     if (name === reserved_words[j]) {
-                        this.setWarningText(RoboBlocks.locales.getKey('LANG_RESERVED_WORDS'));
+                        this.setWarningText(FabBlocks.locales.getKey('LANG_RESERVED_WORDS'));
                         name = '';
                         break;
                     } else {
@@ -4988,7 +4988,7 @@ var load = function (options) {
                     procedures_dropdown.push([proc_name, proc_name]);
                 }
             } else {
-                procedures_dropdown.push([RoboBlocks.locales.getKey('LANG_PROCEDURES_DEFRETURN_PROCEDURE'), RoboBlocks.locales.getKey('LANG_PROCEDURES_DEFRETURN_PROCEDURE')]);
+                procedures_dropdown.push([FabBlocks.locales.getKey('LANG_PROCEDURES_DEFRETURN_PROCEDURE'), FabBlocks.locales.getKey('LANG_PROCEDURES_DEFRETURN_PROCEDURE')]);
             }
             return procedures_dropdown;
         },
@@ -5050,7 +5050,7 @@ var load = function (options) {
             }
             if (!this.exists()) {
                 try {
-                    this.setWarningText(RoboBlocks.locales.getKey('LANG_PROCEDURES_CALL_WITHOUT_DEFINITION'));
+                    this.setWarningText(FabBlocks.locales.getKey('LANG_PROCEDURES_CALL_WITHOUT_DEFINITION'));
                 } catch (e) { }
             } else {
                 try {
@@ -5145,7 +5145,7 @@ var load = function (options) {
         }
     };
     // Source: src/blocks/procedures_defnoreturn/procedures_defnoreturn.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /**
      * procedures_defnoreturn code generation
      * @return {String} Code generated with block parameters
@@ -5178,16 +5178,16 @@ var load = function (options) {
     };
     Blockly.Blocks.procedures_defnoreturn = {
         // Define a procedure with no return value.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_PROCEDURES'),
-        helpUrl: RoboBlocks.URL_PROC_NO_RET,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_PROCEDURES'),
+        helpUrl: FabBlocks.URL_PROC_NO_RET,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_PROCEDURES);
-            var name = Blockly.Procedures.findLegalName(RoboBlocks.locales.getKey('LANG_PROCEDURES_DEFNORETURN_PROCEDURE'), this);
+            this.setColour(FabBlocks.LANG_COLOUR_PROCEDURES);
+            var name = Blockly.Procedures.findLegalName(FabBlocks.locales.getKey('LANG_PROCEDURES_DEFNORETURN_PROCEDURE'), this);
             this.appendDummyInput().appendField(new Blockly.FieldTextInput(name, Blockly.Procedures.rename), 'NAME').appendField('', 'PARAMS');
             // this.appendDummyInput().appendField(new Blockly.FieldTextInput(name), 'NAME').appendField('', 'PARAMS');
-            this.appendStatementInput('STACK').appendField(RoboBlocks.locales.getKey('LANG_PROCEDURES_DEFNORETURN_DO'));
+            this.appendStatementInput('STACK').appendField(FabBlocks.locales.getKey('LANG_PROCEDURES_DEFNORETURN_DO'));
             this.setMutator(new Blockly.Mutator(['procedures_mutatorarg']));
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_PROCEDURES_DEFNORETURN_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_PROCEDURES_DEFNORETURN_TOOLTIP'));
             this.arguments_ = [];
             this.type_arguments_ = [];
         },
@@ -5204,7 +5204,7 @@ var load = function (options) {
             }
             if (badArg) {
                 try {
-                    this.setWarningText(RoboBlocks.locales.getKey('LANG_PROCEDURES_DEF_DUPLICATE_WARNING'));
+                    this.setWarningText(FabBlocks.locales.getKey('LANG_PROCEDURES_DEF_DUPLICATE_WARNING'));
                 } catch (err) {
                     console.log('Captured error: ', err);
                 }
@@ -5354,7 +5354,7 @@ var load = function (options) {
                 for (var j in Blockly.Arduino.RESERVED_WORDS_) {
                     this.reserved_words = Blockly.Arduino.RESERVED_WORDS_.split(',');
                     if (name === this.reserved_words[j]) {
-                        this.setWarningText(RoboBlocks.locales.getKey('LANG_RESERVED_WORDS'));
+                        this.setWarningText(FabBlocks.locales.getKey('LANG_RESERVED_WORDS'));
                         name = '';
                         break;
                     } else {
@@ -5378,8 +5378,8 @@ var load = function (options) {
     Blockly.Blocks.procedures_mutatorcontainer = {
         // Procedure container (for mutator dialog).
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_PROCEDURES);
-            this.appendDummyInput().appendField(RoboBlocks.locales.getKey('LANG_PROCEDURES_MUTATORCONTAINER_Field'));
+            this.setColour(FabBlocks.LANG_COLOUR_PROCEDURES);
+            this.appendDummyInput().appendField(FabBlocks.locales.getKey('LANG_PROCEDURES_MUTATORCONTAINER_Field'));
             this.appendStatementInput('STACK');
             this.setTooltip('');
             this.contextMenu = false;
@@ -5388,8 +5388,8 @@ var load = function (options) {
     Blockly.Blocks.procedures_mutatorarg = {
         // Procedure argument (for mutator dialog).
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_PROCEDURES);
-            this.appendDummyInput().appendField(RoboBlocks.locales.getKey('LANG_PROCEDURES_MUTATORARG_Field')).appendField(new Blockly.FieldDropdown([
+            this.setColour(FabBlocks.LANG_COLOUR_PROCEDURES);
+            this.appendDummyInput().appendField(FabBlocks.locales.getKey('LANG_PROCEDURES_MUTATORARG_Field')).appendField(new Blockly.FieldDropdown([
                 ['int', 'int'],
                 ['String', 'String']
             ]), 'TYPE').appendField(new Blockly.FieldTextInput('x', Blockly.Blocks.procedures_mutatorarg.validator), 'NAME');
@@ -5418,7 +5418,7 @@ var load = function (options) {
     };
 
     // Source: src/blocks/procedures_defreturn/procedures_defreturn.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /**
      * procedures_defreturn code generation
      * @return {String} Code generated with block parameters
@@ -5438,7 +5438,7 @@ var load = function (options) {
         returnValue = returnValue.replace(/&quot;/g, '"');
         var returnType = this.getReturnType();
         if (returnValue) {
-            var a = RoboBlocks.findPinMode(returnValue);
+            var a = FabBlocks.findPinMode(returnValue);
             returnValue = a['code'];
             returnValue += (window.programmingLanguage === 'cpp' ? '  ' : '    ') + 'return ' + a['pin'] + ';\n';
         }
@@ -5464,16 +5464,16 @@ var load = function (options) {
 
     Blockly.Blocks.procedures_defreturn = {
         // Define a procedure with a return value.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_PROCEDURES'), // Procedures are handled specially.
-        helpUrl: RoboBlocks.URL_PROC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_PROCEDURES'), // Procedures are handled specially.
+        helpUrl: FabBlocks.URL_PROC,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_PROCEDURES);
-            var name = Blockly.Procedures.findLegalName(RoboBlocks.locales.getKey('LANG_PROCEDURES_DEFRETURN_PROCEDURE'), this);
+            this.setColour(FabBlocks.LANG_COLOUR_PROCEDURES);
+            var name = Blockly.Procedures.findLegalName(FabBlocks.locales.getKey('LANG_PROCEDURES_DEFRETURN_PROCEDURE'), this);
             this.appendDummyInput().appendField(new Blockly.FieldTextInput(name, Blockly.Procedures.rename), 'NAME').appendField('', 'PARAMS');
-            this.appendStatementInput('STACK').appendField(RoboBlocks.locales.getKey('LANG_PROCEDURES_DEFRETURN_DO'));
-            this.appendValueInput('RETURN').setAlign(Blockly.ALIGN_RIGHT).appendField(RoboBlocks.locales.getKey('LANG_PROCEDURES_DEFRETURN_RETURN'));
+            this.appendStatementInput('STACK').appendField(FabBlocks.locales.getKey('LANG_PROCEDURES_DEFRETURN_DO'));
+            this.appendValueInput('RETURN').setAlign(Blockly.ALIGN_RIGHT).appendField(FabBlocks.locales.getKey('LANG_PROCEDURES_DEFRETURN_RETURN'));
             this.setMutator(new Blockly.Mutator(['procedures_mutatorarg']));
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_PROCEDURES_DEFRETURN_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_PROCEDURES_DEFRETURN_TOOLTIP'));
             this.arguments_ = [];
         },
         isVariable: function (varValue) {
@@ -5487,7 +5487,7 @@ var load = function (options) {
         getReturnType: function () {
             var returnType;
             var returnValue = Blockly.Arduino.valueToCode(this, 'RETURN', Blockly.Arduino.ORDER_NONE) || '';
-            var a = RoboBlocks.findPinMode(returnValue);
+            var a = FabBlocks.findPinMode(returnValue);
             // code+=a['code'];
             returnValue = a['pin'];
 
@@ -5521,7 +5521,7 @@ var load = function (options) {
                     }
                 }
             } else if (this.isVariable(returnValue)) {
-                returnType = RoboBlocks.variables[returnValue][0];
+                returnType = FabBlocks.variables[returnValue][0];
             } else if ((returnValue.search('analogRead') >= 0) || (returnValue.search('digitalRead') >= 0) || (returnValue.search('Distanc') >= 0) || (!isNaN(parseFloat(returnValue)) || (returnValue.search('random') >= 0)) || (returnValue.search('map') >= 0) || returnValue.search('\\[') >= 0 || (returnValue.search('abs') >= 0) || (returnValue.search('sqrt') >= 0) || (returnValue.search('log') >= 0) || (returnValue.search('log') >= 0) || (returnValue.search('exp') >= 0) || (returnValue.search('pow') >= 0)) {
                 returnType = 'int';
             } else if (returnValue.search('readJoystick') >= 0 || returnValue[0] === '{') {
@@ -5550,7 +5550,7 @@ var load = function (options) {
     };
 
     // Source: src/blocks/procedures_ifreturn/procedures_ifreturn.js
-    /* global Blockly, RoboBlocks */
+    /* global Blockly, FabBlocks */
 
     /**
      * procedures_ifreturn code generation
@@ -5562,7 +5562,7 @@ var load = function (options) {
         var code = '';
 
         // Buscar la configuración del pin en función de la condición
-        var pinConfig = RoboBlocks.findPinMode(condition);
+        var pinConfig = FabBlocks.findPinMode(condition);
         code += pinConfig['code'];
         condition = pinConfig['pin'];
 
@@ -5570,7 +5570,7 @@ var load = function (options) {
         if (window.programmingLanguage === 'cpp') {
             code += 'if (' + condition + ') {\n';
             var value = Blockly.Arduino.valueToCode(this, 'VALUE', Blockly.Arduino.ORDER_NONE) || '';
-            pinConfig = RoboBlocks.findPinMode(value);
+            pinConfig = FabBlocks.findPinMode(value);
             code += pinConfig['code'];
             code += '  return (' + value + ');\n';
             code += '}\n';
@@ -5579,7 +5579,7 @@ var load = function (options) {
         else if (window.programmingLanguage === 'python') {
             code += 'if ' + condition + ':\n';
             var value = Blockly.Arduino.valueToCode(this, 'VALUE', Blockly.Arduino.ORDER_NONE) || '';
-            pinConfig = RoboBlocks.findPinMode(value);
+            pinConfig = FabBlocks.findPinMode(value);
             code += pinConfig['code'];
             code += '    return ' + value + '\n';
         }
@@ -5587,7 +5587,7 @@ var load = function (options) {
         else if (window.programmingLanguage === 'js') {
             code += 'if (' + condition + ') {\n';
             var value = Blockly.Arduino.valueToCode(this, 'VALUE', Blockly.Arduino.ORDER_NONE) || '';
-            pinConfig = RoboBlocks.findPinMode(value);
+            pinConfig = FabBlocks.findPinMode(value);
             code += pinConfig['code'];
             code += '  return ' + value + ';\n';
             code += '}\n';
@@ -5598,20 +5598,20 @@ var load = function (options) {
 
     Blockly.Blocks.procedures_ifreturn = {
         // Conditionally return value from a procedure.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_PROCEDURES'),
-        helpUrl: RoboBlocks.URL_PROC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_PROCEDURES'),
+        helpUrl: FabBlocks.URL_PROC,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_PROCEDURES);
+            this.setColour(FabBlocks.LANG_COLOUR_PROCEDURES);
             this.appendValueInput('CONDITION')
                 .setCheck(Boolean)
-                .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_IF_MSG_IF'));
+                .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_IF_MSG_IF'));
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_PROCEDURES_DEFRETURN_RETURN'));
+                .appendField(FabBlocks.locales.getKey('LANG_PROCEDURES_DEFRETURN_RETURN'));
             this.appendValueInput('VALUE');
             this.setInputsInline(true);
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_PROCEDURES_IFRETURN_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_PROCEDURES_IFRETURN_TOOLTIP'));
             this.hasReturnValue_ = true;
         },
         mutationToDom: function () {
@@ -5655,7 +5655,7 @@ var load = function (options) {
                 this.setWarningText(null);
             } else {
                 try {
-                    this.setWarningText(RoboBlocks.locales.getKey('LANG_PROCEDURES_IFRETURN_WARNING'));
+                    this.setWarningText(FabBlocks.locales.getKey('LANG_PROCEDURES_IFRETURN_WARNING'));
                 } catch (err) {
                     console.log('Captured error: ', err);
                 }
@@ -5664,7 +5664,7 @@ var load = function (options) {
     };
 
     // Source: src/blocks/procedures_return/procedures_return.js
-    /* global Blockly, RoboBlocks */
+    /* global Blockly, FabBlocks */
 
     /**
      * procedures_ifreturn code generation
@@ -5674,7 +5674,7 @@ var load = function (options) {
         // Conditionally return value from a procedure.
         var code = '';
         var value = Blockly.Arduino.valueToCode(this, 'VALUE', Blockly.Arduino.ORDER_NONE) || '';
-        var a = RoboBlocks.findPinMode(value);
+        var a = FabBlocks.findPinMode(value);
         code += a['code'];
 
         if (window.programmingLanguage === 'cpp') {
@@ -5690,17 +5690,17 @@ var load = function (options) {
 
     Blockly.Blocks.procedures_return = {
         // Conditionally return value from a procedure.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_PROCEDURES'),
-        helpUrl: RoboBlocks.URL_PROC,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_PROCEDURES'),
+        helpUrl: FabBlocks.URL_PROC,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_PROCEDURES);
+            this.setColour(FabBlocks.LANG_COLOUR_PROCEDURES);
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_PROCEDURES_RETURN'));
+                .appendField(FabBlocks.locales.getKey('LANG_PROCEDURES_RETURN'));
             this.appendValueInput('VALUE');
             this.setInputsInline(true);
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_PROCEDURES_RETURN_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_PROCEDURES_RETURN_TOOLTIP'));
             this.hasReturnValue_ = true;
         },
         mutationToDom: function () {
@@ -5733,7 +5733,7 @@ var load = function (options) {
                 this.setWarningText(null);
             } else {
                 try {
-                    this.setWarningText(RoboBlocks.locales.getKey('LANG_PROCEDURES_IFRETURN_WARNING'));
+                    this.setWarningText(FabBlocks.locales.getKey('LANG_PROCEDURES_IFRETURN_WARNING'));
                 } catch (err) {
                     console.log('Captured error: ', err);
                 }
@@ -5742,7 +5742,7 @@ var load = function (options) {
     };
 
     // Source: src/blocks/serial_available/serial_available.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -5765,27 +5765,27 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.serial_available = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
-        helpUrl: RoboBlocks.URL_SERIE,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
+        helpUrl: FabBlocks.URL_SERIE,
         tags: ['serial'],
 
         /**
          * serial_available initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_COMMUNICATION);
+            this.setColour(FabBlocks.LANG_COLOUR_COMMUNICATION);
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_ADVANCED_SERIAL_AVAILABLE'));
+                .appendField(FabBlocks.locales.getKey('LANG_ADVANCED_SERIAL_AVAILABLE'));
             this.appendStatementInput('DO')
-                .appendField(RoboBlocks.locales.getKey('LANG_CONTROLS_REPEAT_INPUT_DO'));
+                .appendField(FabBlocks.locales.getKey('LANG_CONTROLS_REPEAT_INPUT_DO'));
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_SERIAL_AVAILABLE_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_SERIAL_AVAILABLE_TOOLTIP'));
         }
     };
 
     // Source: src/blocks/serial_parseint/serial_parseint.js
-    /* global Blockly, profiles, JST, RoboBlocks */
+    /* global Blockly, profiles, JST, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -5807,24 +5807,24 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.serial_parseint = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
-        helpUrl: RoboBlocks.URL_SERIE,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
+        helpUrl: FabBlocks.URL_SERIE,
         tags: ['serial'],
 
         /**
          * serial_paraseint initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_COMMUNICATION);
+            this.setColour(FabBlocks.LANG_COLOUR_COMMUNICATION);
             this.appendDummyInput('')
-                .appendField(RoboBlocks.locales.getKey('LANG_ADVANCED_SERIAL_PARSEINT'));
+                .appendField(FabBlocks.locales.getKey('LANG_ADVANCED_SERIAL_PARSEINT'));
             this.setOutput(true, Number);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_SERIAL_PARSEINT_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_SERIAL_PARSEINT_TOOLTIP'));
         }
     };
 
     // Source: src/blocks/serial_print/serial_print.js
-    /* global Blockly, profiles, JST, RoboBlocks */
+    /* global Blockly, profiles, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * serial_print code generation
@@ -5833,7 +5833,7 @@ var load = function (options) {
     Blockly.Arduino.serial_print = function () {
         var content = Blockly.Arduino.valueToCode(this, 'CONTENT', Blockly.Arduino.ORDER_ATOMIC);
         var code = '';
-        var a = RoboBlocks.findPinMode(content);
+        var a = FabBlocks.findPinMode(content);
         code += a['code'];
         content = a['pin'];
 
@@ -5854,22 +5854,22 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.serial_print = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
-        helpUrl: RoboBlocks.URL_SERIE,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
+        helpUrl: FabBlocks.URL_SERIE,
         tags: ['serial'],
         /**
          * serial_print initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_COMMUNICATION);
-            this.appendValueInput('CONTENT', String).appendField(RoboBlocks.locales.getKey('LANG_ADVANCED_SERIAL_PRINT'));
+            this.setColour(FabBlocks.LANG_COLOUR_COMMUNICATION);
+            this.appendValueInput('CONTENT', String).appendField(FabBlocks.locales.getKey('LANG_ADVANCED_SERIAL_PRINT'));
             this.setPreviousStatement(true, null);
             this.setNextStatement(true, null);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_SERIAL_PRINT_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_SERIAL_PRINT_TOOLTIP'));
         }
     };
     // Source: src/blocks/serial_println/serial_println.js
-    /* global Blockly, profiles, JST, RoboBlocks */
+    /* global Blockly, profiles, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * serial_println code generation
@@ -5878,7 +5878,7 @@ var load = function (options) {
     Blockly.Arduino.serial_println = function () {
         var content = Blockly.Arduino.valueToCode(this, 'CONTENT', Blockly.Arduino.ORDER_ATOMIC);
         var code = '';
-        var a = RoboBlocks.findPinMode(content);
+        var a = FabBlocks.findPinMode(content);
         code += a['code'];
         content = a['pin'];
         Blockly.Arduino.setups_['setup_serial'] = JST['serial_println_setups']({
@@ -5895,22 +5895,22 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.serial_println = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
-        helpUrl: RoboBlocks.URL_SERIE,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
+        helpUrl: FabBlocks.URL_SERIE,
         tags: ['serial'],
         /**
          * serial_println initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_COMMUNICATION);
-            this.appendValueInput('CONTENT', String).appendField(RoboBlocks.locales.getKey('LANG_ADVANCED_SERIAL_PRINTLN'));
+            this.setColour(FabBlocks.LANG_COLOUR_COMMUNICATION);
+            this.appendValueInput('CONTENT', String).appendField(FabBlocks.locales.getKey('LANG_ADVANCED_SERIAL_PRINTLN'));
             this.setPreviousStatement(true, null);
             this.setNextStatement(true, null);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_SERIAL_PRINTLN_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_SERIAL_PRINTLN_TOOLTIP'));
         }
     };
     // Source: src/blocks/serial_read/serial_read.js
-    /* global Blockly, profiles, JST, RoboBlocks */
+    /* global Blockly, profiles, JST, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -5933,24 +5933,24 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.serial_read = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
-        helpUrl: RoboBlocks.URL_SERIE,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
+        helpUrl: FabBlocks.URL_SERIE,
         tags: ['serial'],
 
         /**
          * serial_read initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_COMMUNICATION);
+            this.setColour(FabBlocks.LANG_COLOUR_COMMUNICATION);
             this.appendDummyInput('')
-                .appendField(RoboBlocks.locales.getKey('LANG_ADVANCED_SERIAL_READ'));
+                .appendField(FabBlocks.locales.getKey('LANG_ADVANCED_SERIAL_READ'));
             this.setOutput(true, String);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_SERIAL_READ_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_SERIAL_READ_TOOLTIP'));
         }
     };
 
     // Source: src/blocks/serial_readstring/serial_readstring.js
-    /* global Blockly, profiles, JST, RoboBlocks */
+    /* global Blockly, profiles, JST, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -5973,24 +5973,24 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.serial_readstring = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
-        helpUrl: RoboBlocks.URL_SERIE,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
+        helpUrl: FabBlocks.URL_SERIE,
         tags: ['serial'],
 
         /**
          * serial_readstring initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_COMMUNICATION);
+            this.setColour(FabBlocks.LANG_COLOUR_COMMUNICATION);
             this.appendDummyInput('')
-                .appendField(RoboBlocks.locales.getKey('LANG_ADVANCED_SERIAL_READSTRING'));
+                .appendField(FabBlocks.locales.getKey('LANG_ADVANCED_SERIAL_READSTRING'));
             this.setOutput(true, String);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_SERIAL_READSTRING_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_SERIAL_READSTRING_TOOLTIP'));
         }
     };
 
     // Source: src/blocks/serial_special/serial_special.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -6010,29 +6010,29 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.serial_special = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
-        helpUrl: RoboBlocks.URL_SERIE,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_COMMUNICATION'),
+        helpUrl: FabBlocks.URL_SERIE,
         tags: ['serial'],
 
         /**
          * serial_special initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_COMMUNICATION);
+            this.setColour(FabBlocks.LANG_COLOUR_COMMUNICATION);
             this.appendDummyInput('')
-                .appendField(RoboBlocks.locales.getKey('LANG_ADVANCED_SERIAL_SPECIAL'))
+                .appendField(FabBlocks.locales.getKey('LANG_ADVANCED_SERIAL_SPECIAL'))
                 .appendField(new Blockly.FieldDropdown([
-                    [RoboBlocks.locales.getKey('LANG_ADVANCED_SERIAL_SPECIAL_TAB') || 'TAB', '\\t'],
-                    [RoboBlocks.locales.getKey('LANG_ADVANCED_SERIAL_SPECIAL_CARRIAGE_RETURN') || 'CARRIAGE RETURN', '\\r'],
-                    [RoboBlocks.locales.getKey('LANG_ADVANCED_SERIAL_SPECIAL_LINE_FEED') || 'LINE FEED', '\\n']
+                    [FabBlocks.locales.getKey('LANG_ADVANCED_SERIAL_SPECIAL_TAB') || 'TAB', '\\t'],
+                    [FabBlocks.locales.getKey('LANG_ADVANCED_SERIAL_SPECIAL_CARRIAGE_RETURN') || 'CARRIAGE RETURN', '\\r'],
+                    [FabBlocks.locales.getKey('LANG_ADVANCED_SERIAL_SPECIAL_LINE_FEED') || 'LINE FEED', '\\n']
                 ]), 'CHAR');
             this.setOutput(true, String);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_ADVANCED_SERIAL_SPECIAL_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_ADVANCED_SERIAL_SPECIAL_TOOLTIP'));
         }
     };
 
     // Source: src/blocks/text/text.js
-    /* global Blockly, RoboBlocks */
+    /* global Blockly, FabBlocks */
 
     /**
      * text code generation
@@ -6046,21 +6046,21 @@ var load = function (options) {
 
     Blockly.Blocks.text = {
         // Text value.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_TEXT'),
-        helpUrl: RoboBlocks.URL_TEXT,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_TEXT'),
+        helpUrl: FabBlocks.URL_TEXT,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_TEXT);
+            this.setColour(FabBlocks.LANG_COLOUR_TEXT);
             this.appendDummyInput()
                 .appendField('"')
                 .appendField(new Blockly.FieldTextInput(''), 'TEXT')
                 .appendField('"');
             this.setOutput(true, String);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_TEXT_TEXT_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_TEXT_TEXT_TOOLTIP'));
         }
     };
 
     // Source: src/blocks/text_append/text_append.js
-    /* global Blockly, RoboBlocks */
+    /* global Blockly, FabBlocks */
     /**
      * text_append code generation
      * @return {String} Code generated with block parameters
@@ -6072,10 +6072,10 @@ var load = function (options) {
 
         var code = '';
 
-        var a = RoboBlocks.findPinMode(varName);
+        var a = FabBlocks.findPinMode(varName);
         code += a['code'];
         varName = a['pin'];
-        a = RoboBlocks.findPinMode(argument0);
+        a = FabBlocks.findPinMode(argument0);
         code += a['code'];
         argument0 = a['pin'];
 
@@ -6086,18 +6086,18 @@ var load = function (options) {
     };
     Blockly.Blocks.text_append = {
         // Append to a variable in place.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_TEXT'),
-        helpUrl: RoboBlocks.URL_TEXT,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_TEXT'),
+        helpUrl: FabBlocks.URL_TEXT,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_TEXT);
+            this.setColour(FabBlocks.LANG_COLOUR_TEXT);
             this.appendValueInput('VAR')
                 // .appendField(new Blockly.FieldVariable(' '), 'VAR')
-                .appendField(RoboBlocks.locales.getKey('LANG_TEXT_APPEND_TO'));
-            this.appendValueInput('TEXT').appendField(RoboBlocks.locales.getKey('LANG_TEXT_APPEND_APPENDTEXT'));
+                .appendField(FabBlocks.locales.getKey('LANG_TEXT_APPEND_TO'));
+            this.appendValueInput('TEXT').appendField(FabBlocks.locales.getKey('LANG_TEXT_APPEND_APPENDTEXT'));
             this.setPreviousStatement(true);
             this.setNextStatement(true);
             this.setInputsInline(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_TEXT_APPEND_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_TEXT_APPEND_TOOLTIP'));
         },
         getVars: function () {
             return [this.getFieldValue('VAR')];
@@ -6129,9 +6129,9 @@ var load = function (options) {
             //         try{
             //             this.removeInput('TEXT');
             //             this.appendValueInput('TEXT')
-            //                 .appendField(RoboBlocks.locales.getKey('LANG_TEXT_APPEND_TO'))
+            //                 .appendField(FabBlocks.locales.getKey('LANG_TEXT_APPEND_TO'))
             //                 .appendField(new Blockly.FieldDropdown(this.getVariables()), 'VAR')
-            //                 .appendField(RoboBlocks.locales.getKey('LANG_TEXT_APPEND_APPENDTEXT'));
+            //                 .appendField(FabBlocks.locales.getKey('LANG_TEXT_APPEND_APPENDTEXT'));
             //             this.setInputsInline(true);
             //         }catch(e){}
             //         this.last_variables=Blockly.Variables.allVariables();
@@ -6140,7 +6140,7 @@ var load = function (options) {
         }
     };
     // Source: src/blocks/text_equalsIgnoreCase/text_equalsIgnoreCase.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
 
     /**
      * text_equalsIgnoreCase code generation
@@ -6154,11 +6154,11 @@ var load = function (options) {
 
         var code = '';
 
-        var a = RoboBlocks.findPinMode(string1);
+        var a = FabBlocks.findPinMode(string1);
         code += a['code'];
         string1 = a['pin'];
 
-        a = RoboBlocks.findPinMode(string2);
+        a = FabBlocks.findPinMode(string2);
         code += a['code'];
         string2 = a['pin'];
 
@@ -6171,27 +6171,27 @@ var load = function (options) {
     };
 
     Blockly.Blocks.text_equalsIgnoreCase = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_TEXT'),
-        helpUrl: RoboBlocks.URL_TEXT,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_TEXT'),
+        helpUrl: FabBlocks.URL_TEXT,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_TEXT);
+            this.setColour(FabBlocks.LANG_COLOUR_TEXT);
             this.appendValueInput('STRING1')
-                .appendField(RoboBlocks.locales.getKey('LANG_TEXT_EQUALSIGNORECASE_IS'));
+                .appendField(FabBlocks.locales.getKey('LANG_TEXT_EQUALSIGNORECASE_IS'));
 
             this.appendValueInput('STRING2')
-                .appendField(RoboBlocks.locales.getKey('LANG_TEXT_EQUALSIGNORECASE_EQUAL'))
+                .appendField(FabBlocks.locales.getKey('LANG_TEXT_EQUALSIGNORECASE_EQUAL'))
                 .setAlign(Blockly.ALIGN_RIGHT);
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_TEXT_EQUALSIGNORECASE_QUESTION'));
+                .appendField(FabBlocks.locales.getKey('LANG_TEXT_EQUALSIGNORECASE_QUESTION'));
 
             this.setInputsInline(true);
 
             this.setOutput(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_TEXT_EQUALSIGNORECASE_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_TEXT_EQUALSIGNORECASE_TOOLTIP'));
         }
     };
     // Source: src/blocks/text_join/text_join.js
-    /* global Blockly, RoboBlocks */
+    /* global Blockly, FabBlocks */
 
     /**
      * text_join code generation
@@ -6206,7 +6206,7 @@ var load = function (options) {
             return ['\'\'', Blockly.Arduino.ORDER_ATOMIC];
         } else if (this.itemCount_ === 1) {
             var argument0 = Blockly.Arduino.valueToCode(this, 'ADD0', Blockly.Arduino.ORDER_UNARY_POSTFIX) || '';
-            a = RoboBlocks.findPinMode(argument0);
+            a = FabBlocks.findPinMode(argument0);
             code += a['code'];
             argument0 = a['pin'];
 
@@ -6221,7 +6221,7 @@ var load = function (options) {
             return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
         } else {
             var i = (Blockly.Arduino.valueToCode(this, 'ADD0', Blockly.Arduino.ORDER_NONE) || '');
-            a = RoboBlocks.findPinMode(i);
+            a = FabBlocks.findPinMode(i);
             code = a['code'];
             i = a['pin'];
 
@@ -6233,7 +6233,7 @@ var load = function (options) {
 
             for (var n = 1; n < this.itemCount_; n++) {
                 i = (Blockly.Arduino.valueToCode(this, 'ADD' + n, Blockly.Arduino.ORDER_NONE) || '');
-                a = RoboBlocks.findPinMode(i);
+                a = FabBlocks.findPinMode(i);
                 code += a['code'];
                 i = a['pin'];
 
@@ -6252,16 +6252,16 @@ var load = function (options) {
 
     Blockly.Blocks.text_join = {
         // Create a string made up of any number of elements of any type.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_TEXT'),
-        helpUrl: RoboBlocks.URL_TEXT,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_TEXT'),
+        helpUrl: FabBlocks.URL_TEXT,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_TEXT);
+            this.setColour(FabBlocks.LANG_COLOUR_TEXT);
             this.appendValueInput('ADD0')
-                .appendField(RoboBlocks.locales.getKey('LANG_TEXT_JOIN_Field_CREATEWITH'));
+                .appendField(FabBlocks.locales.getKey('LANG_TEXT_JOIN_Field_CREATEWITH'));
             this.appendValueInput('ADD1');
             this.setOutput(true, String);
             this.setMutator(new Blockly.Mutator(['text_create_join_item']));
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_TEXT_JOIN_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_TEXT_JOIN_TOOLTIP'));
             this.itemCount_ = 2;
         },
         mutationToDom: function () {
@@ -6277,7 +6277,7 @@ var load = function (options) {
             for (x = 0; x < this.itemCount_; x++) {
                 var input = this.appendValueInput('ADD' + x);
                 if (x === 0) {
-                    input.appendField(RoboBlocks.locales.getKey('LANG_TEXT_JOIN_Field_CREATEWITH'));
+                    input.appendField(FabBlocks.locales.getKey('LANG_TEXT_JOIN_Field_CREATEWITH'));
                 }
             }
             if (this.itemCount_ === 0) {
@@ -6313,7 +6313,7 @@ var load = function (options) {
             while (itemBlock) {
                 var input = this.appendValueInput('ADD' + this.itemCount_);
                 if (this.itemCount_ === 0) {
-                    input.appendField(RoboBlocks.locales.getKey('LANG_TEXT_JOIN_Field_CREATEWITH'));
+                    input.appendField(FabBlocks.locales.getKey('LANG_TEXT_JOIN_Field_CREATEWITH'));
                 }
                 // Reconnect any child blocks.
                 if (itemBlock.valueConnection_) {
@@ -6346,11 +6346,11 @@ var load = function (options) {
     Blockly.Blocks.text_create_join_container = {
         // Container.
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_TEXT);
+            this.setColour(FabBlocks.LANG_COLOUR_TEXT);
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_TEXT_CREATE_JOIN_Field_JOIN'));
+                .appendField(FabBlocks.locales.getKey('LANG_TEXT_CREATE_JOIN_Field_JOIN'));
             this.appendStatementInput('STACK');
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_TEXT_CREATE_JOIN_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_TEXT_CREATE_JOIN_TOOLTIP'));
             this.contextMenu = false;
         }
     };
@@ -6359,10 +6359,10 @@ var load = function (options) {
         // Add items.
         init: function () {
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_TEXT_CREATE_JOIN_ITEM_Field_ITEM'));
+                .appendField(FabBlocks.locales.getKey('LANG_TEXT_CREATE_JOIN_ITEM_Field_ITEM'));
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_TEXT_CREATE_JOIN_ITEM_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_TEXT_CREATE_JOIN_ITEM_TOOLTIP'));
             this.contextMenu = false;
         }
     };
@@ -6371,11 +6371,11 @@ var load = function (options) {
     Blockly.Blocks.text_create_join_container = {
         // Container.
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_TEXT);
+            this.setColour(FabBlocks.LANG_COLOUR_TEXT);
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_TEXT_CREATE_JOIN_TITLE_JOIN'));
+                .appendField(FabBlocks.locales.getKey('LANG_TEXT_CREATE_JOIN_TITLE_JOIN'));
             this.appendStatementInput('STACK');
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_TEXT_CREATE_JOIN_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_TEXT_CREATE_JOIN_TOOLTIP'));
             this.contextMenu = false;
         }
     };
@@ -6383,12 +6383,12 @@ var load = function (options) {
     Blockly.Blocks.text_create_join_item = {
         // Add items.
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_TEXT);
+            this.setColour(FabBlocks.LANG_COLOUR_TEXT);
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_TEXT_CREATE_JOIN_ITEM_TITLE_ITEM'));
+                .appendField(FabBlocks.locales.getKey('LANG_TEXT_CREATE_JOIN_ITEM_TITLE_ITEM'));
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_TEXT_CREATE_JOIN_ITEM_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_TEXT_CREATE_JOIN_ITEM_TOOLTIP'));
             this.contextMenu = false;
         }
     };
@@ -6396,7 +6396,7 @@ var load = function (options) {
 
 
     // Source: src/blocks/text_length/text_length.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
 
     /**
      * text_length code generation
@@ -6407,7 +6407,7 @@ var load = function (options) {
         // String length.
         var argument0 = Blockly.Arduino.valueToCode(this, 'VALUE', Blockly.Arduino.ORDER_UNARY_POSTFIX) || '';
         var code = '';
-        var a = RoboBlocks.findPinMode(argument0);
+        var a = FabBlocks.findPinMode(argument0);
         code += a['code'];
         argument0 = a['pin'];
 
@@ -6420,19 +6420,19 @@ var load = function (options) {
 
     Blockly.Blocks.text_length = {
         // String length.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_TEXT'),
-        helpUrl: RoboBlocks.URL_TEXT,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_TEXT'),
+        helpUrl: FabBlocks.URL_TEXT,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_TEXT);
+            this.setColour(FabBlocks.LANG_COLOUR_TEXT);
             this.appendValueInput('VALUE')
                 .setCheck([String, Array])
-                .appendField(RoboBlocks.locales.getKey('LANG_TEXT_LENGTH_INPUT_LENGTH'));
+                .appendField(FabBlocks.locales.getKey('LANG_TEXT_LENGTH_INPUT_LENGTH'));
             this.setOutput(true, Number);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_TEXT_LENGTH_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_TEXT_LENGTH_TOOLTIP'));
         }
     };
     // Source: src/blocks/text_substring/text_substring.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
 
     /**
      * text_substring code generation
@@ -6443,15 +6443,15 @@ var load = function (options) {
         var from = Blockly.Arduino.valueToCode(this, 'FROM', Blockly.Arduino.ORDER_NONE);
         var to = Blockly.Arduino.valueToCode(this, 'TO', Blockly.Arduino.ORDER_NONE);
         var code = '';
-        var a = RoboBlocks.findPinMode(string1);
+        var a = FabBlocks.findPinMode(string1);
         code += a['code'];
         string1 = a['pin'];
 
-        a = RoboBlocks.findPinMode(from);
+        a = FabBlocks.findPinMode(from);
         code += a['code'];
         from = a['pin'];
 
-        a = RoboBlocks.findPinMode(to);
+        a = FabBlocks.findPinMode(to);
         code += a['code'];
         to = a['pin'];
 
@@ -6465,34 +6465,34 @@ var load = function (options) {
     };
 
     Blockly.Blocks.text_substring = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_TEXT'),
-        helpUrl: RoboBlocks.URL_TEXT,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_TEXT'),
+        helpUrl: FabBlocks.URL_TEXT,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_TEXT);
+            this.setColour(FabBlocks.LANG_COLOUR_TEXT);
             this.appendValueInput('STRING1')
                 // .setCheck(String)
-                .appendField(RoboBlocks.locales.getKey('LANG_TEXT_SUBSTRING'));
+                .appendField(FabBlocks.locales.getKey('LANG_TEXT_SUBSTRING'));
 
             this.appendValueInput('FROM')
-                .appendField(RoboBlocks.locales.getKey('LANG_TEXT_SUBSTRING_FROM'))
+                .appendField(FabBlocks.locales.getKey('LANG_TEXT_SUBSTRING_FROM'))
                 .setCheck(Number)
                 .setAlign(Blockly.ALIGN_RIGHT);
 
             this.appendValueInput('TO')
-                .appendField(RoboBlocks.locales.getKey('LANG_TEXT_SUBSTRING_TO'))
+                .appendField(FabBlocks.locales.getKey('LANG_TEXT_SUBSTRING_TO'))
                 .setCheck(Number)
                 .setAlign(Blockly.ALIGN_RIGHT);
             // this.appendDummyInput()
-            //     .appendField(RoboBlocks.locales.getKey('LANG_TEXT_SUBSTRING_QUESTION'));
+            //     .appendField(FabBlocks.locales.getKey('LANG_TEXT_SUBSTRING_QUESTION'));
 
             this.setInputsInline(true);
 
             this.setOutput(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_TEXT_SUBSTRING_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_TEXT_SUBSTRING_TOOLTIP'));
         }
     };
     // Source: src/blocks/variables_get/variables_get.js
-    /* global Blockly, RoboBlocks */
+    /* global Blockly, FabBlocks */
     /* jshint sub:true */
     /**
      * variables_get code generation
@@ -6501,22 +6501,22 @@ var load = function (options) {
     Blockly.Arduino.variables_get = function () {
         // Variable setter.
         var varName = this.getFieldValue('VAR') || '';
-        if (RoboBlocks.variables[this.getFieldValue('VAR')] !== undefined) {
-            this.var_type = RoboBlocks.variables[this.getFieldValue('VAR')][0];
+        if (FabBlocks.variables[this.getFieldValue('VAR')] !== undefined) {
+            this.var_type = FabBlocks.variables[this.getFieldValue('VAR')][0];
         }
         return [varName, Blockly.Arduino.ORDER_ATOMIC];
     };
     Blockly.Blocks.variables_get = {
         // Variable setter.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_VARIABLES'), // Variables are handled specially.
-        helpUrl: RoboBlocks.URL_VAR,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_VARIABLES'), // Variables are handled specially.
+        helpUrl: FabBlocks.URL_VAR,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_VARIABLES);
-            this.appendDummyInput('DUMMY').appendField(RoboBlocks.locales.getKey('LANG_VARIABLES_GET'))
+            this.setColour(FabBlocks.LANG_COLOUR_VARIABLES);
+            this.appendDummyInput('DUMMY').appendField(FabBlocks.locales.getKey('LANG_VARIABLES_GET'))
                 // .appendField(new Blockly.FieldDropdown(this.getVariables()), 'VAR');
                 .appendField(new Blockly.FieldVariable(' '), 'VAR');
             this.setOutput(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_VARIABLES_GET_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_VARIABLES_GET_TOOLTIP'));
         },
         getVariables: function () {
             var variables = Blockly.Variables.allVariables();
@@ -6546,7 +6546,7 @@ var load = function (options) {
             //             this.removeInput('DUMMY');
             //         }catch(e){}
             //         this.appendDummyInput('DUMMY')
-            //             .appendField(RoboBlocks.locales.getKey('LANG_VARIABLES_GET'))
+            //             .appendField(FabBlocks.locales.getKey('LANG_VARIABLES_GET'))
             //             .appendField(new Blockly.FieldDropdown(this.getVariables()), 'VAR');
             //         this.setFieldValue(this.last_variable, 'VAR');
             //         this.last_variables=Blockly.Variables.allVariables();
@@ -6554,7 +6554,7 @@ var load = function (options) {
             // }
             try {
                 if (!this.exists()) {
-                    this.setWarningText(RoboBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
+                    this.setWarningText(FabBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
                 } else {
                     this.setWarningText(null);
                 }
@@ -6575,7 +6575,7 @@ var load = function (options) {
         }
     };
     // Source: src/blocks/variables_global/variables_global.js
-    /* global Blockly,  RoboBlocks */
+    /* global Blockly,  FabBlocks */
     /* jshint sub:true */
     /**
      * variables_global code generation
@@ -6588,7 +6588,7 @@ var load = function (options) {
         var varName = this.getFieldValue('VAR') || '';
         var isFunction = false;
 
-        var a = RoboBlocks.findPinMode(varValue);
+        var a = FabBlocks.findPinMode(varValue);
         Blockly.Arduino.setups_['pinMode' + varValue] = a['code'];
         varValue = a['pin'];
 
@@ -6620,7 +6620,7 @@ var load = function (options) {
             Blockly.Arduino.definitions_['declare_var' + varName] = varType + varName + '=' + '(int*)malloc(3*sizeof(int));\n';
             Blockly.Arduino.setups_['define_var' + varName] = varName + '[0]=' + varValue[0] + ';\n' + varName + '[1]=' + varValue[1] + ';\n' + varName + '[2]=' + varValue[2] + ';\n';
         } else if (this.isVariable(varValue)) {
-            varType = RoboBlocks.variables[varValue][0];
+            varType = FabBlocks.variables[varValue][0];
         } else if (varValue.search('readJoystick') >= 0) {
             varType = 'int *';
             Blockly.Arduino.definitions_['declare_var' + varName] = varType + varName + '=' + '(int*)malloc(3*sizeof(int));\n';
@@ -6643,24 +6643,24 @@ var load = function (options) {
         }
 
         // Actualiza el objeto de variables
-        RoboBlocks.variables[varName] = [varType, 'global'];
-        RoboBlocks.variables['analogRead(' + varName + ')'] = [varType, 'global'];
-        RoboBlocks.variables['digitalRead(' + varName + ')'] = [varType, 'global'];
+        FabBlocks.variables[varName] = [varType, 'global'];
+        FabBlocks.variables['analogRead(' + varName + ')'] = [varType, 'global'];
+        FabBlocks.variables['digitalRead(' + varName + ')'] = [varType, 'global'];
 
         return '';
     };
 
     Blockly.Blocks.variables_global = {
         // Variable setter.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_VARIABLES'), // Variables are handled specially.
-        helpUrl: RoboBlocks.URL_VAR,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_VARIABLES'), // Variables are handled specially.
+        helpUrl: FabBlocks.URL_VAR,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_VARIABLES);
-            this.appendValueInput('VALUE').appendField(RoboBlocks.locales.getKey('LANG_VARIABLES_GLOBAL')).appendField(new Blockly.FieldTextInput(''), 'VAR').appendField(RoboBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_EQUALS'));
+            this.setColour(FabBlocks.LANG_COLOUR_VARIABLES);
+            this.appendValueInput('VALUE').appendField(FabBlocks.locales.getKey('LANG_VARIABLES_GLOBAL')).appendField(new Blockly.FieldTextInput(''), 'VAR').appendField(FabBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_EQUALS'));
             this.setInputsInline(false);
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_TOOLTIP'));
         },
         getVars: function () {
             return [this.getFieldValue('VAR')];
@@ -6707,7 +6707,7 @@ var load = function (options) {
                 for (var j in Blockly.Arduino.RESERVED_WORDS_) {
                     var reserved_words = Blockly.Arduino.RESERVED_WORDS_.split(',');
                     if (name === reserved_words[j]) {
-                        this.setWarningText(RoboBlocks.locales.getKey('LANG_RESERVED_WORDS'));
+                        this.setWarningText(FabBlocks.locales.getKey('LANG_RESERVED_WORDS'));
                         name = '';
                         break;
                     } else {
@@ -6730,7 +6730,7 @@ var load = function (options) {
     };
 
     // Source: src/blocks/variables_global_type/variables_global_type.js
-    /* global Blockly,  RoboBlocks */
+    /* global Blockly,  FabBlocks */
     /* jshint sub:true */
     /**
      * variables_global_type code generation
@@ -6743,7 +6743,7 @@ var load = function (options) {
         var varName = this.getFieldValue('VAR') || '';
         var code = '';
 
-        var a = RoboBlocks.findPinMode(varValue);
+        var a = FabBlocks.findPinMode(varValue);
         code += a['code'];
         varValue = a['pin'];
 
@@ -6773,35 +6773,35 @@ var load = function (options) {
                 )
             );
 
-        RoboBlocks.variables[varName] = [varType, 'global'];
-        RoboBlocks.variables['analogRead(' + varName + ')'] = [varType, 'global'];
-        RoboBlocks.variables['digitalRead(' + varName + ')'] = [varType, 'global'];
+        FabBlocks.variables[varName] = [varType, 'global'];
+        FabBlocks.variables['analogRead(' + varName + ')'] = [varType, 'global'];
+        FabBlocks.variables['digitalRead(' + varName + ')'] = [varType, 'global'];
 
         return '';
     };
 
     Blockly.Blocks.variables_global_type = {
         // Variable setter.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_VARIABLES'), // Variables are handled specially.
-        helpUrl: RoboBlocks.URL_VAR,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_VARIABLES'), // Variables are handled specially.
+        helpUrl: FabBlocks.URL_VAR,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_VARIABLES);
+            this.setColour(FabBlocks.LANG_COLOUR_VARIABLES);
             this.appendValueInput('VALUE').
-                appendField(RoboBlocks.locales.getKey('LANG_VARIABLES_GLOBAL')).
+                appendField(FabBlocks.locales.getKey('LANG_VARIABLES_GLOBAL')).
                 appendField(new Blockly.FieldTextInput(''), 'VAR').
-                appendField(RoboBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_TYPE')).
+                appendField(FabBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_TYPE')).
                 appendField(new Blockly.FieldDropdown([
-                    [RoboBlocks.locales.getKey('LANG_VARIABLES_TYPE_STRING'), 'String'],
-                    [RoboBlocks.locales.getKey('LANG_VARIABLES_TYPE_INTEGER'), 'int'],
-                    [RoboBlocks.locales.getKey('LANG_VARIABLES_TYPE_INTEGER_LONG'), 'long'],
-                    [RoboBlocks.locales.getKey('LANG_VARIABLES_TYPE_BYTE'), 'byte'],
-                    [RoboBlocks.locales.getKey('LANG_VARIABLES_TYPE_FLOAT'), 'float']
+                    [FabBlocks.locales.getKey('LANG_VARIABLES_TYPE_STRING'), 'String'],
+                    [FabBlocks.locales.getKey('LANG_VARIABLES_TYPE_INTEGER'), 'int'],
+                    [FabBlocks.locales.getKey('LANG_VARIABLES_TYPE_INTEGER_LONG'), 'long'],
+                    [FabBlocks.locales.getKey('LANG_VARIABLES_TYPE_BYTE'), 'byte'],
+                    [FabBlocks.locales.getKey('LANG_VARIABLES_TYPE_FLOAT'), 'float']
                 ]), "VAR_TYPE").
-                appendField(RoboBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_EQUALS'));
+                appendField(FabBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_EQUALS'));
             this.setInputsInline(false);
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_TOOLTIP'));
         },
         getVars: function () {
             return [this.getFieldValue('VAR')];
@@ -6848,7 +6848,7 @@ var load = function (options) {
                 for (var j in Blockly.Arduino.RESERVED_WORDS_) {
                     var reserved_words = Blockly.Arduino.RESERVED_WORDS_.split(',');
                     if (name === reserved_words[j]) {
-                        this.setWarningText(RoboBlocks.locales.getKey('LANG_RESERVED_WORDS'));
+                        this.setWarningText(FabBlocks.locales.getKey('LANG_RESERVED_WORDS'));
                         name = '';
                         break;
                     } else {
@@ -6871,7 +6871,7 @@ var load = function (options) {
     };
 
     // Source: src/blocks/variables_local/variables_local.js
-    /* global Blockly,  RoboBlocks */
+    /* global Blockly,  FabBlocks */
     /* jshint sub:true */
     /**
      * variable code generation
@@ -6887,7 +6887,7 @@ var load = function (options) {
         var isFunction = false;
 
 
-        var a = RoboBlocks.findPinMode(varValue);
+        var a = FabBlocks.findPinMode(varValue);
         code += a['code'];
         varValue = a['pin'];
 
@@ -6937,7 +6937,7 @@ var load = function (options) {
             code += varType + varName + ' = (int*)malloc(3*sizeof(int));\n';
             code += varName + '[0] = ' + varValue[0] + ';\n' + varName + '[1] = ' + varValue[1] + ';\n' + varName + '[2] = ' + varValue[2] + ';\n';
         } else if (this.isVariable(varValue)) {
-            varType = RoboBlocks.variables[varValue][0];
+            varType = FabBlocks.variables[varValue][0];
             if (window.programmingLanguage === 'python') {
                 code += varName + ': ' + { 'String': 'str', 'int': 'int', 'long': 'int', 'byte': 'int', 'float': 'float' }[varType] + ' = ' + varValue + '\n';
             } else if (window.programmingLanguage === 'cpp') {
@@ -6989,23 +6989,23 @@ var load = function (options) {
             }
         }
 
-        RoboBlocks.variables[varName] = [varType, 'local'];
-        RoboBlocks.variables['analogRead(' + varName + ')'] = [varType, 'local'];
-        RoboBlocks.variables['digitalRead(' + varName + ')'] = [varType, 'local'];
+        FabBlocks.variables[varName] = [varType, 'local'];
+        FabBlocks.variables['analogRead(' + varName + ')'] = [varType, 'local'];
+        FabBlocks.variables['digitalRead(' + varName + ')'] = [varType, 'local'];
 
         return code;
     };
     Blockly.Blocks.variables_local = {
         // Variable setter.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_VARIABLES'), // Variables are handled specially.
-        helpUrl: RoboBlocks.URL_VAR,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_VARIABLES'), // Variables are handled specially.
+        helpUrl: FabBlocks.URL_VAR,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_VARIABLES);
-            this.appendValueInput('VALUE').appendField(RoboBlocks.locales.getKey('LANG_VARIABLES_LOCAL')).appendField(new Blockly.FieldTextInput(''), 'VAR').appendField(RoboBlocks.locales.getKey('LANG_VARIABLES_LOCAL_EQUALS'));
+            this.setColour(FabBlocks.LANG_COLOUR_VARIABLES);
+            this.appendValueInput('VALUE').appendField(FabBlocks.locales.getKey('LANG_VARIABLES_LOCAL')).appendField(new Blockly.FieldTextInput(''), 'VAR').appendField(FabBlocks.locales.getKey('LANG_VARIABLES_LOCAL_EQUALS'));
             this.setInputsInline(false);
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_VARIABLES_LOCAL_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_VARIABLES_LOCAL_TOOLTIP'));
         },
         getVars: function () {
             return [this.getFieldValue('VAR')];
@@ -7020,7 +7020,7 @@ var load = function (options) {
         validName: Blockly.Blocks.variables_global.validName
     };
     // Source: src/blocks/variables_local_type/variables_local_type.js
-    /* global Blockly,  RoboBlocks */
+    /* global Blockly,  FabBlocks */
     /* jshint sub:true */
     /**
      * variable code generation
@@ -7033,7 +7033,7 @@ var load = function (options) {
         var varName = this.getFieldValue('VAR') || '';
         var code = '';
 
-        var a = RoboBlocks.findPinMode(varValue);
+        var a = FabBlocks.findPinMode(varValue);
         code += a['code'];
         varValue = a['pin'];
 
@@ -7045,34 +7045,34 @@ var load = function (options) {
             code += 'let ' + varName + ' = ' + varValue + ';\n';
         }
 
-        RoboBlocks.variables[varName] = [varType, 'local'];
-        RoboBlocks.variables['analogRead(' + varName + ')'] = [varType, 'local'];
-        RoboBlocks.variables['digitalRead(' + varName + ')'] = [varType, 'local'];
+        FabBlocks.variables[varName] = [varType, 'local'];
+        FabBlocks.variables['analogRead(' + varName + ')'] = [varType, 'local'];
+        FabBlocks.variables['digitalRead(' + varName + ')'] = [varType, 'local'];
 
         return code;
     };
     Blockly.Blocks.variables_local_type = {
         // Variable setter.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_VARIABLES'), // Variables are handled specially.
-        helpUrl: RoboBlocks.URL_VAR,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_VARIABLES'), // Variables are handled specially.
+        helpUrl: FabBlocks.URL_VAR,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_VARIABLES);
+            this.setColour(FabBlocks.LANG_COLOUR_VARIABLES);
             this.appendValueInput('VALUE').
-                appendField(RoboBlocks.locales.getKey('LANG_VARIABLES_LOCAL')).
+                appendField(FabBlocks.locales.getKey('LANG_VARIABLES_LOCAL')).
                 appendField(new Blockly.FieldTextInput(''), 'VAR').
-                appendField(RoboBlocks.locales.getKey('LANG_VARIABLES_LOCAL_TYPE')).
+                appendField(FabBlocks.locales.getKey('LANG_VARIABLES_LOCAL_TYPE')).
                 appendField(new Blockly.FieldDropdown([
-                    [RoboBlocks.locales.getKey('LANG_VARIABLES_TYPE_STRING'), 'String'],
-                    [RoboBlocks.locales.getKey('LANG_VARIABLES_TYPE_INTEGER'), 'int'],
-                    [RoboBlocks.locales.getKey('LANG_VARIABLES_TYPE_INTEGER_LONG'), 'long'],
-                    [RoboBlocks.locales.getKey('LANG_VARIABLES_TYPE_BYTE'), 'byte'],
-                    [RoboBlocks.locales.getKey('LANG_VARIABLES_TYPE_FLOAT'), 'float']
+                    [FabBlocks.locales.getKey('LANG_VARIABLES_TYPE_STRING'), 'String'],
+                    [FabBlocks.locales.getKey('LANG_VARIABLES_TYPE_INTEGER'), 'int'],
+                    [FabBlocks.locales.getKey('LANG_VARIABLES_TYPE_INTEGER_LONG'), 'long'],
+                    [FabBlocks.locales.getKey('LANG_VARIABLES_TYPE_BYTE'), 'byte'],
+                    [FabBlocks.locales.getKey('LANG_VARIABLES_TYPE_FLOAT'), 'float']
                 ]), "VAR_TYPE").
-                appendField(RoboBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_EQUALS'));
+                appendField(FabBlocks.locales.getKey('LANG_VARIABLES_GLOBAL_EQUALS'));
             this.setInputsInline(false);
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_VARIABLES_LOCAL_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_VARIABLES_LOCAL_TOOLTIP'));
         },
         getVars: function () {
             return [this.getFieldValue('VAR')];
@@ -7088,7 +7088,7 @@ var load = function (options) {
     };
 
     // Source: src/blocks/variables_set/variables_set.js
-    /* global Blockly, JST, RoboBlocks */
+    /* global Blockly, JST, FabBlocks */
     /* jshint sub:true */
     /**
      * variables_set code generation
@@ -7100,7 +7100,7 @@ var load = function (options) {
         var varName = this.getFieldValue('VAR') || '';
         var code = '';
 
-        var a = RoboBlocks.findPinMode(varValue);
+        var a = FabBlocks.findPinMode(varValue);
         code += a['code'];
         varValue = a['pin'];
 
@@ -7113,17 +7113,17 @@ var load = function (options) {
     };
     Blockly.Blocks.variables_set = {
         // Variable setter.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_VARIABLES'), // Variables are handled specially.
-        helpUrl: RoboBlocks.URL_VAR,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_VARIABLES'), // Variables are handled specially.
+        helpUrl: FabBlocks.URL_VAR,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_VARIABLES);
-            this.appendValueInput('VALUE').appendField(RoboBlocks.locales.getKey('LANG_VARIABLES_SET'))
+            this.setColour(FabBlocks.LANG_COLOUR_VARIABLES);
+            this.appendValueInput('VALUE').appendField(FabBlocks.locales.getKey('LANG_VARIABLES_SET'))
                 // .appendField(new Blockly.FieldDropdown(this.getVariables()), 'VAR')
-                .appendField(new Blockly.FieldVariable(' '), 'VAR').appendField(RoboBlocks.locales.getKey('LANG_VARIABLES_SET_AS')).setAlign(Blockly.ALIGN_RIGHT);
+                .appendField(new Blockly.FieldVariable(' '), 'VAR').appendField(FabBlocks.locales.getKey('LANG_VARIABLES_SET_AS')).setAlign(Blockly.ALIGN_RIGHT);
             this.setInputsInline(false);
             this.setPreviousStatement(true);
             this.setNextStatement(true);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_VARIABLES_SET_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_VARIABLES_SET_TOOLTIP'));
         },
         getVariables: function () {
             var variables = Blockly.Variables.allVariables();
@@ -7144,7 +7144,7 @@ var load = function (options) {
             }
             try {
                 if (!this.exists()) {
-                    this.setWarningText(RoboBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
+                    this.setWarningText(FabBlocks.locales.getKey('LANG_VARIABLES_CALL_WITHOUT_DEFINITION'));
                 } else {
                     this.setWarningText(null);
                 }
@@ -7170,7 +7170,7 @@ var load = function (options) {
         var statement_send = Blockly.Arduino.valueToCode(this, 'SNT', Blockly.Arduino.ORDER_ATOMIC) || '';
 
         var code = '';
-        var a = RoboBlocks.findPinMode(statement_send);
+        var a = FabBlocks.findPinMode(statement_send);
         code += a['code'];
         statement_send = a['pin'];
 
@@ -7182,7 +7182,7 @@ var load = function (options) {
     };
 
     // Source: src/blocks/math_number/math_number.js
-    /* global Blockly, RoboBlocks */
+    /* global Blockly, FabBlocks */
     /* jshint sub:true */
 
     /**
@@ -7201,14 +7201,14 @@ var load = function (options) {
 
     Blockly.Blocks.math_integer_dc = {
         // Numeric value.
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_MATH'), // Variables are handled specially.
-        helpUrl: RoboBlocks.URL_MATH,
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_MATH'), // Variables are handled specially.
+        helpUrl: FabBlocks.URL_MATH,
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_MATH);
+            this.setColour(FabBlocks.LANG_COLOUR_MATH);
             this.appendDummyInput()
                 .appendField(new Blockly.FieldTextInput('0', Blockly.Blocks.math_integer_dc.validator), 'NUM');
             this.setOutput(true, Number);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_MATH_NUMBER_TOOLTIP'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_MATH_NUMBER_TOOLTIP'));
         }
     };
 
@@ -7229,38 +7229,39 @@ var load = function (options) {
      * @type {Object}
      */
     Blockly.Blocks.raspberry_send = {
-        category: RoboBlocks.locales.getKey('LANG_CATEGORY_RASPBERRY'),
+        category: FabBlocks.locales.getKey('LANG_CATEGORY_RASPBERRY'),
         tags: ['raspberry'],
-        helpUrl: RoboBlocks.URL_BT,
+        helpUrl: FabBlocks.URL_BT,
         /**
          * bq_bluetooth_send initialization
          */
         init: function () {
-            this.setColour(RoboBlocks.LANG_COLOUR_RASPBERRY);
+            this.setColour(FabBlocks.LANG_COLOUR_RASPBERRY);
             this.appendDummyInput()
-                .appendField(RoboBlocks.locales.getKey('LANG_RASPBERRY_SEND'));
+                .appendField(FabBlocks.locales.getKey('LANG_RASPBERRY_SEND'));
             this.appendValueInput('SNT')
                 .setAlign(Blockly.ALIGN_RIGHT)
-                .appendField(RoboBlocks.locales.getKey('LANG_RASPBERRY_SEND'));
+                .appendField(FabBlocks.locales.getKey('LANG_RASPBERRY_SEND'));
             this.setInputsInline(false);
             this.setPreviousStatement(true, null);
             this.setNextStatement(true, null);
-            this.setTooltip(RoboBlocks.locales.getKey('LANG_RASPBERRY_SEND'));
+            this.setTooltip(FabBlocks.locales.getKey('LANG_RASPBERRY_SEND'));
         }
     };
     return Blockly.Blocks;
 };
 
-// Definición del objeto RoboBlocks
-var RoboBlocks = {
+// Definición del objeto FabBlocks
+var FabBlocks = {
     load: load,
     language: null // Aquí se almacenará el idioma seleccionado
 };
 
-// Exponer RoboBlocks globalmente si se ejecuta en el navegador
+// Exponer FabBlocks globalmente si se ejecuta en el navegador
 if (typeof window !== 'undefined') {
-    window.RoboBlocks = RoboBlocks;
+    window.FabBlocks = FabBlocks;
+    window.RoboBlocks = FabBlocks; // Compatibility alias
 }
 
-// Exportar RoboBlocks como un módulo ES6
-export { RoboBlocks };
+// Exportar FabBlocks como un módulo ES6
+export { FabBlocks };

@@ -1,6 +1,6 @@
 
 import { stateStore } from '../core/state.store.js';
-import { RoboBlocksAdapter } from '../integrations/roboblocks.adapter.js';
+import { FabBlocksAdapter } from '../integrations/fabblocks.adapter.js';
 import { BlocklyAdapter } from '../integrations/blockly.adapter.js';
 
 /**
@@ -30,8 +30,8 @@ export class LocaleController {
         // Update State
         stateStore.set('locale', newLocale);
 
-        // Load RoboBlocks
-        RoboBlocksAdapter.load({
+        // Load FabBlocks
+        FabBlocksAdapter.load({
             zoom: 1,
             colorProfile: colorProfile,
             language: newLocale

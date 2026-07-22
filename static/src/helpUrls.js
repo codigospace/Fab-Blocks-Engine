@@ -1,4 +1,4 @@
-export const RoboBlocksURLs = {
+export const FabBlocksURLs = {
     GITHUB_SRC_URL: 'https://github.com/bq/roboblocks/tree/master/src/',
     URL_LED: '',
     URL_LDR: '',

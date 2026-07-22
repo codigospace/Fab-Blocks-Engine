@@ -4,7 +4,7 @@ import { themeController } from './ui/theme.controller.js';
 import { languageController } from './ui/language.controller.js';
 import { localeController } from './ui/locale.controller.js';
 import { stateStore } from './core/state.store.js';
-import { RoboBlocksAdapter } from './integrations/roboblocks.adapter.js';
+import { FabBlocksAdapter } from './integrations/fabblocks.adapter.js';
 
 // Import Translation Map to ensure it's loaded (even if used by controllers)
 import { translationMap } from '/static/src/translationMap.js';
@@ -21,10 +21,10 @@ class App {
         // Initialize Core Components
         // Logic from original script:
         /*
-        if (localStorage.getItem('languageRoboBlocks') === undefined...) window.roboblocksLanguage = ...
+        if (localStorage.getItem('languageFabBlocks') === undefined...) window.fabblocksLanguage = ...
         if (window.programmingLanguage === undefined...) ...
         
-        RoboBlocks.load({...})
+        FabBlocks.load({...})
         Blockly.inject...
         Blockly.Xml.domToWorkspace...
         */
@@ -39,8 +39,8 @@ class App {
 
         // console.log("Initializing App with:", { currentLocale, programmingLanguage, colorProfile });
 
-        // Load RoboBlocks
-        RoboBlocksAdapter.load({
+        // Load FabBlocks
+        FabBlocksAdapter.load({
             zoom: 1,
             colorProfile: colorProfile,
             language: currentLocale

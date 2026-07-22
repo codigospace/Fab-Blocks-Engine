@@ -1,6 +1,6 @@
 
 import { BlocklyAdapter } from '../integrations/blockly.adapter.js';
-import { RoboBlocksAdapter } from '../integrations/roboblocks.adapter.js';
+import { FabBlocksAdapter } from '../integrations/fabblocks.adapter.js';
 import { stateStore } from './state.store.js';
 
 /**
@@ -58,7 +58,7 @@ export class CodeGenerator {
             });
 
             // We also need to re-apply colors to workspace after code update according to original logic
-            // "changeColorWorkSpace(RoboBlocks);" was called at end of updateCode
+            // "changeColorWorkSpace(FabBlocks);" was called at end of updateCode
             // This creates a dependency loop if we call UI controller here.
             // Better approach: Events. 
             // For now, we will dispatch a custom event that ThemeController can listen to.

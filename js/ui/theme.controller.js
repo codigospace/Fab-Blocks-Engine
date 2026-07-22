@@ -1,5 +1,5 @@
 
-import { RoboBlocksAdapter } from '../integrations/roboblocks.adapter.js';
+import { FabBlocksAdapter } from '../integrations/fabblocks.adapter.js';
 import { stateStore } from '../core/state.store.js';
 
 /**
@@ -39,8 +39,8 @@ export class ThemeController {
         const profile = selector.value;
         const currentLocale = stateStore.get('locale');
 
-        // Update RoboBlocks
-        RoboBlocksAdapter.load({
+        // Update FabBlocks
+        FabBlocksAdapter.load({
             zoom: 1,
             colorProfile: profile,
             language: currentLocale,
@@ -55,7 +55,7 @@ export class ThemeController {
 
     applyColorsToBlocks() {
         // Original logic: update colors for each block type
-        const colors = RoboBlocksAdapter.getColors();
+        const colors = FabBlocksAdapter.getColors();
         const workspace = Blockly.getMainWorkspace();
 
         if (!workspace) return;
@@ -69,15 +69,15 @@ export class ThemeController {
             // In standard Blockly, block.type is string. 
             // If original code was: var colors = [ ... ]; var color = colors[blockType]; 
             // This implies blockType might be usable as index? 
-            // ACTUALLY, checking standard RoboBlocks/Visualino, block types might be mapped elsewhere or the 'colors' array is actually an object?
+            // ACTUALLY, checking standard FabBlocks, block types might be mapped elsewhere or the 'colors' array is actually an object?
             // In the provided HTML: 
-            // var colors = [ "", RoboBlocks.LANG_COLOUR_PROCEDURES, ... ];
+            // var colors = [ "", FabBlocks.LANG_COLOUR_PROCEDURES, ... ];
             // This is definitely an array.
             // If index.html uses `colors[blockType]`, then blockType MUST be an integer ??
             // OR checks generic types?
             // Wait, looking at index.html: "var blockType = block.type;" 
             // If block.type is string 'controls_if', colors['controls_if'] is undefined on an array.
-            // UNLESS RoboBlocks hacks block.type to be integer?
+            // UNLESS FabBlocks hacks block.type to be integer?
             // OR I might be misinterpreting the array vs object.
             // Let's assume the original logic worked and replicate it exactly as written.
 
@@ -114,7 +114,7 @@ export class ThemeController {
     }
 
     applyWorkspaceColors() {
-        const colors = RoboBlocksAdapter.getColorConstants();
+        const colors = FabBlocksAdapter.getColorConstants();
         if (!colors) return;
 
         // Using DOM query selectors as per original jQuery logic

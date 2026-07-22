@@ -17,7 +17,7 @@ export class StateStore {
 
     loadFromStorage() {
         const storedLanguage = localStorage.getItem('selectedLanguage');
-        const storedRoboBlocksLang = localStorage.getItem('languageRoboBlocks');
+        const storedFabBlocksLang = localStorage.getItem('languageFabBlocks') || localStorage.getItem('languageRoboBlocks');
 
         if (storedLanguage) {
             this.state.language = storedLanguage;
@@ -26,13 +26,13 @@ export class StateStore {
         // Backward compatibility: Ensure global is set on init
         window.programmingLanguage = this.state.language;
 
-        // Note: verify if we need to sync roboblocksLanguage specifically or if it's just the locale
+        // Note: verify if we need to sync fabblocksLanguage specifically or if it's just the locale
         const localeSelector = document.getElementById('localeSelector');
         if (localeSelector) {
             // In case we init before DOM, but usually store is init after load
             this.state.locale = localeSelector.value || 'es-ES';
-        } else if (storedRoboBlocksLang) {
-            this.state.locale = storedRoboBlocksLang;
+        } else if (storedFabBlocksLang) {
+            this.state.locale = storedFabBlocksLang;
         }
     }
 
