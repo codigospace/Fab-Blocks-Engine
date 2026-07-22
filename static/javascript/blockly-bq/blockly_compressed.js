@@ -13998,13 +13998,24 @@ Blockly.Block.prototype.getColour = function() {
     return this.colourHex_
 };
 Blockly.Block.prototype.setColour = function(a) {
-    a instanceof Number && (a = "#DDD");
+    // Soporta tonos numéricos legacy (ej. 230). Convertir a hex usando HSV helper si es número.
+    if (typeof a === 'number') {
+        try {
+            // Blockly.HSV_SATURATION y Blockly.HSV_VALUE están definidos en la librería
+            a = goog.color.hsvToHex(a, Blockly.HSV_SATURATION, 256 * Blockly.HSV_VALUE);
+        } catch (e) {
+            // Fallback seguro
+            a = "#DDD";
+        }
+    } else if (a instanceof Number) {
+        a = "#DDD";
+    }
     this.colourHex_ = a;
     this.svg_ && this.svg_.updateColour();
-    var b = this.getIcons();
-    for (a = 0; a < b.length; a++) b[a].updateColour();
+    var icons = this.getIcons();
+    for (var i = 0; i < icons.length; i++) icons[i].updateColour();
     if (this.rendered) {
-        for (a = 0; b = this.inputList[a]; a++)
+        for (var j = 0; b = this.inputList[j]; j++)
             for (var c = 0, d; d = b.fieldRow[c]; c++) d.setText(null);
         this.render()
     }

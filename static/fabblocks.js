@@ -3999,6 +3999,14 @@ var load = function (options) {
     /* global Blockly, FabBlocks */
 
     /**
+     * logic_null code generation
+     * @return {String} Code generated with block parameters
+     */
+    Blockly.Arduino.logic_null = function () {
+        return ['NULL', Blockly.Arduino.ORDER_ATOMIC];
+    };
+
+    /**
      * logic_boolean code generation
      * @return {String} Code generated with block parameters
      */
@@ -4217,6 +4225,14 @@ var load = function (options) {
      * @return {String} Code generated with block parameters
      */
 
+
+    Blockly.Arduino.math_number = function () {
+        // Numeric value.
+        var code = window.parseFloat(this.getFieldValue('NUM'));
+        return [code, Blockly.Arduino.ORDER_ATOMIC];
+    };
+
+    Blockly.Arduino.math_integer = Blockly.Arduino.math_number;
 
     Blockly.Arduino.math_arithmetic = function () {
         // Basic arithmetic operators, and power.
@@ -6598,7 +6614,7 @@ var load = function (options) {
                 break;
             }
         }
-        
+
         if (varValue.search(/["']/) >= 0 || varValue.search('substring\\(') >= 0) {
             varType = 'String';
         } else if (isFunction) {
@@ -7222,6 +7238,18 @@ var load = function (options) {
         } else {
             return null;
         }
+    };
+
+    // Ensure a basic Arduino generator exists for the standard math_number block.
+    // Some workspaces include math_number blocks but the Arduino generator was not
+    // present in the bundled generators, causing: "does not know how to generate code for block type 'math_number'".
+    Blockly.Arduino.math_number = function (block) {
+        var value = window.parseFloat(block.getFieldValue('NUM'));
+        if (Number.isNaN(value)) {
+            value = 0;
+        }
+        var order = value < 0 ? Blockly.Arduino.ORDER_UNARY_PREFIX : Blockly.Arduino.ORDER_ATOMIC;
+        return [value, order];
     };
 
     /**

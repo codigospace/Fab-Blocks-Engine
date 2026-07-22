@@ -1,11 +1,14 @@
-html, body {
+html,
+body {
     height: 95%;
     margin: 0;
 }
 
 #blockly {
     width: 66%;
-    float: left;
+    height: 100%;
+    overflow: hidden;
+    /* prevent internal scroll */
 }
 
 #code {
@@ -29,7 +32,7 @@ html, body {
     float: left;
     margin: 0 5px 0 5px;
     width: 10px;
-    height: 100%; 
+    height: 100%;
 }
 
 .navbar {
@@ -38,11 +41,13 @@ html, body {
 
 @media (max-width: 768px) {
     #blockly {
-        width: 100%; /* En pantallas pequeñas, que ocupe todo el ancho */
+        width: 100%;
+        /* En pantallas pequeñas, que ocupe todo el ancho */
     }
 
     #code {
         width: 100%;
-        display: none; /* Ocultar el área de código en pantallas pequeñas */
+        display: none;
+        /* Ocultar el área de código en pantallas pequeñas */
     }
 }

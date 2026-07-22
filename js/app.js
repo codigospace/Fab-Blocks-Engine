@@ -35,7 +35,9 @@ class App {
         const colorProfile = stateStore.get('colorProfile');
 
         // Global compatibility (if other external scripts rely on them)
-        window.translationMap = translationMap || {}; // Should be set by module import or script
+        window.translationMap = translationMap || {};
+        window.programmingLanguage = programmingLanguage;
+        window.roboblocksLanguage = currentLocale;
 
         // console.log("Initializing App with:", { currentLocale, programmingLanguage, colorProfile });
 
